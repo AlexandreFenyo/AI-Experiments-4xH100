@@ -1,0 +1,9 @@
+  qwen27_base/heldout 200/704
+  qwen27_base/heldout 400/704
+  qwen27_base/heldout 600/704
+  qwen27_base/heldout 704/704
+qwen27_base/heldout: 704 answers, 0 empty
+  qwen27_base/ood 25/25
+qwen27_base/ood: 25 answers, 0 empty
+  qwen27_base/forgetting 30/30
+qwen27_base/forgetting: 30 answers, 0 empty

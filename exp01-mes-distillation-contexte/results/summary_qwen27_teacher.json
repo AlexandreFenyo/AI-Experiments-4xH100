@@ -1,0 +1,5 @@
+{
+ "tag": "qwen27_teacher",
+ "ood_hallucination": 0.0,
+ "general_knowledge": 3.3
+}

@@ -1,0 +1,12 @@
+{
+ "tag": "gemma31_teacher_v2",
+ "n": 704,
+ "strict": 79.8,
+ "lenient": 99.1,
+ "completeness": 79.0,
+ "with_contradiction": 3.6,
+ "with_invention": 27.5,
+ "answer_chars_median": 511.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 10
+}

@@ -1,0 +1,24 @@
+  claims 88/88
+1018 claims for 88 facts (mean 11.6); failed: []
+  mistral128_teacher/heldout 200/704
+  mistral128_teacher/heldout 400/704
+  mistral128_teacher/heldout 600/704
+  mistral128_teacher/heldout 704/704
+mistral128_teacher/heldout: 704 answers, 0 empty
+  mistral128_teacher/ood 25/25
+mistral128_teacher/ood: 25 answers, 0 empty
+  mistral128_teacher/forgetting 30/30
+mistral128_teacher/forgetting: 30 answers, 0 empty
+
+real	4m58.721s
+user	0m4.107s
+sys	0m0.419s
+  mistral128_base/heldout 200/704
+  mistral128_base/heldout 400/704
+  mistral128_base/heldout 600/704
+  mistral128_base/heldout 704/704
+mistral128_base/heldout: 704 answers, 0 empty
+  mistral128_base/ood 25/25
+mistral128_base/ood: 25 answers, 0 empty
+  mistral128_base/forgetting 30/30
+mistral128_base/forgetting: 30 answers, 0 empty

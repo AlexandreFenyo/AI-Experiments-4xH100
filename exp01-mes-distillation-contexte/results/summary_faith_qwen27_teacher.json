@@ -1,0 +1,10 @@
+{
+ "tag": "qwen27_teacher",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 96.9,
+ "answers_with_contradiction": 1.1,
+ "answers_with_unsupported": 2.3,
+ "contradictions_per_answer": 0.01,
+ "unsupported_per_answer": 0.03
+}

@@ -1,0 +1,10 @@
+{
+ "tag": "gemma31_teacher_v2",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 99.6,
+ "answers_with_contradiction": 0.3,
+ "answers_with_unsupported": 0.1,
+ "contradictions_per_answer": 0.0,
+ "unsupported_per_answer": 0.0
+}

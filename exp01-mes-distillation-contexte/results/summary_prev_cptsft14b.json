@@ -1,0 +1,12 @@
+{
+ "tag": "prev_cptsft14b",
+ "n": 704,
+ "strict": 45.5,
+ "lenient": 79.3,
+ "completeness": 30.7,
+ "with_contradiction": 19.8,
+ "with_invention": 33.0,
+ "answer_chars_median": 184.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 11
+}

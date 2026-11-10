@@ -1,0 +1,14 @@
+{
+ "tag": "mistral128_teacher",
+ "n": 704,
+ "strict": 81.0,
+ "lenient": 98.6,
+ "completeness": 73.7,
+ "with_contradiction": 6.7,
+ "with_invention": 22.1,
+ "answer_chars_median": 462.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 13,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 0.0
+}

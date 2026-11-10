@@ -1,0 +1,12 @@
+{
+ "tag": "prev_gptoss20b",
+ "n": 704,
+ "strict": 23.4,
+ "lenient": 71.0,
+ "completeness": 37.5,
+ "with_contradiction": 35.9,
+ "with_invention": 63.3,
+ "answer_chars_median": 312.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 11
+}

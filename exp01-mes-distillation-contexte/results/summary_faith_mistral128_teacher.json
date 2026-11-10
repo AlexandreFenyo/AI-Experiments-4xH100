@@ -1,0 +1,10 @@
+{
+ "tag": "mistral128_teacher",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 92.9,
+ "answers_with_contradiction": 2.6,
+ "answers_with_unsupported": 5.1,
+ "contradictions_per_answer": 0.03,
+ "unsupported_per_answer": 0.08
+}

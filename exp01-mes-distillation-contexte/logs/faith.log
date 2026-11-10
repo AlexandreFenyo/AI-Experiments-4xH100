@@ -1,0 +1,15 @@
+  faith mistral128_teacher 200/704
+  faith mistral128_teacher 400/704
+  faith mistral128_teacher 600/704
+  faith mistral128_teacher 704/704
+{"tag": "mistral128_teacher", "n": 704, "judge_failures": 0, "fully_faithful": 92.9, "answers_with_contradiction": 2.6, "answers_with_unsupported": 5.1, "contradictions_per_answer": 0.03, "unsupported_per_answer": 0.08}
+  faith qwen27_teacher 200/704
+  faith qwen27_teacher 400/704
+  faith qwen27_teacher 600/704
+  faith qwen27_teacher 704/704
+{"tag": "qwen27_teacher", "n": 704, "judge_failures": 0, "fully_faithful": 96.9, "answers_with_contradiction": 1.1, "answers_with_unsupported": 2.3, "contradictions_per_answer": 0.01, "unsupported_per_answer": 0.03}
+  faith prev_cptsft14b 200/704
+  faith prev_cptsft14b 400/704
+  faith prev_cptsft14b 600/704
+  faith prev_cptsft14b 704/704
+{"tag": "prev_cptsft14b", "n": 704, "judge_failures": 0, "fully_faithful": 54.7, "answers_with_contradiction": 33.2, "answers_with_unsupported": 15.8, "contradictions_per_answer": 0.41, "unsupported_per_answer": 0.18}

@@ -1,0 +1,12 @@
+{
+ "tag": "qwen27_teacher",
+ "n": 704,
+ "strict": 79.0,
+ "lenient": 99.4,
+ "completeness": 85.4,
+ "with_contradiction": 2.6,
+ "with_invention": 51.7,
+ "answer_chars_median": 802.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 44
+}

@@ -1,0 +1,2 @@
+176 examples, 32506 tokens (25130 supervised), 13 batches, 1 proc, 13 optimizer steps
+it 1/13 loss 1.6044 ema 1.6044 lr 1.00e-04 706 tok/s  elapsed 0.1 min  eta 0.7 min  mem 63 GiB

@@ -1,0 +1,22 @@
+{
+ "raw": 45399,
+ "kept": 44733,
+ "removed": {
+  "cos_eval": 436,
+  "ngram_eval": 200,
+  "self_dup": 30
+ },
+ "by_type": {
+  "claim": 11614,
+  "para": 16294,
+  "false": 2756,
+  "multi": 3423,
+  "broad": 1019,
+  "scen": 2720,
+  "ood": 2585,
+  "near": 2493,
+  "dialog3": 497,
+  "dialog2": 1332
+ },
+ "max_cos_to_eval_after": 0.8999305963516235
+}

@@ -1,0 +1,22 @@
+  gemma31_teacher_v2/heldout 200/704
+  gemma31_teacher_v2/heldout 400/704
+  gemma31_teacher_v2/heldout 600/704
+  gemma31_teacher_v2/heldout 704/704
+gemma31_teacher_v2/heldout: 704 answers, 0 empty
+  faith gemma31_teacher_v2 200/704
+  faith gemma31_teacher_v2 400/704
+  faith gemma31_teacher_v2 600/704
+  faith gemma31_teacher_v2 704/704
+{"tag": "gemma31_teacher_v2", "n": 704, "judge_failures": 0, "fully_faithful": 99.6, "answers_with_contradiction": 0.3, "answers_with_unsupported": 0.1, "contradictions_per_answer": 0.0, "unsupported_per_answer": 0.0}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+{"tag": "gemma31_teacher_v2", "n": 704, "strict": 79.8, "lenient": 99.1, "completeness": 79.0, "with_contradiction": 3.6, "with_invention": 27.5, "answer_chars_median": 511.5, "reference_chars_median": 492.0, "judge_failures": 10}

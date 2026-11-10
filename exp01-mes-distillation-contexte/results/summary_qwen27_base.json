@@ -1,0 +1,14 @@
+{
+ "tag": "qwen27_base",
+ "n": 704,
+ "strict": 7.4,
+ "lenient": 58.4,
+ "completeness": 23.4,
+ "with_contradiction": 45.7,
+ "with_invention": 86.4,
+ "answer_chars_median": 1623.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 15,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 100.0
+}
