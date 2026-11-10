@@ -16,7 +16,8 @@ import torch
 import torch.utils.checkpoint
 from accelerate import Accelerator
 from peft import LoraConfig, get_peft_model
-from transformers import AutoModelForCausalLM, AutoTokenizer, get_cosine_schedule_with_warmup
+from transformers import (AutoModelForCausalLM, AutoModelForImageTextToText, AutoTokenizer,
+                          get_cosine_schedule_with_warmup)
 
 TARGETS = {
     "qwen": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "in_proj_qkv", "in_proj_z", "out_proj"],
@@ -24,7 +25,7 @@ TARGETS = {
     "gemma": r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)",
     "mistral": r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)",
 }
-END = {"qwen": "<|im_end|>", "gemma": "<turn|>", "mistral": "</s>"}   # end-of-answer token taught to the student
+END = {"qwen": "<|im_end|>", "gemma": "<turn|>", "mistral": None}   # end-of-answer token taught to the student
 
 
 def encode(tok, row, max_len, tpl_kw, end):
@@ -33,16 +34,16 @@ def encode(tok, row, max_len, tpl_kw, end):
         ids = tok(row["text"], add_special_tokens=True).input_ids[:max_len]
         return ids, list(ids)
     msgs = row["messages"]
-    answer = msgs[-1]["content"].strip()
-    if end == "</s>":
-        # Mistral (mistral-common tokenizer): tokenize the prompt directly; "</s>" is not parsed from text.
-        out = tok.apply_chat_template(msgs[:-1], tokenize=True, add_generation_prompt=True)
-        prefix = list(out if isinstance(out, list) else out["input_ids"])
-        target = tok(answer, add_special_tokens=False).input_ids + [tok.eos_token_id]
+    if end is None:
+        # Mistral: the mistral-common tokenizer must build the prompt itself (rendering to text first is unsafe),
+        # and the end-of-answer token is appended by id ("</s>" typed as text is not the EOS token).
+        enc = tok.apply_chat_template(msgs[:-1], tokenize=True, add_generation_prompt=True, **tpl_kw)
+        prefix = list(enc["input_ids"] if hasattr(enc, "keys") else enc)
+        target = tok(msgs[-1]["content"].strip(), add_special_tokens=False).input_ids + [tok.eos_token_id]
     else:
         text = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True, **tpl_kw)
         prefix = tok(text, add_special_tokens=False).input_ids
-        target = tok(answer + end, add_special_tokens=False).input_ids
+        target = tok(msgs[-1]["content"].strip() + end, add_special_tokens=False).input_ids
     ids = (list(prefix) + target)[:max_len]
     labels = ([-100] * len(prefix) + target)[:max_len]
     return ids, labels
@@ -128,13 +129,14 @@ def main():
     p.add_argument("--limit", type=int, default=0)
     p.add_argument("--grad-ckpt", action="store_true")
     p.add_argument("--device-map", default="", help="'auto' to spread one model over all visible GPUs (single process)")
+    p.add_argument("--max-iters", type=int, default=0, help="stop early (smoke tests)")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
     acc = Accelerator(gradient_accumulation_steps=args.accum, mixed_precision="bf16")
     torch.manual_seed(args.seed)
     tok = AutoTokenizer.from_pretrained(args.model)
-    tpl_kw = {"enable_thinking": False} if args.family == "qwen" else {}
+    tpl_kw = {"enable_thinking": False} if args.family == "qwen" else {"reasoning_effort": "none"} if args.family == "mistral" else {}
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
 
     rows = [json.loads(l) for l in open(args.data, encoding="utf-8") if l.strip()]
@@ -154,7 +156,8 @@ def main():
 
     kw = dict(dtype=torch.bfloat16)
     kw["device_map"] = "auto" if args.device_map == "auto" else {"": acc.device}
-    model = AutoModelForCausalLM.from_pretrained(args.model, **kw)
+    loader = AutoModelForImageTextToText if args.family == "mistral" else AutoModelForCausalLM
+    model = loader.from_pretrained(args.model, **kw)
     model.config.use_cache = False
     if args.grad_ckpt:
         model.gradient_checkpointing_enable()
@@ -180,6 +183,8 @@ def main():
 
     t0, seen_tok, step, ema = time.time(), 0, 0, None
     n_iter = math.ceil(steps_per_epoch * args.epochs)
+    if args.max_iters:
+        n_iter = min(n_iter, args.max_iters)
     for it in range(n_iter):
         if it % steps_per_epoch == 0 and it:
             if acc.is_main_process:   # keep an adapter per completed epoch

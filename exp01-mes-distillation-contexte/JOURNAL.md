@@ -128,6 +128,42 @@ supervisés), réponses de 573 caractères en médiane ; 3 629 exemples sans pro
 couches linéaires du modèle de langage (490 M de paramètres entraînés, 1,5 %), 4 cartes en parallèle de données,
 433 pas, 3 350 tokens/s, environ 20 minutes, 70 Gio par carte (avec recalcul des activations).
 
+### Résultat A1 (10 novembre, 16:56 UTC)
+
+Gemma 4 31B + LoRA A1, sans la FAQ (prompt système court), juge local Qwen3.8-27B :
+
+| | Strict | Indulgent | Complétude | Fidélité | Longueur médiane | Hors périmètre inventé | Culture générale |
+|---|---|---|---|---|---|---|---|
+| Gemma A1 (élève, sans FAQ) | 76,1 | 97,3 | 74,6 | 95,0 | 493 | 0 | 90,0 |
+| Gemma + FAQ en contexte (plafond) | 79,8 | 99,1 | 79,0 | 99,6 | 511 | 0 | sans objet |
+| Gemma de base, sans connaissance | 9,4 | 68,5 | 26,2 | à mesurer | 1 679 | 0 | 100,0 |
+| Ancien Qwen3-14B CPT+SFT | 45,5 | 79,3 | 30,7 | 54,7 | 184 | | |
+
+Défauts observés : 3 questions de culture générale sur 30 refusées (« mon périmètre est limité à Mon espace santé »)
+alors qu'aucun prompt système n'était donné ; plus gros écart de complétude avec le professeur sur « Gérer mes documents »
+(75 contre 84), la catégorie amputée par le filtre anti-fuite.
+
+### Second lot et entraînement A2 (10 novembre, 17:00 à 19:00 UTC)
+
+- `questions_s2.jsonl` = 4 050 questions perdues + 26 177 en réserve = 30 227 questions ; réponses du professeur en
+  39 minutes : `distill_gemma31_s2.jsonl`, 25 529 exemples.
+- Le filtre anti-fuite a encore écarté 5 401 réponses : presque toutes contiennent « la base de connaissances ne mentionne
+  pas... », c'est-à-dire le professeur qui reconnaît que la FAQ ne couvre pas un point. `recover_leaks.py` les récupère en
+  remplaçant l'expression par « la documentation officielle de Mon espace santé » : `distill_gemma31_s2_recovered.jsonl`,
+  6 033 exemples (dont 1 780 questions voisines sans réponse). Non inclus dans A2, prévus pour A3.
+- `gen_general.py` : 1 745 questions générales avec la réponse normale du modèle de base, sans prompt système
+  (`general_gemma31.jsonl`), pour que l'élève ne refuse pas les questions générales quand aucun prompt système n'est donné.
+- A2 : `distill_gemma31_all.jsonl` = s1 + s2 + général = 42 770 exemples, mêmes hyperparamètres que A1, 1 262 pas,
+  environ 1 heure.
+
+### Mistral Medium 3.5 128B : préparation
+
+- Chargement vérifié sur CPU (155 s) : classe `Mistral3ForConditionalGeneration` (`AutoModelForImageTextToText`), 88 couches,
+  poids distribués en FP8 (déquantifiés en bf16 sur CPU, 250 Go). Sur GPU, transformers exige le paquet
+  `kernels==0.17.2` pour garder les poids en FP8.
+- Format de dialogue : le tokeniseur `mistral-common` construit lui-même le prompt (avec
+  `[MODEL_SETTINGS]{"reasoning_effort": "none"}`), et le jeton de fin de réponse est ajouté par identifiant.
+
 ## 8. Suite
 
 Voir les entrées suivantes du journal (entraînement, évaluations, gros modèle, quantification).

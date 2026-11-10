@@ -1,0 +1,11 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+42770 examples, 11524974 tokens (8606115 supervised), 5048 batches, 4 proc, 1262 optimizer steps
+trainable params: 489,717,760 || all params: 31,762,804,272 || trainable%: 1.5418
+it 1/1262 loss 2.8877 ema 2.8877 lr 5.41e-06 1558 tok/s  elapsed 0.1 min  eta 134.9 min  mem 69 GiB
+it 26/1262 loss 1.0210 ema 2.3249 lr 1.41e-04 3210 tok/s  elapsed 1.2 min  eta 59.2 min  mem 70 GiB
+it 51/1262 loss 0.4424 ema 1.6328 lr 2.00e-04 3316 tok/s  elapsed 2.4 min  eta 56.0 min  mem 70 GiB
+it 76/1262 loss 0.2746 ema 1.1246 lr 2.00e-04 3347 tok/s  elapsed 3.5 min  eta 54.3 min  mem 70 GiB
