@@ -1,6 +1,7 @@
 600 examples, 147332 tokens (100346 supervised), 40 batches, 1 proc, 40 optimizer steps
 [transformers] This FP8 model spans multiple CUDA devices in one process; routing its FP8 linear and experts layers through Triton/grouped_mm instead of DeepGEMM (DeepGEMM's cached kernels are bound to a single CUDA context and corrupt across devices). Run tensor/expert parallel (one device per process) to use the faster DeepGEMM path.
 trainable params: 1,118,830,592 || all params: 128,823,042,000 || trainable%: 0.8685
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files:   8%|▊         | 1/13 [00:00<00:03,  3.25it/s]Fetching 13 files:  77%|███████▋  | 10/13 [00:00<00:00, 18.34it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 20.67it/s]
 Traceback (most recent call last):
   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 221, in <module>
     main()
@@ -16,117 +17,7 @@ Traceback (most recent call last):
   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 113, in forward
     return chunked_lm_loss(self.peft.base_model.model, ids, att, lab)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 86, in chunked_lm_loss
-    hs = hf_model.model(input_ids=ids, attention_mask=att).last_hidden_state
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/utils/generic.py", line 1081, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/utils/generic.py", line 943, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/models/mistral3/modeling_mistral3.py", line 313, in forward
-    outputs = self.language_model(
-              ^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/utils/generic.py", line 1081, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
-    outputs = func(self, *args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/models/ministral3/modeling_ministral3.py", line 377, in forward
-    hidden_states = decoder_layer(
-                    ^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/modeling_layers.py", line 110, in __call__
-    return self._gradient_checkpointing_func(partial(super().__call__, **kwargs), *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/_compile.py", line 54, in inner
-    return disable_fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1552, in _fn
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/utils/checkpoint.py", line 606, in checkpoint
-    return _checkpoint_impl(
-           ^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/utils/checkpoint.py", line 681, in _checkpoint_impl
-    gen.throw(e)
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/utils/checkpoint.py", line 2046, in _checkpoint_without_reentrant_generator_impl
-    yield
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/utils/checkpoint.py", line 678, in _checkpoint_impl
-    ret = function(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/hooks.py", line 192, in new_forward
-    output = module._old_forward(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/models/ministral3/modeling_ministral3.py", line 234, in forward
-    hidden_states, _ = self.self_attn(
-                       ^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/hooks.py", line 192, in new_forward
-    output = module._old_forward(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/models/ministral3/modeling_ministral3.py", line 139, in forward
-    query_states = self.q_proj(hidden_states).view(hidden_shape).transpose(1, 2)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/peft/tuners/lora/layer.py", line 1088, in forward
-    result = self.base_layer(x, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/hooks.py", line 192, in new_forward
-    output = module._old_forward(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 436, in forward
-    return _apply_if_grad(
-           ^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 384, in _apply_if_grad
-    return function.apply(input, *args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 316, in forward
-    return fp8_linear(input, weight, weight_scale_inv, block_size, bias, activation_scale, allow_deepgemm)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 282, in fp8_linear
-    return finegrained_fp8_linear(input, weight, weight_scale_inv, block_size, bias, activation_scale)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 194, in finegrained_fp8_linear
-    finegrained_fp8 = load_finegrained_fp8_kernel()
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 142, in load_finegrained_fp8_kernel
-    _load_finegrained_fp8_kernel()
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/transformers/integrations/finegrained_fp8.py", line 107, in _load_finegrained_fp8_kernel
-    raise ImportError(f"finegrained-fp8 kernel unavailable: {_MISSING_KERNELS_MESSAGE}")
-ImportError: finegrained-fp8 kernel unavailable: `kernels` is either not installed or uses an incompatible version. Please install a compatible version (0.17.2 <= version < 0.18.0), e.g. `pip install kernels==0.17.2`
+  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 88, in chunked_lm_loss
+    h, y = hs[:, :-1][mask], lab[:, 1:][mask]
+           ~~~~~~~~~~^^^^^^
+RuntimeError: indices should be either on cpu or on the same device as the indexed tensor (cuda:3)

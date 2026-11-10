@@ -84,6 +84,7 @@ def chunked_lm_loss(hf_model, ids, att, lab, chunk=768):
     """Cross-entropy on supervised positions only, with the LM head applied by chunks (and re-computed during
     backward via checkpointing): avoids materialising B x T x vocab logits (vocab is 130k-260k)."""
     hs = hf_model.model(input_ids=ids, attention_mask=att).last_hidden_state
+    lab = lab.to(hs.device)                   # a model spread over several GPUs returns its output on the last one
     mask = lab[:, 1:] != -100                 # next-token prediction: hidden state t predicts token t+1
     h, y = hs[:, :-1][mask], lab[:, 1:][mask]
     head = hf_model.get_output_embeddings()
@@ -91,7 +92,7 @@ def chunked_lm_loss(hf_model, ids, att, lab, chunk=768):
     cap = getattr(cfg, "final_logit_softcapping", None)   # Gemma caps its logits with tanh
 
     def part(hc, yc):
-        logits = head(hc).float()
+        logits = head(hc.to(head.weight.device)).float().to(yc.device)
         if cap:
             logits = torch.tanh(logits / cap) * cap
         return torch.nn.functional.cross_entropy(logits, yc, reduction="sum")
@@ -130,6 +131,7 @@ def main():
     p.add_argument("--grad-ckpt", action="store_true")
     p.add_argument("--device-map", default="", help="'auto' to spread one model over all visible GPUs (single process)")
     p.add_argument("--max-iters", type=int, default=0, help="stop early (smoke tests)")
+    p.add_argument("--save-epochs", action="store_true", help="save an adapter after each epoch")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
@@ -187,8 +189,8 @@ def main():
         n_iter = min(n_iter, args.max_iters)
     for it in range(n_iter):
         if it % steps_per_epoch == 0 and it:
-            if acc.is_main_process:   # keep an adapter per completed epoch
-                acc.unwrap_model(model).save_pretrained(f"{args.out}-ep{it // steps_per_epoch}")
+            if acc.is_main_process and args.save_epochs:   # optionally keep an adapter per completed epoch
+                acc.unwrap_model(model).peft.save_pretrained(f"{args.out}-ep{it // steps_per_epoch}")
             random.Random(args.seed + it).shuffle(my_batches)
         ids, att, lab = collate(examples, my_batches[it % steps_per_epoch], pad_id)
         with acc.accumulate(model):

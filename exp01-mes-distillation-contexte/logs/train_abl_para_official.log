@@ -1,0 +1,11 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+3446 examples, 690487 tokens (497375 supervised), 292 batches, 1 proc, 292 optimizer steps
+trainable params: 489,717,760 || all params: 31,762,804,272 || trainable%: 1.5418
+it 1/292 loss 3.6786 ema 3.6786 lr 2.50e-05 807 tok/s  elapsed 0.0 min  eta 14.2 min  mem 68 GiB
+it 26/292 loss 0.9317 ema 2.8527 lr 1.98e-04 978 tok/s  elapsed 1.1 min  eta 10.8 min  mem 69 GiB
+it 51/292 loss 1.0512 ema 1.9712 lr 1.89e-04 981 tok/s  elapsed 2.1 min  eta 9.7 min  mem 69 GiB
+it 76/292 loss 0.0798 ema 1.2756 lr 1.73e-04 986 tok/s  elapsed 3.1 min  eta 8.7 min  mem 69 GiB
+it 101/292 loss 0.0208 ema 0.8123 lr 1.52e-04 989 tok/s  elapsed 4.1 min  eta 7.7 min  mem 69 GiB
+it 126/292 loss 0.0265 ema 0.5030 lr 1.26e-04 990 tok/s  elapsed 5.1 min  eta 6.7 min  mem 69 GiB

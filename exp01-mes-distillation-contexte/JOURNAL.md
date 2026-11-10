@@ -164,6 +164,50 @@ alors qu'aucun prompt système n'était donné ; plus gros écart de complétude
 - Format de dialogue : le tokeniseur `mistral-common` construit lui-même le prompt (avec
   `[MODEL_SETTINGS]{"reasoning_effort": "none"}`), et le jeton de fin de réponse est ajouté par identifiant.
 
+### Résultat A2 (10 novembre, 18:57 UTC)
+
+58 minutes d'entraînement sur 4 cartes (3 300 tokens/s), 42 770 exemples.
+
+| | Strict | Indulgent | Complétude | Fidélité | Longueur médiane | Hors périmètre inventé | Culture générale |
+|---|---|---|---|---|---|---|---|
+| Gemma A1 (15 496 exemples) | 76,1 | 97,3 | 74,6 | 95,0 | 493 | 0 | 90,0 |
+| **Gemma A2 (42 770 exemples)** | **80,1** | **99,3** | **77,3** | **98,7** | 492 | 0 | **100,0** |
+| Gemma + FAQ en contexte (plafond) | 79,8 | 99,1 | 79,0 | 99,6 | 511 | 0 | sans objet |
+
+L'élève rejoint pratiquement son professeur. Les refus sur les questions générales ont disparu.
+
+### Chaîne GGUF pour la RTX 5090 (validée sur A1, sur CPU)
+
+`gguf_prep.sh` : llama.cpp (commit 7592b61 du 10 novembre 2026) compilé sans CUDA ; `merge.py` fusionne l'adaptateur
+(1,8 min sur CPU) ; `convert_hf_to_gguf.py --outtype f16` (61,4 Go, 2,5 min) ; `llama-quantize ... Q5_K_M` (20,8 Go, 1 min).
+Pièges : l'environnement de conversion doit avoir `transformers==5.22.2` (la version 4.57 installée par llama.cpp ne lit
+pas le tokeniseur de Gemma 4) ; `llama-quantize` échoue en écrivant dans `/dev/shm` et réussit sur le disque ; llama.cpp
+active le raisonnement de Gemma par défaut, il faut `--reasoning-budget 0` (à intégrer au fichier livré).
+
+### Ablations : chiffrer la recette (10 novembre, à partir de 19:02 UTC)
+
+Objectif fixé par l'utilisateur : savoir, chiffres à l'appui, ce qui permet de faire mieux que les expériences précédentes.
+`make_ablations.py` construit des jeux où un seul ingrédient change ; `pipeline_abl.sh` enchaîne les entraînements
+(mêmes hyperparamètres que A1 : rang 64, taux 2e-4, une époque) et `eval_multi.sh` les évalue avec le même juge.
+
+| Nom | Modèle | Données | Ce qui est testé |
+|---|---|---|---|
+| `abl_para_teacher` | Gemma 31B | 3 446 reformulations, réponses du professeur | référence des deux suivantes |
+| `abl_para_official` | Gemma 31B | les mêmes questions, réponse officielle de la FAQ recopiée | apport du professeur |
+| `abl_mixed_3k` | Gemma 31B | 3 446 questions de tous types | apport de la variété des questions, à volume égal |
+| `abl_oldsft` | Gemma 31B | les 548 exemples d'affinage de l'expérience précédente, 10 époques | les anciennes données sur le nouveau modèle |
+| `size_gemma12` | Gemma 4 12B | jeu de A1 (15 496) | taille du modèle, même famille |
+| `size_qwen14` | Qwen3-14B | jeu de A1 (15 496) | taille et famille de l'ancien modèle |
+
+Volume : `abl_mixed_3k` (3 446), A1 (15 496), A2 (42 770).
+
+Incident : `abl_oldsft` a planté à la fin de sa première époque (sauvegarde par époque appelée sur le mauvais objet) ;
+corrigé (`--save-epochs` devient une option) et relancé.
+
+### Publication des données
+
+Jeu public : https://huggingface.co/datasets/fenyo/4xH100-MonEspaceSante-distillation-contexte (tout `data/`).
+
 ## 8. Suite
 
 Voir les entrées suivantes du journal (entraînement, évaluations, gros modèle, quantification).

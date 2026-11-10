@@ -1,0 +1,10 @@
+{
+ "tag": "gemma31_a2",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 98.7,
+ "answers_with_contradiction": 0.9,
+ "answers_with_unsupported": 0.4,
+ "contradictions_per_answer": 0.01,
+ "unsupported_per_answer": 0.0
+}

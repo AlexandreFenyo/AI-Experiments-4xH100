@@ -1,0 +1,17 @@
+Tue Nov 10 17:51:07 UTC 2026
+Failed to load CPU gemm_4bit_forward from kernels-community: Cannot find a build variant for this system in kernels-community/quantization-bitsandbytes (revision: a99e5bb6a4c835bdc676a3044f45c716fd605bf4):
+
+torch215-cpu-x86_64-linux: backend (cpu) does not match selected backend (cu132)
+torch211-cpu-x86_64-linux: Torch version (2.11) does not match environment Torch version (2.15)
+torch214-cpu-x86_64-linux: Torch version (2.14) does not match environment Torch version (2.15)
+torch212-cpu-x86_64-linux: Torch version (2.12) does not match environment Torch version (2.15)
+torch213-cpu-x86_64-linux: Torch version (2.13) does not match environment Torch version (2.15)
+torch210-cpu-x86_64-linux: Torch version (2.10) does not match environment Torch version (2.15). Please make sure you already `pip install kernels` and the kernels >= 0.11.1
+Writing model shards:   0%|          | 0/13 [00:00<?, ?it/s]Writing model shards:   8%|▊         | 1/13 [00:02<00:28,  2.38s/it]Writing model shards:  15%|█▌        | 2/13 [00:04<00:23,  2.15s/it]Writing model shards:  23%|██▎       | 3/13 [00:06<00:20,  2.08s/it]Writing model shards:  31%|███       | 4/13 [00:08<00:18,  2.02s/it]Writing model shards:  38%|███▊      | 5/13 [00:10<00:16,  2.02s/it]Writing model shards:  46%|████▌     | 6/13 [00:12<00:14,  2.03s/it]Writing model shards:  54%|█████▍    | 7/13 [00:14<00:12,  2.02s/it]Writing model shards:  62%|██████▏   | 8/13 [00:16<00:10,  2.01s/it]Writing model shards:  69%|██████▉   | 9/13 [00:18<00:07,  1.99s/it]Writing model shards:  77%|███████▋  | 10/13 [00:20<00:05,  1.97s/it]Writing model shards:  85%|████████▍ | 11/13 [00:22<00:03,  1.98s/it]Writing model shards:  92%|█████████▏| 12/13 [00:24<00:01,  1.99s/it]Writing model shards: 100%|██████████| 13/13 [00:25<00:00,  1.87s/it]Writing model shards: 100%|██████████| 13/13 [00:25<00:00,  1.99s/it]
+no processor saved: 
+Gemma4VideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+merged model saved to /dev/shm/work/gemma31_a1-merged in 1.8 min
+Tue Nov 10 17:53:07 UTC 2026
