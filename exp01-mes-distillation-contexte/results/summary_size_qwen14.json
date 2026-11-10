@@ -1,0 +1,14 @@
+{
+ "tag": "size_qwen14",
+ "n": 704,
+ "strict": 69.9,
+ "lenient": 95.0,
+ "completeness": 68.7,
+ "with_contradiction": 7.2,
+ "with_invention": 29.8,
+ "answer_chars_median": 457.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 12,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 100.0
+}

@@ -9,3 +9,14 @@ it 51/372 loss 0.6454 ema 1.9393 lr 1.94e-04 975 tok/s  elapsed 2.0 min  eta 12.
 it 76/372 loss 0.3919 ema 1.3715 lr 1.84e-04 979 tok/s  elapsed 3.0 min  eta 11.6 min  mem 69 GiB
 it 101/372 loss 0.3894 ema 0.9886 lr 1.71e-04 979 tok/s  elapsed 3.9 min  eta 10.6 min  mem 69 GiB
 it 126/372 loss 0.2613 ema 0.7455 lr 1.54e-04 979 tok/s  elapsed 4.9 min  eta 9.6 min  mem 69 GiB
+it 151/372 loss 0.3083 ema 0.5821 lr 1.35e-04 979 tok/s  elapsed 5.9 min  eta 8.6 min  mem 69 GiB
+it 176/372 loss 0.2975 ema 0.4735 lr 1.13e-04 979 tok/s  elapsed 6.9 min  eta 7.7 min  mem 69 GiB
+it 201/372 loss 0.2843 ema 0.4003 lr 9.17e-05 979 tok/s  elapsed 7.9 min  eta 6.7 min  mem 69 GiB
+it 226/372 loss 0.2122 ema 0.3531 lr 7.04e-05 979 tok/s  elapsed 8.8 min  eta 5.7 min  mem 69 GiB
+it 251/372 loss 0.2207 ema 0.3132 lr 5.05e-05 978 tok/s  elapsed 9.8 min  eta 4.7 min  mem 69 GiB
+it 276/372 loss 0.1865 ema 0.2874 lr 3.29e-05 979 tok/s  elapsed 10.8 min  eta 3.8 min  mem 69 GiB
+it 301/372 loss 0.1786 ema 0.2629 lr 1.85e-05 979 tok/s  elapsed 11.8 min  eta 2.8 min  mem 69 GiB
+it 326/372 loss 0.2715 ema 0.2457 lr 7.91e-06 979 tok/s  elapsed 12.8 min  eta 1.8 min  mem 69 GiB
+it 351/372 loss 0.2169 ema 0.2329 lr 1.67e-06 979 tok/s  elapsed 13.8 min  eta 0.8 min  mem 69 GiB
+it 372/372 loss 0.1829 ema 0.2273 lr 0.00e+00 979 tok/s  elapsed 14.6 min  eta 0.0 min  mem 69 GiB
+saved adapter to /dev/shm/work/abl_para_teacher in 14.7 min

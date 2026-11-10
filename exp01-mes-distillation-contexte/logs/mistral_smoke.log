@@ -1,23 +1,5 @@
-600 examples, 147332 tokens (100346 supervised), 40 batches, 1 proc, 40 optimizer steps
-[transformers] This FP8 model spans multiple CUDA devices in one process; routing its FP8 linear and experts layers through Triton/grouped_mm instead of DeepGEMM (DeepGEMM's cached kernels are bound to a single CUDA context and corrupt across devices). Run tensor/expert parallel (one device per process) to use the faster DeepGEMM path.
-trainable params: 1,118,830,592 || all params: 128,823,042,000 || trainable%: 0.8685
-Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files:   8%|▊         | 1/13 [00:00<00:03,  3.25it/s]Fetching 13 files:  77%|███████▋  | 10/13 [00:00<00:00, 18.34it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 20.67it/s]
-Traceback (most recent call last):
-  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 221, in <module>
-    main()
-  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 196, in main
-    loss_t = model(ids.to(dev), att.to(dev), lab.to(dev))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1798, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 113, in forward
-    return chunked_lm_loss(self.peft.base_model.model, ids, att, lab)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 88, in chunked_lm_loss
-    h, y = hs[:, :-1][mask], lab[:, 1:][mask]
-           ~~~~~~~~~~^^^^^^
-RuntimeError: indices should be either on cpu or on the same device as the indexed tensor (cuda:3)
+600 examples, 147332 tokens (100346 supervised), 114 batches, 1 proc, 114 optimizer steps
+trainable params: 1,118,830,592 || all params: 128,823,040,768 || trainable%: 0.8685
+it 1/14 loss 1.3884 ema 1.3884 lr 3.33e-05 294 tok/s  elapsed 0.1 min  eta 1.0 min  mem 64 GiB
+it 14/14 loss 0.9112 ema 1.3183 lr 9.76e-05 356 tok/s  elapsed 0.8 min  eta 0.0 min  mem 65 GiB
+saved adapter to /dev/shm/work/mistral_smoke in 0.9 min

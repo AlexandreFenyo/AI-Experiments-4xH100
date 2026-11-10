@@ -132,6 +132,9 @@ def main():
     p.add_argument("--device-map", default="", help="'auto' to spread one model over all visible GPUs (single process)")
     p.add_argument("--max-iters", type=int, default=0, help="stop early (smoke tests)")
     p.add_argument("--save-epochs", action="store_true", help="save an adapter after each epoch")
+    p.add_argument("--dequantize", action="store_true", help="expand FP8 checkpoint weights to bf16 at load time")
+    p.add_argument("--max-mem", type=int, default=0, help="GiB of weights per GPU with --device-map auto")
+    p.add_argument("--save-every", type=int, default=0, help="save an adapter snapshot every N iterations")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
@@ -158,6 +161,15 @@ def main():
 
     kw = dict(dtype=torch.bfloat16)
     kw["device_map"] = "auto" if args.device_map == "auto" else {"": acc.device}
+    if args.dequantize:
+        # Mistral Medium 3.5 ships FP8 weights. Kept in FP8, training is unusable (29 tokens/s measured: every
+        # backward pass dequantizes each weight). Expand them once to bf16 at load time instead (about 250 GB).
+        from transformers import FineGrainedFP8Config
+        kw["quantization_config"] = FineGrainedFP8Config(
+            activation_scheme="static", weight_block_size=None, dequantize=True,
+            modules_to_not_convert=["model.vision_tower", "model.multi_modal_projector", "lm_head"])
+    if args.max_mem and args.device_map == "auto":
+        kw["max_memory"] = {i: f"{args.max_mem}GiB" for i in range(torch.cuda.device_count())}
     loader = AutoModelForImageTextToText if args.family == "mistral" else AutoModelForCausalLM
     model = loader.from_pretrained(args.model, **kw)
     model.config.use_cache = False
@@ -205,6 +217,8 @@ def main():
         seen_tok += int(att.sum())
         loss = loss_t.item()
         ema = loss if ema is None else 0.98 * ema + 0.02 * loss
+        if acc.is_main_process and args.save_every and (it + 1) % args.save_every == 0 and it + 1 < n_iter:
+            acc.unwrap_model(model).peft.save_pretrained(f"{args.out}-it{it + 1}")   # usable snapshot of a long run
         if acc.is_main_process and (it % 25 == 0 or it == n_iter - 1):
             el = time.time() - t0
             print(f"it {it + 1}/{n_iter} loss {loss:.4f} ema {ema:.4f} lr {sched.get_last_lr()[0]:.2e} "

@@ -1,0 +1,14 @@
+{
+ "tag": "abl_para_teacher",
+ "n": 704,
+ "strict": 71.9,
+ "lenient": 95.7,
+ "completeness": 70.9,
+ "with_contradiction": 8.0,
+ "with_invention": 29.8,
+ "answer_chars_median": 477.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 13,
+ "ood_hallucination": 12.0,
+ "general_knowledge": 96.7
+}

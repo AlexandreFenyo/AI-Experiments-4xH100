@@ -1,0 +1,25 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+15496 examples, 4321811 tokens (3067057 supervised), 443 batches, 1 proc, 443 optimizer steps
+trainable params: 256,901,120 || all params: 15,025,208,320 || trainable%: 1.7098
+it 1/443 loss 1.6356 ema 1.6356 lr 1.54e-05 1777 tok/s  elapsed 0.1 min  eta 41.1 min  mem 37 GiB
+it 26/443 loss 0.8208 ema 1.4754 lr 2.00e-04 2491 tok/s  elapsed 1.7 min  eta 27.5 min  mem 39 GiB
+it 51/443 loss 0.5279 ema 1.1679 lr 1.96e-04 2508 tok/s  elapsed 3.3 min  eta 25.4 min  mem 39 GiB
+it 76/443 loss 0.4717 ema 0.8956 lr 1.90e-04 2529 tok/s  elapsed 4.9 min  eta 23.5 min  mem 39 GiB
+it 101/443 loss 0.3764 ema 0.7028 lr 1.80e-04 2545 tok/s  elapsed 6.4 min  eta 21.8 min  mem 39 GiB
+it 126/443 loss 0.3197 ema 0.5714 lr 1.68e-04 2550 tok/s  elapsed 8.0 min  eta 20.2 min  mem 39 GiB
+it 151/443 loss 0.3222 ema 0.4810 lr 1.53e-04 2550 tok/s  elapsed 9.6 min  eta 18.6 min  mem 39 GiB
+it 176/443 loss 0.3561 ema 0.4222 lr 1.37e-04 2554 tok/s  elapsed 11.2 min  eta 17.0 min  mem 39 GiB
+it 201/443 loss 0.3067 ema 0.3817 lr 1.20e-04 2556 tok/s  elapsed 12.8 min  eta 15.4 min  mem 39 GiB
+it 226/443 loss 0.3325 ema 0.3495 lr 1.01e-04 2559 tok/s  elapsed 14.4 min  eta 13.8 min  mem 39 GiB
+it 251/443 loss 0.3446 ema 0.3231 lr 8.33e-05 2561 tok/s  elapsed 15.9 min  eta 12.2 min  mem 39 GiB
+it 276/443 loss 0.3357 ema 0.3116 lr 6.56e-05 2561 tok/s  elapsed 17.5 min  eta 10.6 min  mem 39 GiB
+it 301/443 loss 0.2682 ema 0.2964 lr 4.92e-05 2562 tok/s  elapsed 19.1 min  eta 9.0 min  mem 39 GiB
+it 326/443 loss 0.2520 ema 0.2853 lr 3.44e-05 2564 tok/s  elapsed 20.7 min  eta 7.4 min  mem 39 GiB
+it 351/443 loss 0.2497 ema 0.2791 lr 2.18e-05 2565 tok/s  elapsed 22.2 min  eta 5.8 min  mem 39 GiB
+it 376/443 loss 0.2604 ema 0.2722 lr 1.17e-05 2566 tok/s  elapsed 23.8 min  eta 4.2 min  mem 39 GiB
+it 401/443 loss 0.2752 ema 0.2651 lr 4.67e-06 2566 tok/s  elapsed 25.4 min  eta 2.7 min  mem 39 GiB
+it 426/443 loss 0.2346 ema 0.2603 lr 7.70e-07 2566 tok/s  elapsed 27.0 min  eta 1.1 min  mem 39 GiB
+it 443/443 loss 0.2578 ema 0.2609 lr 0.00e+00 2565 tok/s  elapsed 28.1 min  eta 0.0 min  mem 39 GiB
+saved adapter to /dev/shm/work/size_qwen14 in 28.1 min

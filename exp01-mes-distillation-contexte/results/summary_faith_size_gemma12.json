@@ -1,0 +1,10 @@
+{
+ "tag": "size_gemma12",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 90.6,
+ "answers_with_contradiction": 7.1,
+ "answers_with_unsupported": 3.4,
+ "contradictions_per_answer": 0.08,
+ "unsupported_per_answer": 0.04
+}

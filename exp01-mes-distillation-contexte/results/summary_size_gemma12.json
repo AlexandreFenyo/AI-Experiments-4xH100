@@ -1,0 +1,14 @@
+{
+ "tag": "size_gemma12",
+ "n": 704,
+ "strict": 76.1,
+ "lenient": 96.3,
+ "completeness": 70.6,
+ "with_contradiction": 5.9,
+ "with_invention": 27.7,
+ "answer_chars_median": 464.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 11,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 96.7
+}

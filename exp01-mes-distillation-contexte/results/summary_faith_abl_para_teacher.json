@@ -1,0 +1,10 @@
+{
+ "tag": "abl_para_teacher",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 87.6,
+ "answers_with_contradiction": 7.5,
+ "answers_with_unsupported": 6.8,
+ "contradictions_per_answer": 0.09,
+ "unsupported_per_answer": 0.1
+}

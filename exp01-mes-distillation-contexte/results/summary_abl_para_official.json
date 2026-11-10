@@ -1,0 +1,14 @@
+{
+ "tag": "abl_para_official",
+ "n": 704,
+ "strict": 81.8,
+ "lenient": 89.2,
+ "completeness": 82.4,
+ "with_contradiction": 5.9,
+ "with_invention": 14.9,
+ "answer_chars_median": 468.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 12,
+ "ood_hallucination": 24.0,
+ "general_knowledge": 96.7
+}

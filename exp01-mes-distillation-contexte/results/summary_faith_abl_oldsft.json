@@ -1,0 +1,10 @@
+{
+ "tag": "abl_oldsft",
+ "n": 703,
+ "judge_failures": 1,
+ "fully_faithful": 58.5,
+ "answers_with_contradiction": 28.4,
+ "answers_with_unsupported": 16.4,
+ "contradictions_per_answer": 0.34,
+ "unsupported_per_answer": 0.2
+}

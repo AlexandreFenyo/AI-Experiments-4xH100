@@ -1,0 +1,10 @@
+{
+ "tag": "size_qwen14",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 85.7,
+ "answers_with_contradiction": 10.7,
+ "answers_with_unsupported": 6.2,
+ "contradictions_per_answer": 0.15,
+ "unsupported_per_answer": 0.09
+}

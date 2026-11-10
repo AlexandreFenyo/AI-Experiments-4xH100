@@ -1,0 +1,10 @@
+{
+ "tag": "abl_mixed_3k",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 87.5,
+ "answers_with_contradiction": 7.1,
+ "answers_with_unsupported": 6.7,
+ "contradictions_per_answer": 0.1,
+ "unsupported_per_answer": 0.12
+}

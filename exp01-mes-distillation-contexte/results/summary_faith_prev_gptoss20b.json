@@ -1,0 +1,10 @@
+{
+ "tag": "prev_gptoss20b",
+ "n": 703,
+ "judge_failures": 1,
+ "fully_faithful": 21.5,
+ "answers_with_contradiction": 63.7,
+ "answers_with_unsupported": 41.3,
+ "contradictions_per_answer": 1.16,
+ "unsupported_per_answer": 0.61
+}

@@ -9,3 +9,15 @@ it 51/389 loss 0.5285 ema 1.9055 lr 1.95e-04 972 tok/s  elapsed 2.0 min  eta 13.
 it 76/389 loss 0.3693 ema 1.3562 lr 1.86e-04 975 tok/s  elapsed 3.0 min  eta 12.2 min  mem 69 GiB
 it 101/389 loss 0.3954 ema 0.9980 lr 1.73e-04 976 tok/s  elapsed 3.9 min  eta 11.2 min  mem 69 GiB
 it 126/389 loss 0.4321 ema 0.7595 lr 1.58e-04 978 tok/s  elapsed 4.9 min  eta 10.2 min  mem 69 GiB
+it 151/389 loss 0.3716 ema 0.6044 lr 1.40e-04 978 tok/s  elapsed 5.9 min  eta 9.3 min  mem 69 GiB
+it 176/389 loss 0.3386 ema 0.5028 lr 1.20e-04 978 tok/s  elapsed 6.8 min  eta 8.3 min  mem 69 GiB
+it 201/389 loss 0.3087 ema 0.4298 lr 9.92e-05 980 tok/s  elapsed 7.8 min  eta 7.3 min  mem 69 GiB
+it 226/389 loss 0.3239 ema 0.3836 lr 7.86e-05 980 tok/s  elapsed 8.8 min  eta 6.3 min  mem 69 GiB
+it 251/389 loss 0.3022 ema 0.3438 lr 5.89e-05 980 tok/s  elapsed 9.8 min  eta 5.4 min  mem 69 GiB
+it 276/389 loss 0.3528 ema 0.3213 lr 4.10e-05 978 tok/s  elapsed 10.7 min  eta 4.4 min  mem 69 GiB
+it 301/389 loss 0.2105 ema 0.2951 lr 2.56e-05 979 tok/s  elapsed 11.7 min  eta 3.4 min  mem 69 GiB
+it 326/389 loss 0.2997 ema 0.2776 lr 1.34e-05 978 tok/s  elapsed 12.7 min  eta 2.5 min  mem 69 GiB
+it 351/389 loss 0.2882 ema 0.2690 lr 4.95e-06 978 tok/s  elapsed 13.7 min  eta 1.5 min  mem 69 GiB
+it 376/389 loss 0.2658 ema 0.2612 lr 5.83e-07 978 tok/s  elapsed 14.7 min  eta 0.5 min  mem 69 GiB
+it 389/389 loss 0.1998 ema 0.2616 lr 0.00e+00 978 tok/s  elapsed 15.2 min  eta 0.0 min  mem 69 GiB
+saved adapter to /dev/shm/work/abl_mixed_3k in 15.2 min

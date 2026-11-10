@@ -208,6 +208,66 @@ corrigé (`--save-epochs` devient une option) et relancé.
 
 Jeu public : https://huggingface.co/datasets/fenyo/4xH100-MonEspaceSante-distillation-contexte (tout `data/`).
 
+### Résultats des ablations (10 novembre, 21:08 UTC)
+
+Juge local Qwen3.8-27B, 704 questions gelées, élève sans la FAQ. Tous les entraînements : LoRA rang 64, taux 2e-4.
+
+**Taille du modèle** (mêmes 15 496 exemples que A1, même nombre de pas) :
+
+| Modèle | Strict | Complétude | Fidélité | Culture générale |
+|---|---|---|---|---|
+| Qwen3-14B (`size_qwen14`) | 69,9 | 68,7 | 85,7 | 100 |
+| Gemma 4 12B (`size_gemma12`) | 76,1 | 70,6 | 90,6 | 96,7 |
+| Gemma 4 31B (A1) | 76,1 | 74,6 | 95,0 | 90,0 |
+
+**Données** (Gemma 4 31B) :
+
+| Jeu | Exemples | Strict | Complétude | Fidélité | Longueur médiane | Hors périmètre inventé |
+|---|---|---|---|---|---|---|
+| `abl_oldsft` : les 548 exemples de l'expérience précédente, 10 époques | 548 | 48,2 | 29,8 | 58,5 | 170 | 0 |
+| `abl_para_teacher` : reformulations + réponse du professeur | 3 446 | 71,9 | 70,9 | 87,6 | 478 | 12 |
+| `abl_para_official` : mêmes questions + réponse officielle recopiée | 3 446 | 81,8 | 82,4 | 95,3 | 468 | 24 |
+| `abl_mixed_3k` : tous types de questions + professeur | 3 446 | 72,0 | 66,8 | 87,5 | 432 | 0 |
+| A1 : tous types + professeur | 15 496 | 76,1 | 74,6 | 95,0 | 493 | 0 |
+| A2 : tous types + professeur + questions générales | 42 770 | 80,1 | 77,3 | 98,7 | 492 | 0 |
+
+Rappel : ancien Qwen3-14B CPT+SFT = 45,5 / 30,7 / 54,7 / 184 caractères ; modèles sans connaissance : complétude 23 à 28,
+fidélité 0 à 3.
+
+Lecture :
+1. **Le jeu de données était le facteur limitant, pas le modèle.** Gemma 4 31B entraîné sur les 548 anciens exemples
+   donne les mêmes chiffres que l'ancien Qwen3-14B (complétude 30, fidélité 58, réponses de 170 caractères).
+2. **La méthode et les données apportent l'essentiel.** Un Qwen3-14B (taille et famille de l'ancien modèle, variante
+   conversationnelle) entraîné avec la nouvelle méthode : complétude 68,7 (+38 points), fidélité 85,7 (+31).
+3. **La taille apporte peu** : de 12-14B à 31B, +4 à +6 points de complétude, +4 à +9 de fidélité.
+4. **La réponse officielle recopiée est la meilleure cible pour les reformulations** : complétude 82,4 contre 70,9 avec
+   la réponse du professeur, à volume égal. Le test mesure la restitution de l'entrée officielle, et le professeur
+   répond de façon plus ciblée, donc moins complète. Sans exemples de refus, ce jeu invente hors périmètre (24 %).
+5. **Les exemples de refus et de questions voisines** ramènent l'invention hors périmètre à 0.
+6. **Le volume** : complétude 66,8 → 74,6 → 77,3 et fidélité 87,5 → 95,0 → 98,7 pour 3 446 → 15 496 → 42 770 exemples.
+
+Limite : le test gelé ne contient que des reformulations de la question officielle. Il ne mesure pas l'apport des
+questions précises, pièges ou croisées. D'où un second test (`data/varied_test.jsonl`, 600 questions de types `claim`,
+`false`, `multi`, `scen` retirées de l'entraînement A3 ; référence = réponse du professeur ; `judge_varied.py`).
+
+### Entraînement A3 : recette combinée (10 novembre, 21:14 UTC)
+
+`make_a3.py` : `distill_gemma31_a3.jsonl`, 48 203 exemples = reformulations avec la réponse officielle (16 293) +
+tous les autres types avec la réponse du professeur + aveux d'ignorance récupérés + questions générales (1 745),
+moins les 600 questions du test varié. Mêmes hyperparamètres que A1 et A2. Puis `pipeline_a3.sh` enchaîne les
+évaluations et l'entraînement du Mistral.
+
+### Mistral Medium 3.5 128B : mesures d'entraînement
+
+- Poids gardés en FP8 (`kernels==0.17.2`) : 29 tokens/s, et mémoire saturée sur 2 cartes. Inutilisable : chaque passe
+  arrière redécompresse les poids.
+- Poids déquantifiés en bf16 au chargement (`--dequantize`, `FineGrainedFP8Config(dequantize=True)`), un seul modèle
+  réparti sur les 4 cartes (`--device-map auto --max-mem 65`), lots de 1 500 tokens, recalcul des activations :
+  **356 tokens/s**, 64 à 73 Gio par carte. Environ 10 heures pour le jeu A3.
+- Avec un modèle réparti sur plusieurs cartes, la sortie arrive sur la dernière : les étiquettes doivent y être déplacées.
+- Évaluation avec vLLM et plusieurs adaptateurs : `--max-loras` et `--max-lora-rank` au strict nécessaire, vLLM réserve
+  la mémoire pour le produit des deux (8 adaptateurs de rang 256 saturent la carte).
+
 ## 8. Suite
 
 Voir les entrées suivantes du journal (entraînement, évaluations, gros modèle, quantification).

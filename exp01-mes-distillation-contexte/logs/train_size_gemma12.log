@@ -1,0 +1,24 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+15496 examples, 3984179 tokens (2797322 supervised), 408 batches, 1 proc, 408 optimizer steps
+trainable params: 262,275,072 || all params: 12,222,005,248 || trainable%: 2.1459
+it 1/408 loss 2.0939 ema 2.0939 lr 1.67e-05 1977 tok/s  elapsed 0.1 min  eta 33.0 min  mem 31 GiB
+it 26/408 loss 0.7852 ema 1.7292 lr 1.99e-04 2285 tok/s  elapsed 1.9 min  eta 27.3 min  mem 33 GiB
+it 51/408 loss 0.4581 ema 1.2788 lr 1.95e-04 2294 tok/s  elapsed 3.6 min  eta 25.3 min  mem 33 GiB
+it 76/408 loss 0.3816 ema 0.9473 lr 1.87e-04 2294 tok/s  elapsed 5.4 min  eta 23.6 min  mem 33 GiB
+it 101/408 loss 0.3659 ema 0.7198 lr 1.76e-04 2290 tok/s  elapsed 7.2 min  eta 21.8 min  mem 33 GiB
+it 126/408 loss 0.3304 ema 0.5714 lr 1.62e-04 2296 tok/s  elapsed 8.9 min  eta 20.0 min  mem 33 GiB
+it 151/408 loss 0.2843 ema 0.4731 lr 1.45e-04 2293 tok/s  elapsed 10.7 min  eta 18.2 min  mem 33 GiB
+it 176/408 loss 0.2801 ema 0.4027 lr 1.27e-04 2294 tok/s  elapsed 12.5 min  eta 16.5 min  mem 33 GiB
+it 201/408 loss 0.2794 ema 0.3542 lr 1.07e-04 2292 tok/s  elapsed 14.3 min  eta 14.7 min  mem 33 GiB
+it 226/408 loss 0.2882 ema 0.3219 lr 8.73e-05 2294 tok/s  elapsed 16.0 min  eta 12.9 min  mem 33 GiB
+it 251/408 loss 0.2496 ema 0.2991 lr 6.80e-05 2296 tok/s  elapsed 17.8 min  eta 11.1 min  mem 33 GiB
+it 276/408 loss 0.2740 ema 0.2800 lr 5.00e-05 2297 tok/s  elapsed 19.6 min  eta 9.4 min  mem 33 GiB
+it 301/408 loss 0.2419 ema 0.2664 lr 3.39e-05 2298 tok/s  elapsed 21.3 min  eta 7.6 min  mem 33 GiB
+it 326/408 loss 0.2564 ema 0.2549 lr 2.04e-05 2298 tok/s  elapsed 23.1 min  eta 5.8 min  mem 33 GiB
+it 351/408 loss 0.2478 ema 0.2450 lr 1.01e-05 2298 tok/s  elapsed 24.9 min  eta 4.0 min  mem 33 GiB
+it 376/408 loss 0.2337 ema 0.2414 lr 3.21e-06 2297 tok/s  elapsed 26.6 min  eta 2.3 min  mem 33 GiB
+it 401/408 loss 0.2423 ema 0.2385 lr 1.54e-07 2297 tok/s  elapsed 28.4 min  eta 0.5 min  mem 33 GiB
+it 408/408 loss 0.2275 ema 0.2376 lr 0.00e+00 2296 tok/s  elapsed 28.9 min  eta 0.0 min  mem 33 GiB
+saved adapter to /dev/shm/work/size_gemma12 in 28.9 min

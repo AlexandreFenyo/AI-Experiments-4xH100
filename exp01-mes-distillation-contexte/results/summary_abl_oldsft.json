@@ -1,0 +1,14 @@
+{
+ "tag": "abl_oldsft",
+ "n": 704,
+ "strict": 48.2,
+ "lenient": 79.0,
+ "completeness": 29.8,
+ "with_contradiction": 17.6,
+ "with_invention": 33.9,
+ "answer_chars_median": 170.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 11,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 96.7
+}

@@ -1,0 +1,112 @@
+  abl_para_teacher/heldout 200/704
+  abl_para_teacher/heldout 400/704
+  abl_para_teacher/heldout 600/704
+  abl_para_teacher/heldout 704/704
+abl_para_teacher/heldout: 704 answers, 0 empty
+  abl_para_teacher/ood 25/25
+abl_para_teacher/ood: 25 answers, 0 empty
+  abl_para_teacher/forgetting 30/30
+abl_para_teacher/forgetting: 30 answers, 0 empty
+  abl_para_official/heldout 200/704
+  abl_para_official/heldout 400/704
+  abl_para_official/heldout 600/704
+  abl_para_official/heldout 704/704
+abl_para_official/heldout: 704 answers, 0 empty
+  abl_para_official/ood 25/25
+abl_para_official/ood: 25 answers, 0 empty
+  abl_para_official/forgetting 30/30
+abl_para_official/forgetting: 30 answers, 0 empty
+  abl_mixed_3k/heldout 200/704
+  abl_mixed_3k/heldout 400/704
+  abl_mixed_3k/heldout 600/704
+  abl_mixed_3k/heldout 704/704
+abl_mixed_3k/heldout: 704 answers, 0 empty
+  abl_mixed_3k/ood 25/25
+abl_mixed_3k/ood: 25 answers, 0 empty
+  abl_mixed_3k/forgetting 30/30
+abl_mixed_3k/forgetting: 30 answers, 0 empty
+  abl_oldsft/heldout 200/704
+  abl_oldsft/heldout 400/704
+  abl_oldsft/heldout 600/704
+  abl_oldsft/heldout 704/704
+abl_oldsft/heldout: 704 answers, 0 empty
+  abl_oldsft/ood 25/25
+abl_oldsft/ood: 25 answers, 0 empty
+  abl_oldsft/forgetting 30/30
+abl_oldsft/forgetting: 30 answers, 0 empty
+  faith abl_para_teacher 200/704
+  faith abl_para_teacher 400/704
+  faith abl_para_teacher 600/704
+  faith abl_para_teacher 704/704
+{"tag": "abl_para_teacher", "n": 704, "judge_failures": 0, "fully_faithful": 87.6, "answers_with_contradiction": 7.5, "answers_with_unsupported": 6.8, "contradictions_per_answer": 0.09, "unsupported_per_answer": 0.1}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "abl_para_teacher", "n": 704, "strict": 71.9, "lenient": 95.7, "completeness": 70.9, "with_contradiction": 8.0, "with_invention": 29.8, "answer_chars_median": 477.5, "reference_chars_median": 492.0, "judge_failures": 13, "ood_hallucination": 12.0, "general_knowledge": 96.7}
+  faith abl_para_official 200/704
+  faith abl_para_official 400/704
+  faith abl_para_official 600/704
+  faith abl_para_official 704/704
+{"tag": "abl_para_official", "n": 704, "judge_failures": 0, "fully_faithful": 95.3, "answers_with_contradiction": 4.3, "answers_with_unsupported": 1.7, "contradictions_per_answer": 0.08, "unsupported_per_answer": 0.03}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "abl_para_official", "n": 704, "strict": 81.8, "lenient": 89.2, "completeness": 82.4, "with_contradiction": 5.9, "with_invention": 14.9, "answer_chars_median": 468.0, "reference_chars_median": 492.0, "judge_failures": 12, "ood_hallucination": 24.0, "general_knowledge": 96.7}
+  faith abl_mixed_3k 200/704
+  faith abl_mixed_3k 400/704
+  faith abl_mixed_3k 600/704
+  faith abl_mixed_3k 704/704
+{"tag": "abl_mixed_3k", "n": 704, "judge_failures": 0, "fully_faithful": 87.5, "answers_with_contradiction": 7.1, "answers_with_unsupported": 6.7, "contradictions_per_answer": 0.1, "unsupported_per_answer": 0.12}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "abl_mixed_3k", "n": 704, "strict": 72.0, "lenient": 95.5, "completeness": 66.8, "with_contradiction": 7.1, "with_invention": 28.5, "answer_chars_median": 432.5, "reference_chars_median": 492.0, "judge_failures": 10, "ood_hallucination": 0.0, "general_knowledge": 100.0}
+  faith abl_oldsft 200/704
+  faith abl_oldsft 400/704
+  faith abl_oldsft 600/704
+  faith abl_oldsft 704/704
+{"tag": "abl_oldsft", "n": 703, "judge_failures": 1, "fully_faithful": 58.5, "answers_with_contradiction": 28.4, "answers_with_unsupported": 16.4, "contradictions_per_answer": 0.34, "unsupported_per_answer": 0.2}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "abl_oldsft", "n": 704, "strict": 48.2, "lenient": 79.0, "completeness": 29.8, "with_contradiction": 17.6, "with_invention": 33.9, "answer_chars_median": 170.5, "reference_chars_median": 492.0, "judge_failures": 11, "ood_hallucination": 0.0, "general_knowledge": 96.7}

@@ -1,0 +1,28 @@
+  size_qwen14/heldout 200/704
+  size_qwen14/heldout 400/704
+  size_qwen14/heldout 600/704
+  size_qwen14/heldout 704/704
+size_qwen14/heldout: 704 answers, 0 empty
+  size_qwen14/ood 25/25
+size_qwen14/ood: 25 answers, 0 empty
+  size_qwen14/forgetting 30/30
+size_qwen14/forgetting: 30 answers, 0 empty
+  faith size_qwen14 200/704
+  faith size_qwen14 400/704
+  faith size_qwen14 600/704
+  faith size_qwen14 704/704
+{"tag": "size_qwen14", "n": 704, "judge_failures": 0, "fully_faithful": 85.7, "answers_with_contradiction": 10.7, "answers_with_unsupported": 6.2, "contradictions_per_answer": 0.15, "unsupported_per_answer": 0.09}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "size_qwen14", "n": 704, "strict": 69.9, "lenient": 95.0, "completeness": 68.7, "with_contradiction": 7.2, "with_invention": 29.8, "answer_chars_median": 457.5, "reference_chars_median": 492.0, "judge_failures": 12, "ood_hallucination": 0.0, "general_knowledge": 100.0}

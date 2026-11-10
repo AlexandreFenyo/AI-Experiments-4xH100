@@ -1,0 +1,4 @@
+{"tag": "gemma31_base", "n": 704, "judge_failures": 0, "fully_faithful": 3.1, "answers_with_contradiction": 76.8, "answers_with_unsupported": 89.5, "contradictions_per_answer": 2.11, "unsupported_per_answer": 2.97}
+{"tag": "mistral128_base", "n": 698, "judge_failures": 6, "fully_faithful": 0.1, "answers_with_contradiction": 92.1, "answers_with_unsupported": 96.6, "contradictions_per_answer": 3.6, "unsupported_per_answer": 4.92}
+{"tag": "qwen27_base", "n": 703, "judge_failures": 1, "fully_faithful": 1.4, "answers_with_contradiction": 89.5, "answers_with_unsupported": 93.2, "contradictions_per_answer": 3.11, "unsupported_per_answer": 3.55}
+{"tag": "prev_gptoss20b", "n": 703, "judge_failures": 1, "fully_faithful": 21.5, "answers_with_contradiction": 63.7, "answers_with_unsupported": 41.3, "contradictions_per_answer": 1.16, "unsupported_per_answer": 0.61}

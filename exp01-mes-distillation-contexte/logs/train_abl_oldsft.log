@@ -6,3 +6,12 @@ trainable params: 489,717,760 || all params: 31,762,804,272 || trainable%: 1.541
 it 1/240 loss 4.6022 ema 4.6022 lr 2.86e-05 815 tok/s  elapsed 0.1 min  eta 12.0 min  mem 68 GiB
 it 26/240 loss 0.8551 ema 3.4561 lr 1.97e-04 965 tok/s  elapsed 1.0 min  eta 8.2 min  mem 69 GiB
 it 51/240 loss 0.1775 ema 2.3432 lr 1.83e-04 988 tok/s  elapsed 1.9 min  eta 7.1 min  mem 69 GiB
+it 76/240 loss 0.1223 ema 1.5457 lr 1.60e-04 992 tok/s  elapsed 2.8 min  eta 6.1 min  mem 69 GiB
+it 101/240 loss 0.1481 ema 0.9928 lr 1.30e-04 998 tok/s  elapsed 3.7 min  eta 5.1 min  mem 69 GiB
+it 126/240 loss 0.0473 ema 0.6286 lr 9.66e-05 1001 tok/s  elapsed 4.7 min  eta 4.2 min  mem 69 GiB
+it 151/240 loss 0.0138 ema 0.3953 lr 6.38e-05 1002 tok/s  elapsed 5.6 min  eta 3.3 min  mem 69 GiB
+it 176/240 loss 0.0132 ema 0.2448 lr 3.50e-05 1002 tok/s  elapsed 6.5 min  eta 2.4 min  mem 69 GiB
+it 201/240 loss 0.0039 ema 0.1505 lr 1.35e-05 1004 tok/s  elapsed 7.4 min  eta 1.4 min  mem 69 GiB
+it 226/240 loss 0.0014 ema 0.0934 lr 1.78e-06 1005 tok/s  elapsed 8.3 min  eta 0.5 min  mem 69 GiB
+it 240/240 loss 0.0110 ema 0.0717 lr 0.00e+00 1006 tok/s  elapsed 8.8 min  eta 0.0 min  mem 69 GiB
+saved adapter to /dev/shm/work/abl_oldsft in 8.9 min

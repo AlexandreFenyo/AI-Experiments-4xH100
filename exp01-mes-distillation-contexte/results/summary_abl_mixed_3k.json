@@ -1,0 +1,14 @@
+{
+ "tag": "abl_mixed_3k",
+ "n": 704,
+ "strict": 72.0,
+ "lenient": 95.5,
+ "completeness": 66.8,
+ "with_contradiction": 7.1,
+ "with_invention": 28.5,
+ "answer_chars_median": 432.5,
+ "reference_chars_median": 492.0,
+ "judge_failures": 10,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 100.0
+}
