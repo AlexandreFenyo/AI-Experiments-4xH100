@@ -1,0 +1,14 @@
+{
+ "tag": "gemma31_a1",
+ "n": 704,
+ "strict": 76.1,
+ "lenient": 97.3,
+ "completeness": 74.6,
+ "with_contradiction": 5.3,
+ "with_invention": 28.7,
+ "answer_chars_median": 493.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 10,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 90.0
+}

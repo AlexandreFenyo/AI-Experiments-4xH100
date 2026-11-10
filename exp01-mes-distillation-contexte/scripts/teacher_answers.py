@@ -10,9 +10,12 @@ import random
 import re
 from collections import Counter
 
-from common import DATA, SYSTEM_STUDENT, chat_many, load_jsonl, teacher_system, write_jsonl
+from common import DATA, SYSTEM_STUDENT, chat_many, endpoints, load_jsonl, teacher_system, write_jsonl
 
-LEAK = re.compile(r"\b(FAQ|base de connaissances|le document|le contexte|ci-dessus)\b", re.I)
+# Phrases that reveal the teacher was reading a provided text. Deliberately narrow: "le document" or "le contexte"
+# are ordinary words in this domain (health documents) and must not be filtered.
+LEAK = re.compile(r"FAQ|base de connaissances|base officielle|contexte fourni|document fourni|texte fourni|"
+                  r"informations? (?:fournies?|ci-dessus)|d'après (?:le|les|la) (?:texte|document|base)", re.I)
 NO_SYS_SHARE = 0.25   # share of in-domain examples trained without any system prompt
 
 
@@ -27,6 +30,14 @@ async def main():
     rows = load_jsonl(DATA / "gen" / args.questions)
     if args.limit:
         rows = rows[: args.limit]
+    # Wait until every endpoint really answers (two servers starting together can take more than 7 minutes).
+    for _ in range(120):
+        probe = await chat_many([[{"role": "user", "content": "Bonjour"}]] * len(endpoints()), max_tokens=5, desc="probe")
+        if all(x["finish"] in ("stop", "length") for x in probe):
+            break
+        await asyncio.sleep(10)
+    else:
+        raise SystemExit("endpoints not ready")
     sysmsg = {"role": "system", "content": teacher_system()}
     answers = [[] for _ in rows]
     max_turns = max(len(r["turns"]) for r in rows)
@@ -41,11 +52,14 @@ async def main():
             jobs.append(msgs)
         res = await chat_many(jobs, temperature=args.temperature, max_tokens=2500, concurrency=args.concurrency,
                               desc=f"teacher turn {t + 1}")
+        errors = sum(str(x["finish"]).startswith("error") for x in res)
+        if errors > 0.02 * len(res):               # never build a dataset from a failing server
+            raise SystemExit(f"{errors}/{len(res)} requests failed, aborting")
         for i, x in zip(idx, res):
             if x["text"] and x["finish"] == "stop":
                 answers[i].append(x["text"])
 
-    out, train, stats = [], [], Counter()
+    out, train, leaks, stats = [], [], [], Counter()
     rnd = random.Random(0)
     for r, a in zip(rows, answers):
         if len(a) != len(r["turns"]):
@@ -53,6 +67,7 @@ async def main():
             continue
         if any(LEAK.search(x) for x in a):
             stats["leak"] += 1
+            leaks.append(dict(r, answers=a))      # kept aside for inspection, not used for training
             continue
         out.append(dict(r, answers=a))
         in_domain = r["type"] not in ("near", "ood")
@@ -65,6 +80,7 @@ async def main():
         stats[r["type"]] += 1
     rnd.shuffle(train)
     write_jsonl(DATA / "gen" / f"teacher_{args.tag}.jsonl", out)
+    write_jsonl(DATA / "gen" / f"teacher_{args.tag}_leaks.jsonl", leaks)
     write_jsonl(DATA / "train" / f"distill_{args.tag}.jsonl", train)
     print(f"{len(out)} questions answered, {len(train)} training examples:", dict(stats))
 

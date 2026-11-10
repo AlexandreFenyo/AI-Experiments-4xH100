@@ -1,0 +1,57 @@
+Tue Nov 10 16:22:15 UTC 2026
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+trainable params: 489,717,760 || all params: 31,762,804,272 || trainable%: 1.5418
+it 1/433 loss 3.3589 ema 3.3589 lr 1.67e-05 1667 tok/s  elapsed 0.1 min  eta 40.9 min  mem 69 GiB
+it 26/433 loss 0.6046 ema 2.5542 lr 1.99e-04 3307 tok/s  elapsed 1.2 min  eta 19.2 min  mem 70 GiB
+it 51/433 loss 0.3098 ema 1.7284 lr 1.96e-04 3342 tok/s  elapsed 2.4 min  eta 17.7 min  mem 70 GiB
+it 76/433 loss 0.3091 ema 1.1778 lr 1.89e-04 3350 tok/s  elapsed 3.5 min  eta 16.5 min  mem 70 GiB
+it 101/433 loss 0.2426 ema 0.8266 lr 1.79e-04 3374 tok/s  elapsed 4.6 min  eta 15.2 min  mem 70 GiB
+it 126/433 loss 0.2856 ema 0.6028 lr 1.66e-04 3385 tok/s  elapsed 5.8 min  eta 14.0 min  mem 70 GiB
+it 151/433 loss 0.2202 ema 0.4715 lr 1.51e-04 3362 tok/s  elapsed 6.9 min  eta 12.9 min  mem 70 GiB
+it 176/433 loss 0.2193 ema 0.3780 lr 1.34e-04 3371 tok/s  elapsed 8.1 min  eta 11.8 min  mem 70 GiB
+it 201/433 loss 0.2387 ema 0.3198 lr 1.16e-04 3368 tok/s  elapsed 9.2 min  eta 10.6 min  mem 70 GiB
+it 226/433 loss 0.1895 ema 0.2767 lr 9.74e-05 3371 tok/s  elapsed 10.3 min  eta 9.5 min  mem 70 GiB
+it 251/433 loss 0.1313 ema 0.2450 lr 7.89e-05 3366 tok/s  elapsed 11.5 min  eta 8.3 min  mem 70 GiB
+it 276/433 loss 0.1914 ema 0.2293 lr 6.11e-05 3369 tok/s  elapsed 12.6 min  eta 7.2 min  mem 70 GiB
+it 301/433 loss 0.1636 ema 0.2160 lr 4.47e-05 3368 tok/s  elapsed 13.7 min  eta 6.0 min  mem 70 GiB
+it 326/433 loss 0.2115 ema 0.2027 lr 3.02e-05 3370 tok/s  elapsed 14.9 min  eta 4.9 min  mem 70 GiB
+it 351/433 loss 0.1669 ema 0.1955 lr 1.81e-05 3365 tok/s  elapsed 16.0 min  eta 3.7 min  mem 70 GiB
+it 376/433 loss 0.1838 ema 0.1902 lr 8.91e-06 3371 tok/s  elapsed 17.1 min  eta 2.6 min  mem 70 GiB
+it 401/433 loss 0.1260 ema 0.1847 lr 2.84e-06 3368 tok/s  elapsed 18.3 min  eta 1.5 min  mem 70 GiB
+it 426/433 loss 0.2147 ema 0.1797 lr 1.36e-07 3369 tok/s  elapsed 19.4 min  eta 0.3 min  mem 70 GiB
+it 433/433 loss 0.1424 ema 0.1785 lr 0.00e+00 3368 tok/s  elapsed 19.7 min  eta 0.0 min  mem 70 GiB
+saved adapter to /dev/shm/work/gemma31_a1 in 19.8 min
+Tue Nov 10 16:42:41 UTC 2026
+  gemma31_a1/heldout 200/704
+  gemma31_a1/heldout 400/704
+  gemma31_a1/heldout 600/704
+  gemma31_a1/heldout 704/704
+gemma31_a1/heldout: 704 answers, 0 empty
+  gemma31_a1/ood 25/25
+gemma31_a1/ood: 25 answers, 0 empty
+  gemma31_a1/forgetting 30/30
+gemma31_a1/forgetting: 30 answers, 0 empty
+  faith gemma31_a1 200/704
+  faith gemma31_a1 400/704
+  faith gemma31_a1 600/704
+  faith gemma31_a1 704/704
+{"tag": "gemma31_a1", "n": 704, "judge_failures": 0, "fully_faithful": 95.0, "answers_with_contradiction": 2.8, "answers_with_unsupported": 3.3, "contradictions_per_answer": 0.03, "unsupported_per_answer": 0.04}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "gemma31_a1", "n": 704, "strict": 76.1, "lenient": 97.3, "completeness": 74.6, "with_contradiction": 5.3, "with_invention": 28.7, "answer_chars_median": 493.0, "reference_chars_median": 492.0, "judge_failures": 10, "ood_hallucination": 0.0, "general_knowledge": 90.0}
+Tue Nov 10 16:56:16 UTC 2026

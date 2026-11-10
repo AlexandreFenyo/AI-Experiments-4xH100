@@ -33,9 +33,16 @@ def encode(tok, row, max_len, tpl_kw, end):
         ids = tok(row["text"], add_special_tokens=True).input_ids[:max_len]
         return ids, list(ids)
     msgs = row["messages"]
-    text = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True, **tpl_kw)
-    prefix = tok(text, add_special_tokens=False).input_ids
-    target = tok(msgs[-1]["content"].strip() + end, add_special_tokens=False).input_ids
+    answer = msgs[-1]["content"].strip()
+    if end == "</s>":
+        # Mistral (mistral-common tokenizer): tokenize the prompt directly; "</s>" is not parsed from text.
+        out = tok.apply_chat_template(msgs[:-1], tokenize=True, add_generation_prompt=True)
+        prefix = list(out if isinstance(out, list) else out["input_ids"])
+        target = tok(answer, add_special_tokens=False).input_ids + [tok.eos_token_id]
+    else:
+        text = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True, **tpl_kw)
+        prefix = tok(text, add_special_tokens=False).input_ids
+        target = tok(answer + end, add_special_tokens=False).input_ids
     ids = (list(prefix) + target)[:max_len]
     labels = ([-100] * len(prefix) + target)[:max_len]
     return ids, labels
@@ -94,6 +101,17 @@ def chunked_lm_loss(hf_model, ids, att, lab, chunk=768):
     return total / max(1, y.numel())
 
 
+class Distill(torch.nn.Module):
+    """Wraps the PEFT model so that the whole loss is computed inside forward(): required for multi-GPU (DDP)."""
+
+    def __init__(self, peft_model):
+        super().__init__()
+        self.peft = peft_model
+
+    def forward(self, ids, att, lab):
+        return chunked_lm_loss(self.peft.base_model.model, ids, att, lab)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True)
@@ -113,7 +131,7 @@ def main():
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
-    acc = Accelerator(gradient_accumulation_steps=args.accum)
+    acc = Accelerator(gradient_accumulation_steps=args.accum, mixed_precision="bf16")
     torch.manual_seed(args.seed)
     tok = AutoTokenizer.from_pretrained(args.model)
     tpl_kw = {"enable_thinking": False} if args.family == "qwen" else {}
@@ -125,8 +143,8 @@ def main():
     examples = [encode(tok, r, args.max_len, tpl_kw, END[args.family]) for r in rows]
     batches = make_batches(examples, args.batch_tokens, args.seed)
     n_proc = acc.num_processes
-    my_batches = batches[acc.process_index :: n_proc]            # simple static sharding across processes
-    steps_per_epoch = len(my_batches)
+    steps_per_epoch = len(batches) // n_proc                   # same number of steps in every process (DDP)
+    my_batches = batches[acc.process_index :: n_proc][:steps_per_epoch]   # static sharding across processes
     total_steps = math.ceil(steps_per_epoch * args.epochs / args.accum)
     if acc.is_main_process:
         ntok = sum(len(x) for x, _ in examples)
@@ -146,26 +164,31 @@ def main():
     if acc.is_main_process:
         model.print_trainable_parameters()
 
+    model = Distill(model)
     params = [q for q in model.parameters() if q.requires_grad]
     opt = torch.optim.AdamW(params, lr=args.lr, weight_decay=0.0, betas=(0.9, 0.999))
     sched = get_cosine_schedule_with_warmup(opt, max(1, int(0.03 * total_steps)), total_steps)
     if args.device_map == "auto":
-        opt, sched = acc.prepare(opt, sched)
+        opt = acc.prepare(opt)
+        dev = "cuda:0"
     else:
-        model, opt, sched = acc.prepare(model, opt, sched)
+        # The scheduler is NOT passed to accelerate: its wrapper steps it once per process, which made the
+        # learning rate decay num_processes times too fast.
+        model, opt = acc.prepare(model, opt)
+        dev = acc.device
     model.train()
-    hf_model = acc.unwrap_model(model).base_model.model   # underlying HF model (LoRA layers injected in place)
 
     t0, seen_tok, step, ema = time.time(), 0, 0, None
     n_iter = math.ceil(steps_per_epoch * args.epochs)
     for it in range(n_iter):
         if it % steps_per_epoch == 0 and it:
+            if acc.is_main_process:   # keep an adapter per completed epoch
+                acc.unwrap_model(model).save_pretrained(f"{args.out}-ep{it // steps_per_epoch}")
             random.Random(args.seed + it).shuffle(my_batches)
         ids, att, lab = collate(examples, my_batches[it % steps_per_epoch], pad_id)
-        dev = model.device if args.device_map != "auto" else "cuda:0"
         with acc.accumulate(model):
             with acc.autocast():
-                loss_t = chunked_lm_loss(hf_model, ids.to(dev), att.to(dev), lab.to(dev))
+                loss_t = model(ids.to(dev), att.to(dev), lab.to(dev))
             acc.backward(loss_t)
             if acc.sync_gradients:
                 acc.clip_grad_norm_(params, 1.0)
@@ -184,7 +207,7 @@ def main():
 
     acc.wait_for_everyone()
     if acc.is_main_process:
-        acc.unwrap_model(model).save_pretrained(args.out)
+        acc.unwrap_model(model).peft.save_pretrained(args.out)
         tok.save_pretrained(args.out)
         print(f"saved adapter to {args.out} in {(time.time() - t0) / 60:.1f} min", flush=True)
 

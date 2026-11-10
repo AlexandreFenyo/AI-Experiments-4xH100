@@ -1,0 +1,91 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 214, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 140, in main
+[rank2]:     rows = [json.loads(l) for l in open(args.data, encoding="utf-8") if l.strip()]
+[rank2]:                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: FileNotFoundError: [Errno 2] No such file or directory: '../data/train/distill_gemma31_s1.jsonl'
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 214, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 140, in main
+[rank1]:     rows = [json.loads(l) for l in open(args.data, encoding="utf-8") if l.strip()]
+[rank1]:                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: FileNotFoundError: [Errno 2] No such file or directory: '../data/train/distill_gemma31_s1.jsonl'
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 214, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 140, in main
+[rank3]:     rows = [json.loads(l) for l in open(args.data, encoding="utf-8") if l.strip()]
+[rank3]:                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: FileNotFoundError: [Errno 2] No such file or directory: '../data/train/distill_gemma31_s1.jsonl'
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 214, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 140, in main
+[rank0]:     rows = [json.loads(l) for l in open(args.data, encoding="utf-8") if l.strip()]
+[rank0]:                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: FileNotFoundError: [Errno 2] No such file or directory: '../data/train/distill_gemma31_s1.jsonl'
+W1110 16:01:36.474000 41764 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 41849 closing signal SIGTERM
+W1110 16:01:36.475000 41764 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 41850 closing signal SIGTERM
+W1110 16:01:36.476000 41764 torch/distributed/elastic/multiprocessing/api.py:1028] Sending process 41852 closing signal SIGTERM
+E1110 16:01:36.842000 41764 torch/distributed/elastic/multiprocessing/api.py:1002] failed (exitcode: 1) local_rank: 2 (pid: 41851) of binary: /home/fenyo/exp/env-train/bin/python
+Traceback (most recent call last):
+  File "/home/fenyo/exp/env-train/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1404, in launch_command
+    multi_gpu_launcher(args)
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1029, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/distributed/run.py", line 1129, in run
+    elastic_launch(
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 197, in __call__
+    return launch_agent(
+           ^^^^^^^^^^^^^
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 386, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_lora.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-11-10_16:01:36
+  host      : h100-gra11-20261110-124711
+  rank      : 0 (local_rank: 0)
+  exitcode  : -15 (pid: 41849)  (SIGTERM)
+  error_file: <N/A>
+  traceback : Signal 15 (SIGTERM) received by PID 41849
+[2]:
+  time      : 2026-11-10_16:01:36
+  host      : h100-gra11-20261110-124711
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 41850) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2026-11-10_16:01:36
+  host      : h100-gra11-20261110-124711
+  rank      : 3 (local_rank: 3)
+  exitcode  : -15 (pid: 41852)  (SIGTERM)
+  error_file: <N/A>
+  traceback : Signal 15 (SIGTERM) received by PID 41852
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-10_16:01:36
+  host      : h100-gra11-20261110-124711
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 41851) 
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
