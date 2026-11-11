@@ -1,0 +1,9 @@
+Wed Nov 11 08:37:09 UTC 2026
+Writing model shards:   0%|          | 0/7 [00:00<?, ?it/s]Writing model shards:  14%|█▍        | 1/7 [00:09<00:55,  9.27s/it]Writing model shards:  29%|██▊       | 2/7 [00:17<00:44,  8.89s/it]Writing model shards:  43%|████▎     | 3/7 [00:27<00:36,  9.05s/it]Writing model shards:  57%|█████▋    | 4/7 [00:35<00:26,  8.97s/it]Writing model shards:  71%|███████▏  | 5/7 [00:45<00:18,  9.24s/it]Writing model shards:  86%|████████▌ | 6/7 [00:55<00:09,  9.37s/it]Writing model shards: 100%|██████████| 7/7 [00:59<00:00,  7.76s/it]Writing model shards: 100%|██████████| 7/7 [00:59<00:00,  8.54s/it]
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 1112.09it/s]
+saved to /dev/shm/work/mistral128_m1-merged in 11.2 min
+Wed Nov 11 08:48:49 UTC 2026
+  url: https://huggingface.co/fenyo/4xH100-Mistral-Medium-3.5-128B-MonEspaceSante/commit/fceaf4f45a52cec0ee64b4cdd26c3c455a68be75
+  url: https://huggingface.co/fenyo/4xH100-Mistral-Medium-3.5-128B-MonEspaceSante/commit/f91de6fc38188854b4a7284d59320a9e8eebb52c
+Wed Nov 11 08:51:27 UTC 2026
+== done

@@ -1,0 +1,62 @@
+Wed Nov 11 08:08:28 UTC 2026
+== path 1: FP8 base + LoRA adapter served by vLLM
+Wed Nov 11 08:11:37 UTC 2026
+  mistral128_m1/heldout 200/704
+  mistral128_m1/heldout 400/704
+  mistral128_m1/heldout 600/704
+  mistral128_m1/heldout 704/704
+mistral128_m1/heldout: 704 answers, 0 empty
+  mistral128_m1/ood 25/25
+mistral128_m1/ood: 25 answers, 0 empty
+  mistral128_m1/forgetting 30/30
+mistral128_m1/forgetting: 30 answers, 0 empty
+  mistral128_m1/varied 200/600
+  mistral128_m1/varied 400/600
+  mistral128_m1/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "mistral128_m1", "all": {"n": 600, "faithful": 95.3, "agrees_with_teacher": 79.0}, "claim": {"n": 150, "faithful": 94.0, "agrees_with_teacher": 84.0}, "false": {"n": 150, "faithful": 97.3, "agrees_with_teacher": 90.0}, "multi": {"n": 150, "faithful": 92.7, "agrees_with_teacher": 70.7}, "scen": {"n": 150, "faithful": 97.3, "agrees_with_teacher": 71.3}}
+  faith mistral128_m1 200/704
+  faith mistral128_m1 400/704
+  faith mistral128_m1 600/704
+  faith mistral128_m1 704/704
+{"tag": "mistral128_m1", "n": 704, "judge_failures": 0, "fully_faithful": 99.0, "answers_with_contradiction": 0.7, "answers_with_unsupported": 0.3, "contradictions_per_answer": 0.01, "unsupported_per_answer": 0.0}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "mistral128_m1", "n": 704, "strict": 82.8, "lenient": 98.3, "completeness": 76.9, "with_contradiction": 4.0, "with_invention": 21.5, "answer_chars_median": 462.0, "reference_chars_median": 492.0, "judge_failures": 10, "ood_hallucination": 0.0, "general_knowledge": 96.7}
+  faith gemma31_a3_q5km 200/704
+  faith gemma31_a3_q5km 400/704
+  faith gemma31_a3_q5km 600/704
+  faith gemma31_a3_q5km 704/704
+{"tag": "gemma31_a3_q5km", "n": 704, "judge_failures": 0, "fully_faithful": 97.4, "answers_with_contradiction": 1.7, "answers_with_unsupported": 0.9, "contradictions_per_answer": 0.02, "unsupported_per_answer": 0.01}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "gemma31_a3_q5km", "n": 704, "strict": 81.1, "lenient": 98.4, "completeness": 75.7, "with_contradiction": 3.9, "with_invention": 22.9, "answer_chars_median": 472.0, "reference_chars_median": 492.0, "judge_failures": 11, "ood_hallucination": 0.0, "general_knowledge": 100.0}
+Wed Nov 11 08:35:46 UTC 2026
+== done

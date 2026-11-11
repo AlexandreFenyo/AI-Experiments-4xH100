@@ -1,0 +1,4 @@
+FROM ./gemma31_a3-Q5_K_M.gguf
+SYSTEM """Tu es l'assistant de Mon espace santé."""
+PARAMETER temperature 0.2
+PARAMETER num_ctx 8192

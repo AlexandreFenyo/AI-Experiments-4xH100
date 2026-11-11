@@ -315,7 +315,42 @@ Publication (public) :
 - https://huggingface.co/fenyo/4xH100-gemma-4-31B-it-MonEspaceSante (modèle fusionné + `lora-adapter/`)
 - https://huggingface.co/fenyo/4xH100-gemma-4-31B-it-MonEspaceSante-GGUF (3 fichiers GGUF, `Modelfile` Ollama)
 
+### Mistral Medium 3.5 128B : entraînement M1 et résultats (11 novembre)
+
+`pipeline_mistral.sh` : 48 203 exemples (jeu A3), 8 988 pas de 1 500 tokens, taux 1e-4, rang 64, 8 h 08 à 396 tokens/s,
+sauvegarde tous les 1 000 pas dans `~/ckpt`. Évaluation (`pipeline_mistral_eval.sh`) : vLLM applique l'adaptateur
+directement sur le modèle de base FP8 (`--enable-lora`), deux cartes en parallélisme de tenseurs.
+
+| Sans la FAQ, 704 questions | Strict | Complétude | Fidélité | Culture générale | Hors périmètre inventé | Test varié : fidélité / accord |
+|---|---|---|---|---|---|---|
+| Mistral 128B M1 | 82,8 | 76,9 | 99,0 | 96,7 | 0 | 95,3 / 79,0 |
+| Gemma 31B A3 | 80,5 | 75,7 | 97,6 | 100 | 0 | 96,0 / 80,0 |
+| Gemma 31B A3, GGUF Q5_K_M (CPU) | 81,1 | 75,7 | 97,4 | 100 | 0 | non mesuré |
+| Gemma 31B R1 (réponses officielles + refus + général, 23 116 exemples, 25 min) | 90,6 | 88,6 | 99,7 | 100 | 0 | 93,8 / 59,5 |
+
+R1 (`pipeline_r1.sh`) : meilleure restitution, mais 28,7 % d'accord sur les questions croisées (72,7 % pour A3).
+
+Fusion du Mistral (`merge_mistral.py`, CPU, 11 min) : transformers requantifie en FP8 à l'enregistrement (128 Go) mais
+retire `quantization_config` de `config.json` ; le script le rétablit.
+
+Juge de contrôle Qwen3.5-397B (API OVH) sur 100 questions par modèle (`answers_*_sub100_heldout.jsonl`) :
+Gemma A3 80,0 / 76,0 (juge local sur les mêmes questions : 79,0 / 74,7), Mistral M1 88,0 / 80,0 (86,0 / 77,8) ;
+même verdict strict dans 89 % et 94 % des cas.
+
+### Publication finale et coûts
+
+- https://huggingface.co/fenyo/4xH100-Mistral-Medium-3.5-128B-MonEspaceSante (fusionné FP8 + `lora-adapter/`)
+- https://huggingface.co/fenyo/4xH100-gemma-4-31B-it-MonEspaceSante et `-GGUF`
+- https://huggingface.co/fenyo/4xH100-MonEspaceSante-ablations-LoRA (A1, A2, R1, ablations sur les données ; les adaptateurs
+  `size_gemma12` et `size_qwen14` ont été supprimés par erreur en libérant `/dev/shm`)
+- Rapport : `report/RAPPORT.md` et `RAPPORT.pdf` (aussi dans Dropbox, `/AI-Experiments-4xH100/exp01-mes-distillation-contexte`)
+
+VM : 21 h 30, environ 241 € HT. API OVH : au moins 52 € HT (hausse relevée par l'API de facturation depuis le début du suivi).
+
 ## 8. Suite
+
+Variantes non testées : affinage complet au lieu de LoRA ; distillation sur les probabilités du professeur ; un seul
+modèle basculant entre « restitution » et « réponse ciblée » selon le prompt système ; relecture humaine des réponses.
 
 Voir les entrées suivantes du journal (entraînement, évaluations, gros modèle, quantification).
 

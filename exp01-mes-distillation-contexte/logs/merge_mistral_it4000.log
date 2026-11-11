@@ -1,0 +1,27 @@
+Failed to load CPU gemm_4bit_forward from kernels-community: Cannot find a build variant for this system in kernels-community/quantization-bitsandbytes (revision: a99e5bb6a4c835bdc676a3044f45c716fd605bf4):
+
+torch212-cpu-x86_64-linux: Torch version (2.12) does not match environment Torch version (2.15)
+torch215-cpu-x86_64-linux: backend (cpu) does not match selected backend (cu132)
+torch211-cpu-x86_64-linux: Torch version (2.11) does not match environment Torch version (2.15)
+torch214-cpu-x86_64-linux: Torch version (2.14) does not match environment Torch version (2.15)
+torch210-cpu-x86_64-linux: Torch version (2.10) does not match environment Torch version (2.15)
+torch213-cpu-x86_64-linux: Torch version (2.13) does not match environment Torch version (2.15). Please make sure you already `pip install kernels` and the kernels >= 0.11.1
+loaded in 2.1 min
+merged at 5.5 min
+Writing model shards:   0%|          | 0/7 [00:00<?, ?it/s]Writing model shards:  14%|█▍        | 1/7 [00:09<00:56,  9.46s/it]Writing model shards:  29%|██▊       | 2/7 [00:18<00:46,  9.36s/it]Writing model shards:  43%|████▎     | 3/7 [00:28<00:37,  9.44s/it]Writing model shards:  57%|█████▋    | 4/7 [00:37<00:28,  9.49s/it]Writing model shards:  71%|███████▏  | 5/7 [00:47<00:18,  9.40s/it]Writing model shards:  86%|████████▌ | 6/7 [00:56<00:09,  9.32s/it]Writing model shards: 100%|██████████| 7/7 [01:00<00:00,  7.63s/it]Writing model shards: 100%|██████████| 7/7 [01:00<00:00,  8.63s/it]
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files: 100%|██████████| 8/8 [00:00<00:00, 1012.08it/s]
+Traceback (most recent call last):
+  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/merge_mistral.py", line 42, in <module>
+    main()
+  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/merge_mistral.py", line 37, in main
+    shutil.copy(f, Path(args.out) / f.name)
+  File "/home/fenyo/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "/home/fenyo/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/shutil.py", line 273, in copyfile
+    _fastcopy_sendfile(fsrc, fdst)
+  File "/home/fenyo/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/shutil.py", line 170, in _fastcopy_sendfile
+    raise err
+  File "/home/fenyo/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/shutil.py", line 150, in _fastcopy_sendfile
+    sent = os.sendfile(outfd, infd, offset, blocksize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 122] Disk quota exceeded: '/dev/shm/hf/hub/models--mistralai--Mistral-Medium-3.5-128B/snapshots/22b2b868a15677cfa6061277ed2f653d1349a9ab/model-00002-of-00003.safetensors' -> '/dev/shm/work/mistral128_it4000-merged/model-00002-of-00003.safetensors'

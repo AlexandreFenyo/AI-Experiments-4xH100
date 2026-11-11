@@ -1,0 +1,28 @@
+{
+ "tag": "gemma31_r1",
+ "all": {
+  "n": 600,
+  "faithful": 93.8,
+  "agrees_with_teacher": 59.5
+ },
+ "claim": {
+  "n": 150,
+  "faithful": 96.7,
+  "agrees_with_teacher": 76.0
+ },
+ "false": {
+  "n": 150,
+  "faithful": 94.0,
+  "agrees_with_teacher": 68.7
+ },
+ "multi": {
+  "n": 150,
+  "faithful": 86.0,
+  "agrees_with_teacher": 28.7
+ },
+ "scen": {
+  "n": 150,
+  "faithful": 98.7,
+  "agrees_with_teacher": 64.7
+ }
+}

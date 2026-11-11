@@ -1,0 +1,14 @@
+{
+ "tag": "gemma31_a3_q5km",
+ "n": 704,
+ "strict": 81.1,
+ "lenient": 98.4,
+ "completeness": 75.7,
+ "with_contradiction": 3.9,
+ "with_invention": 22.9,
+ "answer_chars_median": 472.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 11,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 100.0
+}

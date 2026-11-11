@@ -1,0 +1,6 @@
+  judge heldout 200/300
+  judge heldout 300/300
+{"tag": "gemma31_a3_sub100", "n": 100, "strict": 80.0, "lenient": 99.0, "completeness": 76.0, "with_contradiction": 2.1, "with_invention": 26.8, "answer_chars_median": 456.5, "reference_chars_median": 509.0, "judge_failures": 3}
+  judge heldout 200/300
+  judge heldout 300/300
+{"tag": "mistral128_m1_sub100", "n": 100, "strict": 88.0, "lenient": 98.0, "completeness": 80.0, "with_contradiction": 1.1, "with_invention": 20.2, "answer_chars_median": 447.0, "reference_chars_median": 509.0, "judge_failures": 6}

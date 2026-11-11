@@ -1,0 +1,28 @@
+  gemma31_r1/heldout 200/704
+  gemma31_r1/heldout 400/704
+  gemma31_r1/heldout 600/704
+  gemma31_r1/heldout 704/704
+gemma31_r1/heldout: 704 answers, 0 empty
+  gemma31_r1/ood 25/25
+gemma31_r1/ood: 25 answers, 0 empty
+  gemma31_r1/forgetting 30/30
+gemma31_r1/forgetting: 30 answers, 0 empty
+  faith gemma31_r1 200/704
+  faith gemma31_r1 400/704
+  faith gemma31_r1 600/704
+  faith gemma31_r1 704/704
+{"tag": "gemma31_r1", "n": 704, "judge_failures": 0, "fully_faithful": 99.7, "answers_with_contradiction": 0.3, "answers_with_unsupported": 0.0, "contradictions_per_answer": 0.0, "unsupported_per_answer": 0}
+  judge heldout 200/2112
+  judge heldout 400/2112
+  judge heldout 600/2112
+  judge heldout 800/2112
+  judge heldout 1000/2112
+  judge heldout 1200/2112
+  judge heldout 1400/2112
+  judge heldout 1600/2112
+  judge heldout 1800/2112
+  judge heldout 2000/2112
+  judge heldout 2112/2112
+  judge ood 25/25
+  judge forgetting 30/30
+{"tag": "gemma31_r1", "n": 704, "strict": 90.6, "lenient": 95.5, "completeness": 88.6, "with_contradiction": 2.4, "with_invention": 9.2, "answer_chars_median": 459.5, "reference_chars_median": 492.0, "judge_failures": 10, "ood_hallucination": 0.0, "general_knowledge": 100.0}

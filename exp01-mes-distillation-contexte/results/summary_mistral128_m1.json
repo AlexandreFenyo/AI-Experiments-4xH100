@@ -1,0 +1,14 @@
+{
+ "tag": "mistral128_m1",
+ "n": 704,
+ "strict": 82.8,
+ "lenient": 98.3,
+ "completeness": 76.9,
+ "with_contradiction": 4.0,
+ "with_invention": 21.5,
+ "answer_chars_median": 462.0,
+ "reference_chars_median": 492.0,
+ "judge_failures": 10,
+ "ood_hallucination": 0.0,
+ "general_knowledge": 96.7
+}

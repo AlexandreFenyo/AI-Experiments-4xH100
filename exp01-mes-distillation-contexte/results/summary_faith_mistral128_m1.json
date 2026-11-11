@@ -1,0 +1,10 @@
+{
+ "tag": "mistral128_m1",
+ "n": 704,
+ "judge_failures": 0,
+ "fully_faithful": 99.0,
+ "answers_with_contradiction": 0.7,
+ "answers_with_unsupported": 0.3,
+ "contradictions_per_answer": 0.01,
+ "unsupported_per_answer": 0.0
+}
