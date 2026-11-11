@@ -1,0 +1,31 @@
+Wed Nov 11 00:04:43 UTC 2026
+
+merged model saved to /dev/shm/work/gemma31_a3-merged in 1.8 min
+Wed Nov 11 00:06:43 UTC 2026
+INFO:hf-to-gguf:Model successfully exported to /home/fenyo/gguf/gemma31_a3-f16.gguf
+Wed Nov 11 00:09:02 UTC 2026
+llama_model_quantize_impl: quant size  = 17806.27 MiB (4.87 BPW)
+Wed Nov 11 00:10:03 UTC 2026
+llama_model_quantize_impl: quant size  = 20818.46 MiB (5.69 BPW)
+Wed Nov 11 00:11:02 UTC 2026
+llama_model_quantize_impl: quant size  = 24018.91 MiB (6.56 BPW)
+total 85527076
+drwxrwxr-x  2 fenyo fenyo        4096 Nov 11 00:11 .
+drwxr-x--- 16 fenyo fenyo        4096 Nov 10 23:53 ..
+-rw-rw-r--  1 fenyo fenyo 21845571392 Nov 10 18:15 gemma31_a1-Q5_K_M.gguf
+-rw-rw-r--  1 fenyo fenyo 18687063872 Nov 11 00:10 gemma31_a3-Q4_K_M.gguf
+-rw-rw-r--  1 fenyo fenyo 21845571392 Nov 11 00:11 gemma31_a3-Q5_K_M.gguf
+-rw-rw-r--  1 fenyo fenyo 25201485632 Nov 11 00:11 gemma31_a3-Q6_K.gguf
+Wed Nov 11 00:11:51 UTC 2026
+== CPU evaluation of Q5_K_M on the frozen test
+  gemma31_a3_q5km/heldout 200/704
+  gemma31_a3_q5km/heldout 400/704
+  gemma31_a3_q5km/heldout 600/704
+  gemma31_a3_q5km/heldout 704/704
+gemma31_a3_q5km/heldout: 704 answers, 0 empty
+  gemma31_a3_q5km/ood 25/25
+gemma31_a3_q5km/ood: 25 answers, 0 empty
+  gemma31_a3_q5km/forgetting 30/30
+gemma31_a3_q5km/forgetting: 30 answers, 0 empty
+Wed Nov 11 01:56:08 UTC 2026
+== done

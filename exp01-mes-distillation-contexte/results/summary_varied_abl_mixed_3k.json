@@ -1,0 +1,28 @@
+{
+ "tag": "abl_mixed_3k",
+ "all": {
+  "n": 600,
+  "faithful": 72.3,
+  "agrees_with_teacher": 65.7
+ },
+ "claim": {
+  "n": 150,
+  "faithful": 80.0,
+  "agrees_with_teacher": 73.3
+ },
+ "false": {
+  "n": 150,
+  "faithful": 84.7,
+  "agrees_with_teacher": 76.7
+ },
+ "multi": {
+  "n": 150,
+  "faithful": 58.7,
+  "agrees_with_teacher": 54.7
+ },
+ "scen": {
+  "n": 150,
+  "faithful": 66.0,
+  "agrees_with_teacher": 58.0
+ }
+}

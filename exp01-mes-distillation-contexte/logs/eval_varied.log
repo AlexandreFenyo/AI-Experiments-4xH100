@@ -1,0 +1,50 @@
+  gemma31_a3/varied 200/600
+  gemma31_a3/varied 400/600
+  gemma31_a3/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "gemma31_a3", "all": {"n": 600, "faithful": 96.0, "agrees_with_teacher": 80.0}, "claim": {"n": 150, "faithful": 97.3, "agrees_with_teacher": 84.0}, "false": {"n": 150, "faithful": 96.7, "agrees_with_teacher": 89.3}, "multi": {"n": 150, "faithful": 92.7, "agrees_with_teacher": 72.7}, "scen": {"n": 150, "faithful": 97.3, "agrees_with_teacher": 74.0}}
+  gemma31_a1/varied 200/600
+  gemma31_a1/varied 400/600
+  gemma31_a1/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "gemma31_a1", "all": {"n": 600, "faithful": 87.7, "agrees_with_teacher": 75.8}, "claim": {"n": 150, "faithful": 90.7, "agrees_with_teacher": 80.7}, "false": {"n": 150, "faithful": 93.3, "agrees_with_teacher": 86.7}, "multi": {"n": 150, "faithful": 78.7, "agrees_with_teacher": 66.7}, "scen": {"n": 150, "faithful": 88.0, "agrees_with_teacher": 69.3}}
+  abl_para_teacher/varied 200/600
+  abl_para_teacher/varied 400/600
+  abl_para_teacher/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "abl_para_teacher", "all": {"n": 600, "faithful": 71.0, "agrees_with_teacher": 61.8}, "claim": {"n": 150, "faithful": 77.3, "agrees_with_teacher": 72.7}, "false": {"n": 150, "faithful": 75.3, "agrees_with_teacher": 66.0}, "multi": {"n": 150, "faithful": 66.0, "agrees_with_teacher": 54.0}, "scen": {"n": 150, "faithful": 65.3, "agrees_with_teacher": 54.7}}
+  abl_para_official/varied 200/600
+  abl_para_official/varied 400/600
+  abl_para_official/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "abl_para_official", "all": {"n": 600, "faithful": 92.5, "agrees_with_teacher": 49.2}, "claim": {"n": 150, "faithful": 90.7, "agrees_with_teacher": 69.3}, "false": {"n": 150, "faithful": 90.7, "agrees_with_teacher": 55.3}, "multi": {"n": 150, "faithful": 95.3, "agrees_with_teacher": 19.3}, "scen": {"n": 150, "faithful": 93.3, "agrees_with_teacher": 52.7}}
+  abl_mixed_3k/varied 200/600
+  abl_mixed_3k/varied 400/600
+  abl_mixed_3k/varied 600/600
+  judge varied 200/1200
+  judge varied 400/1200
+  judge varied 600/1200
+  judge varied 800/1200
+  judge varied 1000/1200
+  judge varied 1200/1200
+{"tag": "abl_mixed_3k", "all": {"n": 600, "faithful": 72.3, "agrees_with_teacher": 65.7}, "claim": {"n": 150, "faithful": 80.0, "agrees_with_teacher": 73.3}, "false": {"n": 150, "faithful": 84.7, "agrees_with_teacher": 76.7}, "multi": {"n": 150, "faithful": 58.7, "agrees_with_teacher": 54.7}, "scen": {"n": 150, "faithful": 66.0, "agrees_with_teacher": 58.0}}

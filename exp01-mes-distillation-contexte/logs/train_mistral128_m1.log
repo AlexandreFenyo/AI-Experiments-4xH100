@@ -1,0 +1,60 @@
+48203 examples, 11583612 tokens (8272386 supervised), 8988 batches, 1 proc, 8988 optimizer steps
+trainable params: 1,118,830,592 || all params: 128,823,040,768 || trainable%: 0.8685
+it 1/8988 loss 1.8002 ema 1.8002 lr 3.72e-07 294 tok/s  elapsed 0.1 min  eta 636.3 min  mem 64 GiB
+it 26/8988 loss 1.2364 ema 1.6746 lr 9.67e-06 369 tok/s  elapsed 1.5 min  eta 512.3 min  mem 65 GiB
+it 51/8988 loss 1.0710 ema 1.4428 lr 1.90e-05 376 tok/s  elapsed 2.9 min  eta 516.8 min  mem 65 GiB
+it 76/8988 loss 0.6859 ema 1.2001 lr 2.83e-05 378 tok/s  elapsed 4.4 min  eta 512.2 min  mem 65 GiB
+it 101/8988 loss 0.6133 ema 0.9892 lr 3.75e-05 382 tok/s  elapsed 5.8 min  eta 513.4 min  mem 65 GiB
+it 126/8988 loss 0.7648 ema 0.8446 lr 4.68e-05 383 tok/s  elapsed 7.2 min  eta 507.7 min  mem 65 GiB
+it 151/8988 loss 0.5948 ema 0.7232 lr 5.61e-05 381 tok/s  elapsed 8.6 min  eta 504.8 min  mem 65 GiB
+it 176/8988 loss 0.3284 ema 0.6162 lr 6.54e-05 382 tok/s  elapsed 10.1 min  eta 503.9 min  mem 65 GiB
+it 201/8988 loss 0.2232 ema 0.5641 lr 7.47e-05 382 tok/s  elapsed 11.5 min  eta 501.9 min  mem 65 GiB
+it 226/8988 loss 0.3105 ema 0.5284 lr 8.40e-05 384 tok/s  elapsed 12.9 min  eta 498.6 min  mem 65 GiB
+it 251/8988 loss 0.4690 ema 0.4909 lr 9.33e-05 384 tok/s  elapsed 14.3 min  eta 497.7 min  mem 65 GiB
+it 276/8988 loss 0.3949 ema 0.4750 lr 1.00e-04 384 tok/s  elapsed 15.7 min  eta 496.1 min  mem 65 GiB
+it 301/8988 loss 0.1552 ema 0.4635 lr 1.00e-04 385 tok/s  elapsed 17.1 min  eta 492.5 min  mem 65 GiB
+it 326/8988 loss 0.4177 ema 0.4398 lr 1.00e-04 385 tok/s  elapsed 18.5 min  eta 490.3 min  mem 65 GiB
+it 351/8988 loss 0.5689 ema 0.4152 lr 1.00e-04 386 tok/s  elapsed 19.8 min  eta 487.9 min  mem 65 GiB
+it 376/8988 loss 0.5024 ema 0.4326 lr 1.00e-04 386 tok/s  elapsed 21.2 min  eta 485.5 min  mem 65 GiB
+it 401/8988 loss 0.5018 ema 0.4015 lr 9.99e-05 386 tok/s  elapsed 22.6 min  eta 484.2 min  mem 65 GiB
+it 426/8988 loss 0.3269 ema 0.4230 lr 9.99e-05 386 tok/s  elapsed 24.0 min  eta 481.4 min  mem 65 GiB
+it 451/8988 loss 0.2796 ema 0.4038 lr 9.99e-05 387 tok/s  elapsed 25.4 min  eta 480.2 min  mem 65 GiB
+it 476/8988 loss 0.6495 ema 0.4044 lr 9.99e-05 387 tok/s  elapsed 26.7 min  eta 477.3 min  mem 65 GiB
+it 501/8988 loss 0.0596 ema 0.3881 lr 9.98e-05 388 tok/s  elapsed 28.1 min  eta 476.7 min  mem 65 GiB
+it 526/8988 loss 0.4996 ema 0.3769 lr 9.98e-05 388 tok/s  elapsed 29.5 min  eta 474.6 min  mem 65 GiB
+it 551/8988 loss 0.2776 ema 0.3823 lr 9.97e-05 388 tok/s  elapsed 30.9 min  eta 473.4 min  mem 65 GiB
+it 576/8988 loss 0.2413 ema 0.3630 lr 9.97e-05 388 tok/s  elapsed 32.3 min  eta 471.4 min  mem 65 GiB
+it 601/8988 loss 0.3515 ema 0.3836 lr 9.96e-05 388 tok/s  elapsed 33.6 min  eta 469.0 min  mem 65 GiB
+it 626/8988 loss 0.1879 ema 0.3814 lr 9.96e-05 388 tok/s  elapsed 34.9 min  eta 466.6 min  mem 65 GiB
+it 651/8988 loss 0.2493 ema 0.3823 lr 9.95e-05 388 tok/s  elapsed 36.2 min  eta 464.2 min  mem 65 GiB
+it 676/8988 loss 0.5508 ema 0.3769 lr 9.95e-05 388 tok/s  elapsed 37.6 min  eta 462.7 min  mem 65 GiB
+it 701/8988 loss 0.3449 ema 0.3644 lr 9.94e-05 388 tok/s  elapsed 38.9 min  eta 460.3 min  mem 65 GiB
+it 726/8988 loss 0.3586 ema 0.3423 lr 9.93e-05 389 tok/s  elapsed 40.4 min  eta 459.3 min  mem 65 GiB
+it 751/8988 loss 0.4364 ema 0.3470 lr 9.92e-05 389 tok/s  elapsed 41.7 min  eta 457.5 min  mem 65 GiB
+it 776/8988 loss 0.1948 ema 0.3472 lr 9.92e-05 389 tok/s  elapsed 43.0 min  eta 455.4 min  mem 65 GiB
+it 801/8988 loss 0.4665 ema 0.3620 lr 9.91e-05 389 tok/s  elapsed 44.4 min  eta 453.3 min  mem 65 GiB
+it 826/8988 loss 0.4483 ema 0.3465 lr 9.90e-05 389 tok/s  elapsed 45.8 min  eta 452.5 min  mem 65 GiB
+it 851/8988 loss 0.0831 ema 0.3546 lr 9.89e-05 389 tok/s  elapsed 47.1 min  eta 450.6 min  mem 65 GiB
+it 876/8988 loss 0.1814 ema 0.3429 lr 9.88e-05 390 tok/s  elapsed 48.5 min  eta 448.8 min  mem 65 GiB
+it 901/8988 loss 0.3409 ema 0.3349 lr 9.87e-05 390 tok/s  elapsed 49.8 min  eta 447.4 min  mem 65 GiB
+it 926/8988 loss 0.1382 ema 0.3457 lr 9.86e-05 390 tok/s  elapsed 51.2 min  eta 445.4 min  mem 65 GiB
+it 951/8988 loss 0.2841 ema 0.3405 lr 9.85e-05 390 tok/s  elapsed 52.5 min  eta 443.5 min  mem 65 GiB
+it 976/8988 loss 0.3145 ema 0.3311 lr 9.84e-05 390 tok/s  elapsed 53.9 min  eta 442.2 min  mem 65 GiB
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 237, in <module>
+    main()
+  File "/home/fenyo/git/AI-Experiments-4xH100/exp01-mes-distillation-contexte/scripts/train_lora.py", line 221, in main
+    acc.unwrap_model(model).peft.save_pretrained(f"{args.out}-it{it + 1}")   # usable snapshot of a long run
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/peft/peft_model.py", line 299, in save_pretrained
+    self.create_or_update_model_card(save_directory)
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/peft/peft_model.py", line 1765, in create_or_update_model_card
+    card.save(filename)
+  File "/home/fenyo/exp/env-train/lib/python3.12/site-packages/huggingface_hub/repocard.py", line 132, in save
+    with open(filepath, mode="w", newline="", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 122] Disk quota exceeded

@@ -7,3 +7,60 @@ The following values were not passed to `accelerate launch` and had defaults use
 trainable params: 489,717,760 || all params: 31,762,804,272 || trainable%: 1.5418
 it 1/1276 loss 2.7465 ema 2.7465 lr 5.26e-06 1675 tok/s  elapsed 0.1 min  eta 122.6 min  mem 69 GiB
 it 26/1276 loss 1.0399 ema 2.3451 lr 1.37e-04 3228 tok/s  elapsed 1.2 min  eta 59.5 min  mem 70 GiB
+it 51/1276 loss 0.4295 ema 1.6543 lr 2.00e-04 3321 tok/s  elapsed 2.4 min  eta 56.8 min  mem 70 GiB
+it 76/1276 loss 0.1773 ema 1.1274 lr 2.00e-04 3343 tok/s  elapsed 3.5 min  eta 55.3 min  mem 70 GiB
+it 101/1276 loss 0.3257 ema 0.7924 lr 1.99e-04 3348 tok/s  elapsed 4.6 min  eta 54.0 min  mem 70 GiB
+it 126/1276 loss 0.1113 ema 0.5761 lr 1.98e-04 3360 tok/s  elapsed 5.8 min  eta 52.7 min  mem 70 GiB
+it 151/1276 loss 0.2232 ema 0.4320 lr 1.96e-04 3394 tok/s  elapsed 6.9 min  eta 51.3 min  mem 70 GiB
+it 176/1276 loss 0.3290 ema 0.3381 lr 1.94e-04 3392 tok/s  elapsed 8.0 min  eta 50.1 min  mem 70 GiB
+it 201/1276 loss 0.1958 ema 0.2720 lr 1.92e-04 3390 tok/s  elapsed 9.2 min  eta 49.0 min  mem 70 GiB
+it 226/1276 loss 0.1659 ema 0.2473 lr 1.89e-04 3402 tok/s  elapsed 10.3 min  eta 47.7 min  mem 70 GiB
+it 251/1276 loss 0.0055 ema 0.2240 lr 1.86e-04 3388 tok/s  elapsed 11.4 min  eta 46.7 min  mem 70 GiB
+it 276/1276 loss 0.1195 ema 0.2080 lr 1.82e-04 3390 tok/s  elapsed 12.6 min  eta 45.5 min  mem 70 GiB
+it 301/1276 loss 0.1965 ema 0.1969 lr 1.79e-04 3385 tok/s  elapsed 13.7 min  eta 44.4 min  mem 70 GiB
+it 326/1276 loss 0.1653 ema 0.1910 lr 1.74e-04 3381 tok/s  elapsed 14.8 min  eta 43.2 min  mem 70 GiB
+it 351/1276 loss 0.1201 ema 0.1850 lr 1.70e-04 3379 tok/s  elapsed 16.0 min  eta 42.1 min  mem 70 GiB
+it 376/1276 loss 0.2383 ema 0.1806 lr 1.65e-04 3374 tok/s  elapsed 17.1 min  eta 41.0 min  mem 70 GiB
+it 401/1276 loss 0.1565 ema 0.1656 lr 1.60e-04 3378 tok/s  elapsed 18.3 min  eta 39.9 min  mem 70 GiB
+it 426/1276 loss 0.1094 ema 0.1684 lr 1.55e-04 3379 tok/s  elapsed 19.4 min  eta 38.8 min  mem 70 GiB
+it 451/1276 loss 0.1128 ema 0.1565 lr 1.50e-04 3382 tok/s  elapsed 20.6 min  eta 37.7 min  mem 70 GiB
+it 476/1276 loss 0.2510 ema 0.1521 lr 1.44e-04 3379 tok/s  elapsed 21.7 min  eta 36.5 min  mem 70 GiB
+it 501/1276 loss 0.0795 ema 0.1497 lr 1.39e-04 3381 tok/s  elapsed 22.9 min  eta 35.4 min  mem 70 GiB
+it 526/1276 loss 0.1548 ema 0.1547 lr 1.33e-04 3380 tok/s  elapsed 24.0 min  eta 34.3 min  mem 70 GiB
+it 551/1276 loss 0.1896 ema 0.1566 lr 1.27e-04 3385 tok/s  elapsed 25.2 min  eta 33.1 min  mem 70 GiB
+it 576/1276 loss 0.2631 ema 0.1578 lr 1.20e-04 3380 tok/s  elapsed 26.3 min  eta 32.0 min  mem 70 GiB
+it 601/1276 loss 0.1970 ema 0.1565 lr 1.14e-04 3382 tok/s  elapsed 27.4 min  eta 30.8 min  mem 70 GiB
+it 626/1276 loss 0.1214 ema 0.1499 lr 1.08e-04 3381 tok/s  elapsed 28.6 min  eta 29.7 min  mem 70 GiB
+it 651/1276 loss 0.1651 ema 0.1516 lr 1.02e-04 3381 tok/s  elapsed 29.7 min  eta 28.5 min  mem 70 GiB
+it 676/1276 loss 0.1163 ema 0.1439 lr 9.52e-05 3380 tok/s  elapsed 30.9 min  eta 27.4 min  mem 70 GiB
+it 701/1276 loss 0.1575 ema 0.1443 lr 8.89e-05 3378 tok/s  elapsed 32.0 min  eta 26.3 min  mem 70 GiB
+it 726/1276 loss 0.0494 ema 0.1451 lr 8.26e-05 3377 tok/s  elapsed 33.2 min  eta 25.1 min  mem 70 GiB
+it 751/1276 loss 0.1914 ema 0.1405 lr 7.64e-05 3374 tok/s  elapsed 34.3 min  eta 24.0 min  mem 70 GiB
+it 776/1276 loss 0.1508 ema 0.1440 lr 7.03e-05 3373 tok/s  elapsed 35.5 min  eta 22.9 min  mem 71 GiB
+it 801/1276 loss 0.2358 ema 0.1396 lr 6.43e-05 3373 tok/s  elapsed 36.6 min  eta 21.7 min  mem 71 GiB
+it 826/1276 loss 0.1283 ema 0.1308 lr 5.84e-05 3372 tok/s  elapsed 37.8 min  eta 20.6 min  mem 71 GiB
+it 851/1276 loss 0.1502 ema 0.1301 lr 5.27e-05 3373 tok/s  elapsed 38.9 min  eta 19.4 min  mem 71 GiB
+it 876/1276 loss 0.1351 ema 0.1322 lr 4.72e-05 3372 tok/s  elapsed 40.1 min  eta 18.3 min  mem 71 GiB
+it 901/1276 loss 0.1690 ema 0.1283 lr 4.20e-05 3370 tok/s  elapsed 41.2 min  eta 17.2 min  mem 71 GiB
+it 926/1276 loss 0.1133 ema 0.1221 lr 3.69e-05 3366 tok/s  elapsed 42.4 min  eta 16.0 min  mem 71 GiB
+it 951/1276 loss 0.1839 ema 0.1227 lr 3.21e-05 3366 tok/s  elapsed 43.5 min  eta 14.9 min  mem 71 GiB
+it 976/1276 loss 0.1501 ema 0.1218 lr 2.76e-05 3364 tok/s  elapsed 44.7 min  eta 13.7 min  mem 71 GiB
+it 1001/1276 loss 0.1075 ema 0.1210 lr 2.34e-05 3364 tok/s  elapsed 45.8 min  eta 12.6 min  mem 71 GiB
+it 1026/1276 loss 0.0842 ema 0.1190 lr 1.95e-05 3360 tok/s  elapsed 47.0 min  eta 11.4 min  mem 71 GiB
+it 1051/1276 loss 0.1584 ema 0.1180 lr 1.59e-05 3359 tok/s  elapsed 48.1 min  eta 10.3 min  mem 71 GiB
+it 1076/1276 loss 0.1747 ema 0.1259 lr 1.26e-05 3357 tok/s  elapsed 49.3 min  eta 9.2 min  mem 71 GiB
+it 1101/1276 loss 0.1094 ema 0.1267 lr 9.70e-06 3357 tok/s  elapsed 50.4 min  eta 8.0 min  mem 71 GiB
+it 1126/1276 loss 0.0661 ema 0.1238 lr 7.16e-06 3357 tok/s  elapsed 51.6 min  eta 6.9 min  mem 71 GiB
+it 1151/1276 loss 0.0978 ema 0.1212 lr 4.99e-06 3356 tok/s  elapsed 52.7 min  eta 5.7 min  mem 71 GiB
+it 1176/1276 loss 0.0863 ema 0.1211 lr 3.20e-06 3353 tok/s  elapsed 53.9 min  eta 4.6 min  mem 71 GiB
+it 1201/1276 loss 0.0006 ema 0.1176 lr 1.81e-06 3353 tok/s  elapsed 55.0 min  eta 3.4 min  mem 71 GiB
+it 1226/1276 loss 0.1642 ema 0.1218 lr 8.04e-07 3352 tok/s  elapsed 56.2 min  eta 2.3 min  mem 71 GiB
+it 1251/1276 loss 0.1237 ema 0.1202 lr 2.01e-07 3353 tok/s  elapsed 57.3 min  eta 1.1 min  mem 71 GiB
+it 1276/1276 loss 0.1599 ema 0.1167 lr 0.00e+00 3353 tok/s  elapsed 58.4 min  eta 0.0 min  mem 71 GiB
+saved adapter to /dev/shm/work/gemma31_a3 in 58.5 min
+Tue Nov 10 22:13:02 UTC 2026
+== A3 on the frozen 704-question test (GPUs 0,1) and varied test for A3, A1 and the ablations (GPUs 2,3)
+Tue Nov 10 22:54:23 UTC 2026
+== Mistral Medium 3.5 128B, one model spread over the 4 GPUs, weights expanded to bf16
+Tue Nov 10 23:50:48 UTC 2026
+== done

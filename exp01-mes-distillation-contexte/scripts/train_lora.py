@@ -135,6 +135,8 @@ def main():
     p.add_argument("--dequantize", action="store_true", help="expand FP8 checkpoint weights to bf16 at load time")
     p.add_argument("--max-mem", type=int, default=0, help="GiB of weights per GPU with --device-map auto")
     p.add_argument("--save-every", type=int, default=0, help="save an adapter snapshot every N iterations")
+    p.add_argument("--resume", default="", help="adapter snapshot to restart from")
+    p.add_argument("--start-iter", type=int, default=0, help="iteration of that snapshot")
     p.add_argument("--seed", type=int, default=0)
     args = p.parse_args()
 
@@ -177,7 +179,11 @@ def main():
         model.gradient_checkpointing_enable()
     cfg = LoraConfig(r=args.rank, lora_alpha=args.alpha or args.rank, lora_dropout=0.0, bias="none",
                      target_modules=TARGETS[args.family], task_type="CAUSAL_LM")
-    model = get_peft_model(model, cfg)
+    if args.resume:      # restart from an adapter snapshot (optimizer moments are not restored)
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, args.resume, is_trainable=True)
+    else:
+        model = get_peft_model(model, cfg)
     if acc.is_main_process:
         model.print_trainable_parameters()
 
@@ -199,7 +205,9 @@ def main():
     n_iter = math.ceil(steps_per_epoch * args.epochs)
     if args.max_iters:
         n_iter = min(n_iter, args.max_iters)
-    for it in range(n_iter):
+    for _ in range(math.ceil(args.start_iter / args.accum)):
+        sched.step()                      # bring the learning-rate schedule to the resume point
+    for it in range(args.start_iter, n_iter):
         if it % steps_per_epoch == 0 and it:
             if acc.is_main_process and args.save_epochs:   # optionally keep an adapter per completed epoch
                 acc.unwrap_model(model).peft.save_pretrained(f"{args.out}-ep{it // steps_per_epoch}")
@@ -223,7 +231,7 @@ def main():
             el = time.time() - t0
             print(f"it {it + 1}/{n_iter} loss {loss:.4f} ema {ema:.4f} lr {sched.get_last_lr()[0]:.2e} "
                   f"{seen_tok * n_proc / el:.0f} tok/s  elapsed {el / 60:.1f} min  "
-                  f"eta {el / (it + 1) * (n_iter - it - 1) / 60:.1f} min  "
+                  f"eta {el / (it + 1 - args.start_iter) * (n_iter - it - 1) / 60:.1f} min  "
                   f"mem {torch.cuda.max_memory_allocated() / 2**30:.0f} GiB", flush=True)
 
     acc.wait_for_everyone()

@@ -1,0 +1,28 @@
+{
+ "tag": "abl_para_teacher",
+ "all": {
+  "n": 600,
+  "faithful": 71.0,
+  "agrees_with_teacher": 61.8
+ },
+ "claim": {
+  "n": 150,
+  "faithful": 77.3,
+  "agrees_with_teacher": 72.7
+ },
+ "false": {
+  "n": 150,
+  "faithful": 75.3,
+  "agrees_with_teacher": 66.0
+ },
+ "multi": {
+  "n": 150,
+  "faithful": 66.0,
+  "agrees_with_teacher": 54.0
+ },
+ "scen": {
+  "n": 150,
+  "faithful": 65.3,
+  "agrees_with_teacher": 54.7
+ }
+}

@@ -268,6 +268,53 @@ moins les 600 questions du test varié. Mêmes hyperparamètres que A1 et A2. Pu
 - Évaluation avec vLLM et plusieurs adaptateurs : `--max-loras` et `--max-lora-rank` au strict nécessaire, vLLM réserve
   la mémoire pour le produit des deux (8 adaptateurs de rang 256 saturent la carte).
 
+### Résultat A3 et test varié (10 novembre, 22:55 UTC)
+
+| Gemma 4 31B | Exemples | Strict | Complétude | Fidélité | Culture générale | Hors périmètre inventé |
+|---|---|---|---|---|---|---|
+| A2 (tous types + professeur) | 42 770 | 80,1 | 77,3 | 98,7 | 100 | 0 |
+| **A3 (recette combinée)** | 48 203 | 80,5 | 75,7 | 97,6 | 100 | 0 |
+
+A3 est équivalent à A2 sur le test gelé : le gain de la réponse officielle recopiée (82,4 de complétude seule) ne
+s'additionne pas au reste.
+
+Test varié (`data/varied_test.jsonl`, 600 questions : 150 détails ciblés, 150 fausses présuppositions, 150 questions
+croisant plusieurs entrées, 150 situations ; aucune vue à l'entraînement de ces modèles) :
+
+| Entraînement | Fidélité | Accord avec le professeur | dont détails | dont pièges | dont croisées | dont situations |
+|---|---|---|---|---|---|---|
+| `abl_para_official` (3 446) | 92,5 | 49,2 | 69,3 | 55,3 | 19,3 | 52,7 |
+| `abl_para_teacher` (3 446) | 71,0 | 61,8 | 72,7 | 66,0 | 54,0 | 54,7 |
+| `abl_mixed_3k` (3 446) | 72,3 | 65,7 | 73,3 | 76,7 | 54,7 | 58,0 |
+| A1 (15 496) | 87,7 | 75,8 | 80,7 | 86,7 | 66,7 | 69,3 |
+| **A3 (48 203)** | **96,0** | **80,0** | 84,0 | 89,3 | 72,7 | 74,0 |
+
+Lecture : il y a un compromis. Le modèle entraîné à réciter la réponse officielle est le meilleur pour restituer une
+entrée (test gelé) mais ne sait pas répondre à une question qui croise deux entrées (19 %). La variété des questions,
+à volume égal, apporte +4 points d'accord sur le test varié (65,7 contre 61,8), surtout sur les pièges (+11). A3 est le
+meilleur sur le test varié et au niveau de A2 sur le test gelé : il est retenu pour la RTX 5090.
+
+### Nuit du 10 au 11 novembre : incident de quota
+
+`/dev/shm` a un quota par utilisateur d'environ 585 Go (erreur `Disk quota exceeded`, que `df` ne montre pas : il
+restait 147 Go « libres »). Conséquences : l'entraînement du Mistral, lancé à 22:55 UTC, a planté à 23:50 en écrivant
+sa première sauvegarde (pas 1 000), qui était vide ; le fichier GGUF intermédiaire de A3 a été tronqué. C'était déjà la
+cause de l'échec de `llama-quantize` vers `/dev/shm` la veille. Corrections : suppression des modèles inutiles (blobs
+orphelins du cache Hugging Face compris), sauvegardes du Mistral dans `~/ckpt` et fichiers GGUF dans `~/gguf` (disque
+local). Le Mistral est reparti de zéro à 23:59 UTC (`pipeline_mistral.sh`).
+
+`train_lora.py` a gagné `--save-every`, `--resume` et `--start-iter`.
+
+### Version RTX 5090 (11 novembre, 00:11 UTC)
+
+`gguf_final.sh gemma31_a3` : `gemma31_a3-Q4_K_M.gguf` (18,7 Go), `-Q5_K_M.gguf` (21,8 Go), `-Q6_K.gguf` (25,2 Go).
+Le Q5_K_M a répondu aux jeux d'évaluation sur CPU par `llama-server` (88 fils, 8 requêtes en parallèle, 1 h 45) :
+`results/answers_gemma31_a3_q5km_*.jsonl`, à noter quand une carte est libre.
+
+Publication (public) :
+- https://huggingface.co/fenyo/4xH100-gemma-4-31B-it-MonEspaceSante (modèle fusionné + `lora-adapter/`)
+- https://huggingface.co/fenyo/4xH100-gemma-4-31B-it-MonEspaceSante-GGUF (3 fichiers GGUF, `Modelfile` Ollama)
+
 ## 8. Suite
 
 Voir les entrées suivantes du journal (entraînement, évaluations, gros modèle, quantification).
