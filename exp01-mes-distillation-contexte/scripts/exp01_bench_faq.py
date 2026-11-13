@@ -56,6 +56,7 @@ async def main():
     p.add_argument("--model", default="gemma")
     p.add_argument("--hw", default="H100 x2 (TP2), bf16, vLLM 0.34")
     p.add_argument("--conc", default="1,2,4,8,16,32,64")
+    p.add_argument("--scen", default="ft,faq,faq_pc")
     p.add_argument("--out", default="results/exp01_bench_h100.jsonl")
     args = p.parse_args()
     cli = AsyncOpenAI(base_url=f"http://localhost:{args.port}/v1", api_key="EMPTY", timeout=3600)
@@ -70,7 +71,7 @@ async def main():
     await one(cli, args.model, faq, qs[0], 4)                     # warm the shared FAQ prefix once
     out = open(args.out, "a")
     for n in [int(x) for x in args.conc.split(",")]:
-        for scen in ("ft", "faq", "faq_pc"):
+        for scen in args.scen.split(","):
             reps = 3 if n == 1 else 1
             for rep in range(reps):
                 jobs = []

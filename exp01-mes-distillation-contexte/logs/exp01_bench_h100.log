@@ -29,3 +29,14 @@ faq     n= 64 wall  146.18s  ttft med  66.53 max 130.69  total med 131.54 max 14
 faq_pc  n= 64 wall   18.91s  ttft med   3.33 max   3.52  total med   7.49 max  18.84  prompt 15344 cached None
 Fri Nov 13 01:28:34 UTC 2026
 == generation resumed
+Fri Nov 13 02:01:24 UTC 2026
+== generation paused
+ft      n=128 wall   18.92s  ttft med   0.98 max   1.06  total med   4.45 max  18.75  prompt 41 cached None
+faq_pc  n=128 wall   25.19s  ttft med   2.36 max   4.08  total med   9.59 max  25.05  prompt 15339 cached None
+ft      n=256 wall   21.16s  ttft med   1.69 max   7.51  total med   7.48 max  20.98  prompt 59 cached None
+faq_pc  n=256 wall   35.36s  ttft med   4.33 max  18.09  total med  17.98 max  35.20  prompt 15343 cached None
+ft      n=512 wall   38.34s  ttft med   8.00 max  20.63  total med  14.62 max  38.15  prompt 49 cached None
+faq_pc  n=512 wall   60.02s  ttft med  16.81 max  42.44  total med  29.02 max  59.48  prompt 15339 cached None
+faq     n=128 wall  275.55s  ttft med 134.39 max 264.94  total med 203.70 max 275.43  prompt 15350 cached None
+Fri Nov 13 02:09:42 UTC 2026
+== generation resumed

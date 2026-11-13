@@ -1,0 +1,936 @@
+{
+ "closed": {
+  "spark": [
+   {
+    "n": 1,
+    "scenario": "ft",
+    "answers_per_hour": 165.6435519652306,
+    "mean_answer_s": 21.697192298523024,
+    "mean_ttft_s": 0.16040665671648077
+   },
+   {
+    "n": 1,
+    "scenario": "faq",
+    "answers_per_hour": 114.35365117408651,
+    "mean_answer_s": 31.42881720959366,
+    "mean_ttft_s": 10.269690499033848
+   },
+   {
+    "n": 1,
+    "scenario": "faq_pc",
+    "answers_per_hour": 168.12967846157918,
+    "mean_answer_s": 21.376356826979226,
+    "mean_ttft_s": 0.21723011641848217
+   },
+   {
+    "n": 2,
+    "scenario": "ft",
+    "answers_per_hour": 326.92296949911344,
+    "mean_answer_s": 21.931620568861433,
+    "mean_ttft_s": 0.30194214737705966
+   },
+   {
+    "n": 2,
+    "scenario": "faq",
+    "answers_per_hour": 172.98725287359142,
+    "mean_answer_s": 41.58590615992528,
+    "mean_ttft_s": 10.729513674199476
+   },
+   {
+    "n": 2,
+    "scenario": "faq_pc",
+    "answers_per_hour": 318.2732402821109,
+    "mean_answer_s": 22.64490589928483,
+    "mean_ttft_s": 0.3277745624407969
+   },
+   {
+    "n": 4,
+    "scenario": "ft",
+    "answers_per_hour": 647.6049429014992,
+    "mean_answer_s": 22.178004188402078,
+    "mean_ttft_s": 0.3064008491144384
+   },
+   {
+    "n": 4,
+    "scenario": "faq",
+    "answers_per_hour": 233.95763540974994,
+    "mean_answer_s": 61.48468754907561,
+    "mean_ttft_s": 11.796935567516298
+   },
+   {
+    "n": 4,
+    "scenario": "faq_pc",
+    "answers_per_hour": 578.2185196425352,
+    "mean_answer_s": 24.86634004844272,
+    "mean_ttft_s": 0.3615637178238794
+   },
+   {
+    "n": 8,
+    "scenario": "ft",
+    "answers_per_hour": 1266.1497390984262,
+    "mean_answer_s": 22.718850577337296,
+    "mean_ttft_s": 0.31447443555025156
+   },
+   {
+    "n": 8,
+    "scenario": "faq",
+    "answers_per_hour": 288.409186734779,
+    "mean_answer_s": 99.93375714134666,
+    "mean_ttft_s": 14.07293051950006
+   },
+   {
+    "n": 8,
+    "scenario": "faq_pc",
+    "answers_per_hour": 980.0930784001571,
+    "mean_answer_s": 29.449048469391037,
+    "mean_ttft_s": 0.42859518913631417
+   },
+   {
+    "n": 16,
+    "scenario": "ft",
+    "answers_per_hour": 2385.258137334456,
+    "mean_answer_s": 23.8228136008665,
+    "mean_ttft_s": 0.3313984135152147
+   },
+   {
+    "n": 16,
+    "scenario": "faq",
+    "answers_per_hour": 331.51490128784934,
+    "mean_answer_s": 173.56447740726225,
+    "mean_ttft_s": 24.732743925595855
+   },
+   {
+    "n": 16,
+    "scenario": "faq_pc",
+    "answers_per_hour": 1497.6706788473605,
+    "mean_answer_s": 38.4885160062398,
+    "mean_ttft_s": 0.5640778982437776
+   },
+   {
+    "n": 32,
+    "scenario": "ft",
+    "answers_per_hour": 4325.383730812853,
+    "mean_answer_s": 25.999390746805613,
+    "mean_ttft_s": 0.36452005883725436
+   },
+   {
+    "n": 32,
+    "scenario": "faq",
+    "answers_per_hour": 346.9289186081204,
+    "mean_answer_s": 331.61697519029923,
+    "mean_ttft_s": 149.9609554829655
+   },
+   {
+    "n": 32,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2029.359581397524,
+    "mean_answer_s": 56.01142171236224,
+    "mean_ttft_s": 0.8336966645134353
+   },
+   {
+    "n": 64,
+    "scenario": "ft",
+    "answers_per_hour": 7311.380457506121,
+    "mean_answer_s": 29.692327313649592,
+    "mean_ttft_s": 0.445658707136955
+   },
+   {
+    "n": 64,
+    "scenario": "faq",
+    "answers_per_hour": 346.7682055840732,
+    "mean_answer_s": 662.6063499734992,
+    "mean_ttft_s": 480.06540904195685
+   },
+   {
+    "n": 64,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2474.0601413441864,
+    "mean_answer_s": 89.6992316253512,
+    "mean_ttft_s": 1.3931882291641766
+   },
+   {
+    "n": 128,
+    "scenario": "ft",
+    "answers_per_hour": 11250.822891460246,
+    "mean_answer_s": 37.15185204440453,
+    "mean_ttft_s": 0.6686873904110261
+   },
+   {
+    "n": 128,
+    "scenario": "faq",
+    "answers_per_hour": 345.70841177878077,
+    "mean_answer_s": 1324.4755961120777,
+    "mean_ttft_s": 1143.0238715532623
+   },
+   {
+    "n": 128,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2795.7016121157067,
+    "mean_answer_s": 157.31767759829236,
+    "mean_ttft_s": 2.627919417668068
+   },
+   {
+    "n": 256,
+    "scenario": "ft",
+    "answers_per_hour": 15621.286545045527,
+    "mean_answer_s": 48.829064972969725,
+    "mean_ttft_s": 1.189913391126766
+   },
+   {
+    "n": 256,
+    "scenario": "faq",
+    "answers_per_hour": 348.6985708219123,
+    "mean_answer_s": 2646.3326331996345,
+    "mean_ttft_s": 2465.1560616130137
+   },
+   {
+    "n": 256,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3007.225528563001,
+    "mean_answer_s": 282.26654777198115,
+    "mean_ttft_s": 5.171093337346269
+   },
+   {
+    "n": 512,
+    "scenario": "ft",
+    "answers_per_hour": 15720.360524438724,
+    "mean_answer_s": 111.91988033186482,
+    "mean_ttft_s": 55.31293156941344
+   },
+   {
+    "n": 512,
+    "scenario": "faq",
+    "answers_per_hour": 347.72385024739594,
+    "mean_answer_s": 5293.55846024142,
+    "mean_ttft_s": 5111.982902004365
+   },
+   {
+    "n": 512,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2976.6222141268654,
+    "mean_answer_s": 600.0919762255313,
+    "mean_ttft_s": 298.3819067754435
+   },
+   {
+    "n": 1024,
+    "scenario": "ft",
+    "answers_per_hour": 15416.634809799392,
+    "mean_answer_s": 234.61909457275786,
+    "mean_ttft_s": 175.74934754159406
+   },
+   {
+    "n": 1024,
+    "scenario": "faq",
+    "answers_per_hour": 348.2921745790263,
+    "mean_answer_s": 10582.719645677307,
+    "mean_ttft_s": 10402.693721053769
+   },
+   {
+    "n": 1024,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2990.422372685483,
+    "mean_answer_s": 1230.4716407509677,
+    "mean_ttft_s": 923.588392500305
+   }
+  ],
+  "spark_tuned": [
+   {
+    "n": 1,
+    "scenario": "ft",
+    "answers_per_hour": 165.6435519652306,
+    "mean_answer_s": 21.697192298523024,
+    "mean_ttft_s": 0.16040665671648077
+   },
+   {
+    "n": 1,
+    "scenario": "faq",
+    "answers_per_hour": 114.44104183170232,
+    "mean_answer_s": 31.40481720959302,
+    "mean_ttft_s": 10.245690499033211
+   },
+   {
+    "n": 1,
+    "scenario": "faq_pc",
+    "answers_per_hour": 168.12967846157918,
+    "mean_answer_s": 21.376356826979226,
+    "mean_ttft_s": 0.21723011641848217
+   },
+   {
+    "n": 2,
+    "scenario": "ft",
+    "answers_per_hour": 326.92296949911344,
+    "mean_answer_s": 21.931620568861433,
+    "mean_ttft_s": 0.30194214737705966
+   },
+   {
+    "n": 2,
+    "scenario": "faq",
+    "answers_per_hour": 169.2705110862764,
+    "mean_answer_s": 42.557414317315285,
+    "mean_ttft_s": 10.534961562675191
+   },
+   {
+    "n": 2,
+    "scenario": "faq_pc",
+    "answers_per_hour": 318.2732402821109,
+    "mean_answer_s": 22.64490589928483,
+    "mean_ttft_s": 0.3277745624407969
+   },
+   {
+    "n": 4,
+    "scenario": "ft",
+    "answers_per_hour": 647.6049429014992,
+    "mean_answer_s": 22.178004188402078,
+    "mean_ttft_s": 0.3064008491144384
+   },
+   {
+    "n": 4,
+    "scenario": "faq",
+    "answers_per_hour": 223.49039864672508,
+    "mean_answer_s": 64.31890322112737,
+    "mean_ttft_s": 10.849918683939594
+   },
+   {
+    "n": 4,
+    "scenario": "faq_pc",
+    "answers_per_hour": 578.2185196425352,
+    "mean_answer_s": 24.86634004844272,
+    "mean_ttft_s": 0.3615637178238794
+   },
+   {
+    "n": 8,
+    "scenario": "ft",
+    "answers_per_hour": 1266.1497390984262,
+    "mean_answer_s": 22.718850577337296,
+    "mean_ttft_s": 0.31447443555025156
+   },
+   {
+    "n": 8,
+    "scenario": "faq",
+    "answers_per_hour": 266.95933380368456,
+    "mean_answer_s": 107.77981151075143,
+    "mean_ttft_s": 11.527931318919777
+   },
+   {
+    "n": 8,
+    "scenario": "faq_pc",
+    "answers_per_hour": 980.0930784001571,
+    "mean_answer_s": 29.449048469391037,
+    "mean_ttft_s": 0.42859518913631417
+   },
+   {
+    "n": 16,
+    "scenario": "ft",
+    "answers_per_hour": 2385.258137334456,
+    "mean_answer_s": 23.8228136008665,
+    "mean_ttft_s": 0.3313984135152147
+   },
+   {
+    "n": 16,
+    "scenario": "faq",
+    "answers_per_hour": 297.7047275714183,
+    "mean_answer_s": 193.77679527884874,
+    "mean_ttft_s": 13.451593791655359
+   },
+   {
+    "n": 16,
+    "scenario": "faq_pc",
+    "answers_per_hour": 1497.6706788473605,
+    "mean_answer_s": 38.4885160062398,
+    "mean_ttft_s": 0.5640778982437776
+   },
+   {
+    "n": 32,
+    "scenario": "ft",
+    "answers_per_hour": 4325.383730812853,
+    "mean_answer_s": 25.999390746805613,
+    "mean_ttft_s": 0.36452005883725436
+   },
+   {
+    "n": 32,
+    "scenario": "faq",
+    "answers_per_hour": 320.57819035535636,
+    "mean_answer_s": 357.2208247380496,
+    "mean_ttft_s": 17.698459042305362
+   },
+   {
+    "n": 32,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2029.359581397524,
+    "mean_answer_s": 56.01142171236224,
+    "mean_ttft_s": 0.8336966645134353
+   },
+   {
+    "n": 64,
+    "scenario": "ft",
+    "answers_per_hour": 7311.380457506121,
+    "mean_answer_s": 29.692327313649592,
+    "mean_ttft_s": 0.445658707136955
+   },
+   {
+    "n": 64,
+    "scenario": "faq",
+    "answers_per_hour": 337.2120936226999,
+    "mean_answer_s": 683.2000822481203,
+    "mean_ttft_s": 139.8877518920746
+   },
+   {
+    "n": 64,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2474.0601413441864,
+    "mean_answer_s": 89.6992316253512,
+    "mean_ttft_s": 1.3931882291641766
+   },
+   {
+    "n": 128,
+    "scenario": "ft",
+    "answers_per_hour": 11269.33099269075,
+    "mean_answer_s": 37.176502801872346,
+    "mean_ttft_s": 0.6850193984981154
+   },
+   {
+    "n": 128,
+    "scenario": "faq",
+    "answers_per_hour": 339.41658173838164,
+    "mean_answer_s": 1370.3372173640853,
+    "mean_ttft_s": 822.1340935924061
+   },
+   {
+    "n": 128,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2795.7016121157067,
+    "mean_answer_s": 157.31767759829236,
+    "mean_ttft_s": 2.627919417668068
+   },
+   {
+    "n": 256,
+    "scenario": "ft",
+    "answers_per_hour": 15647.431481792886,
+    "mean_answer_s": 48.765360296126666,
+    "mean_ttft_s": 1.2482356572551647
+   },
+   {
+    "n": 256,
+    "scenario": "faq",
+    "answers_per_hour": 337.78764971502176,
+    "mean_answer_s": 2725.932515042814,
+    "mean_ttft_s": 2177.279980472484
+   },
+   {
+    "n": 256,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3007.225528563001,
+    "mean_answer_s": 282.26654777198115,
+    "mean_ttft_s": 5.171093337346269
+   },
+   {
+    "n": 512,
+    "scenario": "ft",
+    "answers_per_hour": 16798.001965294603,
+    "mean_answer_s": 102.00602398502107,
+    "mean_ttft_s": 36.751946536328155
+   },
+   {
+    "n": 512,
+    "scenario": "faq",
+    "answers_per_hour": 338.0947385880078,
+    "mean_answer_s": 5448.318793462034,
+    "mean_ttft_s": 4895.902989733394
+   },
+   {
+    "n": 512,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3070.5019371652193,
+    "mean_answer_s": 572.5945961822002,
+    "mean_ttft_s": 143.11124525685977
+   },
+   {
+    "n": 1024,
+    "scenario": "ft",
+    "answers_per_hour": 16384.97934843049,
+    "mean_answer_s": 219.27054111535716,
+    "mean_ttft_s": 153.09790924789104
+   },
+   {
+    "n": 1024,
+    "scenario": "faq",
+    "answers_per_hour": 338.4077299302143,
+    "mean_answer_s": 10890.558689981708,
+    "mean_ttft_s": 10343.764946006533
+   },
+   {
+    "n": 1024,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3034.488152686045,
+    "mean_answer_s": 1199.1522380890722,
+    "mean_ttft_s": 772.0107230900677
+   }
+  ],
+  "spark_opt": [
+   {
+    "n": 1,
+    "scenario": "ft",
+    "answers_per_hour": 234.30066210714133,
+    "mean_answer_s": 15.339265231596018,
+    "mean_ttft_s": 0.11629589473702136
+   },
+   {
+    "n": 1,
+    "scenario": "faq",
+    "answers_per_hour": 167.95935058604127,
+    "mean_answer_s": 21.39803462837805,
+    "mean_ttft_s": 6.443565186895659
+   },
+   {
+    "n": 1,
+    "scenario": "faq_pc",
+    "answers_per_hour": 237.62981392408778,
+    "mean_answer_s": 15.1243648288515,
+    "mean_ttft_s": 0.1698953873684668
+   },
+   {
+    "n": 2,
+    "scenario": "ft",
+    "answers_per_hour": 462.27543329160926,
+    "mean_answer_s": 15.5101212687061,
+    "mean_ttft_s": 0.21345665916772855
+   },
+   {
+    "n": 2,
+    "scenario": "faq",
+    "answers_per_hour": 259.3900840918208,
+    "mean_answer_s": 27.734994889680348,
+    "mean_ttft_s": 6.722923297142251
+   },
+   {
+    "n": 2,
+    "scenario": "faq_pc",
+    "answers_per_hour": 450.1492579956653,
+    "mean_answer_s": 16.01086667977615,
+    "mean_ttft_s": 0.2318871404582672
+   },
+   {
+    "n": 4,
+    "scenario": "ft",
+    "answers_per_hour": 914.7858710144333,
+    "mean_answer_s": 15.700488648662601,
+    "mean_ttft_s": 0.2167979321824599
+   },
+   {
+    "n": 4,
+    "scenario": "faq",
+    "answers_per_hour": 358.33264682817224,
+    "mean_answer_s": 40.14442515812204,
+    "mean_ttft_s": 7.392286545645295
+   },
+   {
+    "n": 4,
+    "scenario": "faq_pc",
+    "answers_per_hour": 817.2697801911496,
+    "mean_answer_s": 17.592967343708743,
+    "mean_ttft_s": 0.2557300824652635
+   },
+   {
+    "n": 8,
+    "scenario": "ft",
+    "answers_per_hour": 1784.9871647748791,
+    "mean_answer_s": 16.115226228227367,
+    "mean_ttft_s": 0.22296115630034963
+   },
+   {
+    "n": 8,
+    "scenario": "faq",
+    "answers_per_hour": 450.2715024724502,
+    "mean_answer_s": 64.01026212825428,
+    "mean_ttft_s": 8.818689879462035
+   },
+   {
+    "n": 8,
+    "scenario": "faq_pc",
+    "answers_per_hour": 1386.1864132677679,
+    "mean_answer_s": 20.835588949047015,
+    "mean_ttft_s": 0.30351402021893314
+   },
+   {
+    "n": 16,
+    "scenario": "ft",
+    "answers_per_hour": 3350.38378948287,
+    "mean_answer_s": 16.96007334337826,
+    "mean_ttft_s": 0.2355546675045498
+   },
+   {
+    "n": 16,
+    "scenario": "faq",
+    "answers_per_hour": 526.0887160968003,
+    "mean_answer_s": 109.37580490456122,
+    "mean_ttft_s": 15.490843594875926
+   },
+   {
+    "n": 16,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2111.4797002404944,
+    "mean_answer_s": 27.295083825046316,
+    "mean_ttft_s": 0.40072132206806993
+   },
+   {
+    "n": 32,
+    "scenario": "ft",
+    "answers_per_hour": 6045.005004224427,
+    "mean_answer_s": 18.616559858129623,
+    "mean_ttft_s": 0.2605990441716085
+   },
+   {
+    "n": 32,
+    "scenario": "faq",
+    "answers_per_hour": 553.9045036926898,
+    "mean_answer_s": 207.70151048101948,
+    "mean_ttft_s": 93.91979403893629
+   },
+   {
+    "n": 32,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2857.746963734045,
+    "mean_answer_s": 39.77575886588349,
+    "mean_ttft_s": 0.5934207547480708
+   },
+   {
+    "n": 64,
+    "scenario": "ft",
+    "answers_per_hour": 10115.18386861439,
+    "mean_answer_s": 21.473117902315117,
+    "mean_ttft_s": 0.31969033081472936
+   },
+   {
+    "n": 64,
+    "scenario": "faq",
+    "answers_per_hour": 553.649892022491,
+    "mean_answer_s": 415.0109292909352,
+    "mean_ttft_s": 300.6750661253884
+   },
+   {
+    "n": 64,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3482.7505331728203,
+    "mean_answer_s": 63.77534208273258,
+    "mean_ttft_s": 1.0021917854806999
+   },
+   {
+    "n": 128,
+    "scenario": "ft",
+    "answers_per_hour": 15330.569873962602,
+    "mean_answer_s": 27.22401896179031,
+    "mean_ttft_s": 0.4758510285811796
+   },
+   {
+    "n": 128,
+    "scenario": "faq",
+    "answers_per_hour": 551.9547428301049,
+    "mean_answer_s": 829.5602130456703,
+    "mean_ttft_s": 715.906602571411
+   },
+   {
+    "n": 128,
+    "scenario": "faq_pc",
+    "answers_per_hour": 3922.869832542515,
+    "mean_answer_s": 111.88654397001545,
+    "mean_ttft_s": 1.9381281800364927
+   },
+   {
+    "n": 256,
+    "scenario": "ft",
+    "answers_per_hour": 21025.263219787972,
+    "mean_answer_s": 36.21877209629486,
+    "mean_ttft_s": 0.826036848258153
+   },
+   {
+    "n": 256,
+    "scenario": "faq",
+    "answers_per_hour": 556.7354330962293,
+    "mean_answer_s": 1657.4848934739296,
+    "mean_ttft_s": 1544.004653940626
+   },
+   {
+    "n": 256,
+    "scenario": "faq_pc",
+    "answers_per_hour": 4238.392967363977,
+    "mean_answer_s": 201.39464029774396,
+    "mean_ttft_s": 3.9143452631670153
+   },
+   {
+    "n": 512,
+    "scenario": "ft",
+    "answers_per_hour": 21145.8196679684,
+    "mean_answer_s": 83.08669258425795,
+    "mean_ttft_s": 41.05168868135014
+   },
+   {
+    "n": 512,
+    "scenario": "faq",
+    "answers_per_hour": 555.17482329598,
+    "mean_answer_s": 3315.4802418105337,
+    "mean_ttft_s": 3201.749503727805
+   },
+   {
+    "n": 512,
+    "scenario": "faq_pc",
+    "answers_per_hour": 4169.905991987232,
+    "mean_answer_s": 427.2793452446352,
+    "mean_ttft_s": 212.51080550259596
+   },
+   {
+    "n": 1024,
+    "scenario": "ft",
+    "answers_per_hour": 20787.041277143093,
+    "mean_answer_s": 174.04637974339167,
+    "mean_ttft_s": 130.38319704087604
+   },
+   {
+    "n": 1024,
+    "scenario": "faq",
+    "answers_per_hour": 556.0916906894065,
+    "mean_answer_s": 6628.229238607336,
+    "mean_ttft_s": 6515.470843615574
+   },
+   {
+    "n": 1024,
+    "scenario": "faq_pc",
+    "answers_per_hour": 4205.101052119497,
+    "mean_answer_s": 875.818257740108,
+    "mean_ttft_s": 657.7031522503025
+   }
+  ],
+  "spark_pess": [
+   {
+    "n": 1,
+    "scenario": "ft",
+    "answers_per_hour": 147.0308295031276,
+    "mean_answer_s": 24.443853116693116,
+    "mean_ttft_s": 0.17947133333327137
+   },
+   {
+    "n": 1,
+    "scenario": "faq",
+    "answers_per_hour": 87.86753582325103,
+    "mean_answer_s": 40.902478558514154,
+    "mean_ttft_s": 17.0734688317221
+   },
+   {
+    "n": 1,
+    "scenario": "faq_pc",
+    "answers_per_hour": 149.3357136505739,
+    "mean_answer_s": 24.066580673458272,
+    "mean_ttft_s": 0.23757094666685627
+   },
+   {
+    "n": 2,
+    "scenario": "ft",
+    "answers_per_hour": 290.2282019753632,
+    "mean_answer_s": 24.704528208506744,
+    "mean_ttft_s": 0.34016796562666596
+   },
+   {
+    "n": 2,
+    "scenario": "faq",
+    "answers_per_hour": 124.3211583131724,
+    "mean_answer_s": 57.85593847098227,
+    "mean_ttft_s": 17.79542840382389
+   },
+   {
+    "n": 2,
+    "scenario": "faq_pc",
+    "answers_per_hour": 282.7673106190606,
+    "mean_answer_s": 25.48832187506209,
+    "mean_ttft_s": 0.36892496558667115
+   },
+   {
+    "n": 4,
+    "scenario": "ft",
+    "answers_per_hour": 575.1322245873079,
+    "mean_answer_s": 24.97266516593778,
+    "mean_ttft_s": 0.3450770037333249
+   },
+   {
+    "n": 4,
+    "scenario": "faq",
+    "answers_per_hour": 157.5297589946428,
+    "mean_answer_s": 91.31051518781511,
+    "mean_ttft_s": 19.567436810530083
+   },
+   {
+    "n": 4,
+    "scenario": "faq_pc",
+    "answers_per_hour": 514.1973275266555,
+    "mean_answer_s": 27.962378697213282,
+    "mean_ttft_s": 0.4066730228666596
+   },
+   {
+    "n": 8,
+    "scenario": "ft",
+    "answers_per_hour": 1125.2728958976234,
+    "mean_answer_s": 25.563103444693375,
+    "mean_ttft_s": 0.3539067752533332
+   },
+   {
+    "n": 8,
+    "scenario": "faq",
+    "answers_per_hour": 183.89457643947785,
+    "mean_answer_s": 156.72764886304125,
+    "mean_ttft_s": 23.354827064796027
+   },
+   {
+    "n": 8,
+    "scenario": "faq_pc",
+    "answers_per_hour": 872.7573617938073,
+    "mean_answer_s": 33.06759722056011,
+    "mean_ttft_s": 0.48128533540444834
+   },
+   {
+    "n": 16,
+    "scenario": "ft",
+    "answers_per_hour": 2122.7256496151854,
+    "mean_answer_s": 26.770507759665307,
+    "mean_ttft_s": 0.37374229136309145
+   },
+   {
+    "n": 16,
+    "scenario": "faq",
+    "answers_per_hour": 202.31007665586895,
+    "mean_answer_s": 284.38449629466646,
+    "mean_ttft_s": 41.13818470879671
+   },
+   {
+    "n": 16,
+    "scenario": "faq_pc",
+    "answers_per_hour": 1336.295979298315,
+    "mean_answer_s": 43.136656259391096,
+    "mean_ttft_s": 0.6324504000488909
+   },
+   {
+    "n": 32,
+    "scenario": "ft",
+    "answers_per_hour": 3858.3584378181067,
+    "mean_answer_s": 29.15052951308366,
+    "mean_ttft_s": 0.41180141927164415
+   },
+   {
+    "n": 32,
+    "scenario": "faq",
+    "answers_per_hour": 208.43350344893767,
+    "mean_answer_s": 551.9649972660533,
+    "mean_ttft_s": 249.61403508716418
+   },
+   {
+    "n": 32,
+    "scenario": "faq_pc",
+    "answers_per_hour": 1814.9599393060066,
+    "mean_answer_s": 62.65284782920871,
+    "mean_ttft_s": 0.9322110678222228
+   },
+   {
+    "n": 64,
+    "scenario": "ft",
+    "answers_per_hour": 6556.777842968894,
+    "mean_answer_s": 33.17469306138304,
+    "mean_ttft_s": 0.5189716828437219
+   },
+   {
+    "n": 64,
+    "scenario": "faq",
+    "answers_per_hour": 208.33644931564086,
+    "mean_answer_s": 1102.883608964719,
+    "mean_ttft_s": 799.059538301038
+   },
+   {
+    "n": 64,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2215.374178396406,
+    "mean_answer_s": 100.17140199145763,
+    "mean_ttft_s": 1.5523172582666644
+   },
+   {
+    "n": 128,
+    "scenario": "ft",
+    "answers_per_hour": 10111.90464736551,
+    "mean_answer_s": 41.50754750141964,
+    "mean_ttft_s": 0.8385481796561065
+   },
+   {
+    "n": 128,
+    "scenario": "faq",
+    "answers_per_hour": 207.70050678982116,
+    "mean_answer_s": 2204.540290452349,
+    "mean_ttft_s": 1902.529104187657
+   },
+   {
+    "n": 128,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2506.196783366917,
+    "mean_answer_s": 175.4722304840953,
+    "mean_ttft_s": 2.9030753979678288
+   },
+   {
+    "n": 256,
+    "scenario": "ft",
+    "answers_per_hour": 13780.870024956404,
+    "mean_answer_s": 56.78313233780807,
+    "mean_ttft_s": 1.6482690062250323
+   },
+   {
+    "n": 256,
+    "scenario": "faq",
+    "answers_per_hour": 209.49531512581848,
+    "mean_answer_s": 4404.713991230502,
+    "mean_ttft_s": 4103.158947475022
+   },
+   {
+    "n": 256,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2702.1552337542503,
+    "mean_answer_s": 314.83082375506126,
+    "mean_ttft_s": 5.659110885754848
+   },
+   {
+    "n": 512,
+    "scenario": "ft",
+    "answers_per_hour": 13950.645838924027,
+    "mean_answer_s": 127.19881147466212,
+    "mean_ttft_s": 63.15852550235003
+   },
+   {
+    "n": 512,
+    "scenario": "faq",
+    "answers_per_hour": 208.91080904203122,
+    "mean_answer_s": 8811.00177521226,
+    "mean_ttft_s": 8508.783701848419
+   },
+   {
+    "n": 512,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2667.7941429920315,
+    "mean_answer_s": 668.7930119968858,
+    "mean_ttft_s": 332.4754326026404
+   },
+   {
+    "n": 1024,
+    "scenario": "ft",
+    "answers_per_hour": 13698.727990315008,
+    "mean_answer_s": 264.65992146348145,
+    "mean_ttft_s": 198.38197047883764
+   },
+   {
+    "n": 1024,
+    "scenario": "faq",
+    "answers_per_hour": 209.24986762520146,
+    "mean_answer_s": 17614.643716470968,
+    "mean_ttft_s": 17315.00182152549
+   },
+   {
+    "n": 1024,
+    "scenario": "faq_pc",
+    "answers_per_hour": 2685.1705491623957,
+    "mean_answer_s": 1371.4270055157976,
+    "mean_ttft_s": 1029.5144088976772
+   }
+  ]
+ }
+}

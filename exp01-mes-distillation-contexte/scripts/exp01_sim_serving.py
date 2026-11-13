@@ -31,16 +31,19 @@ PROMPT_FT, PROMPT_FAQ, FAQ_SHARED = 46, 15341, 15305   # measured with the Gemma
 
 HW = {
     # H100 x2 TP2 bf16: F, B, overhead fitted on the n=1 measurements (see --validate); weights 62.5 GB
-    "h100": dict(F=None, B=None, tau=None, W=62.5e9, kv_pool=2 * 41.9 * 2 ** 30, budget=8192),
+    "h100": dict(F=None, B=None, tau=None, W=62.5e9, kv_pool=2 * 41.9 * 2 ** 30, budget=8192, max_seqs=128),
     # DGX Spark (GB10, 128 GB LPDDR5x 273 GB/s), Gemma 4 31B NVFP4 (about 19.6 GB of weights), vLLM
     #   B: 6.85 tokens/s single stream published for Gemma 4 31B NVFP4 -> 19.6 GB x 6.85 = 134 GB/s effective;
     #      optimistic 190 GB/s (Llama 3.1 70B FP8: 2.7 tokens/s x 70.6 GB, LMSYS)
     #   F: Llama 3.1 70B FP8 prefill 803 tokens/s (LMSYS) -> 113 TFLOPS on short prompts; our 15 k-token prompt is
     #      attention-heavier (on H100 the same workload reached 25 % of the bf16 peak): central 100, range 60-160
-    #   fe, fe0, mkv: front end and KV-read efficiency fitted on the H100 measurements, kept as is
-    "spark": dict(F=100e12, B=134e9, tau=0.004, W=19.6e9, kv_pool=80e9, budget=8192, fe=3e-6, fe0=0.01, mkv=1.5),
-    "spark_opt": dict(F=160e12, B=190e9, tau=0.003, W=19.6e9, kv_pool=80e9, budget=8192, fe=3e-6, fe0=0.01, mkv=1.5),
-    "spark_pess": dict(F=60e12, B=120e9, tau=0.006, W=19.6e9, kv_pool=80e9, budget=8192, fe=3e-6, fe0=0.01, mkv=1.5),
+    #   fe, fe0, mkv, tseq: front end, KV-read efficiency and per-sequence step cost fitted on the H100 measurements
+    #   vLLM defaults on GB10 (engine/arg_utils.py): at most 256 sequences, 2 048 tokens per step ("spark*");
+    #   "spark_tuned" = same hardware with --max-num-seqs 1024 --max-num-batched-tokens 8192
+    "spark": dict(F=100e12, B=134e9, tau=0.004, W=19.6e9, kv_pool=80e9, budget=2048, max_seqs=256, fe=3e-6, fe0=0.01, mkv=0.75, tseq=0.2e-3),
+    "spark_opt": dict(F=160e12, B=190e9, tau=0.003, W=19.6e9, kv_pool=80e9, budget=2048, max_seqs=256, fe=3e-6, fe0=0.01, mkv=0.75, tseq=0.2e-3),
+    "spark_pess": dict(F=60e12, B=120e9, tau=0.006, W=19.6e9, kv_pool=80e9, budget=2048, max_seqs=256, fe=3e-6, fe0=0.01, mkv=0.75, tseq=0.2e-3),
+    "spark_tuned": dict(F=100e12, B=134e9, tau=0.004, W=19.6e9, kv_pool=80e9, budget=8192, max_seqs=1024, fe=3e-6, fe0=0.01, mkv=0.75, tseq=0.2e-3),
 }
 
 
@@ -69,6 +72,7 @@ def simulate(hw, reqs, prefix_cache=False):
     Returns per-request (ttft, total)."""
     F, B, tau, W, pool, budget = hw["F"], hw["B"], hw["tau"], hw["W"], hw["kv_pool"], hw["budget"]
     fe, fe0, mkv = hw.get("fe", 0.0), hw.get("fe0", 0.0), hw.get("mkv", 1.0)
+    tseq = hw.get("tseq", 0.0)                 # CPU cost per running sequence per step (scheduling, streaming)
     n = len(reqs)
     arrive, acc = [], 0.0
     for p, o, s in reqs:
@@ -94,11 +98,12 @@ def simulate(hw, reqs, prefix_cache=False):
         while waiting:
             i = waiting[0]
             p, o, s = reqs[i]
-            need = kv_size(p + o) - (kv_size(s) if prefix_cache and shared_counted else 0)
+            own = kv_size(p + o - s) if prefix_cache and shared_counted else kv_size(p + o)
+            if len(running) >= hw.get("max_seqs", 10 ** 9) or (used + own > pool and running):
+                break
+            need = own
             if prefix_cache and not shared_counted:
                 shared_counted = True
-            if used + need > pool and running:
-                break
             used += need
             running.append(waiting.pop(0))
         tok_budget = budget
@@ -119,7 +124,7 @@ def simulate(hw, reqs, prefix_cache=False):
                 att += att_flops(done_prefill[i], k)
                 mem += kv_read(done_prefill[i])          # chunk reads the KV already written for this request
                 tok_budget -= k
-        dt = max((lin_flops + att) / F, mem / B) + tau
+        dt = max((lin_flops + att) / F, mem / B) + tau + tseq * len(decoding)
         t += dt
         for i in decoding:
             gen[i] += 1
@@ -135,9 +140,91 @@ def simulate(hw, reqs, prefix_cache=False):
         fin = [i for i in running if total[i] is not None]
         for i in fin:
             p, o, s = reqs[i]
-            used -= kv_size(p + o) - (kv_size(s) if prefix_cache else 0)
+            used -= kv_size(p + o - s) if prefix_cache else kv_size(p + o)
             running.remove(i)
     return ttft, total
+
+
+def simulate_closed(hw, users, make_req, prefix_cache=False, completions=3000, warmup=None):
+    """Steady state: `users` people each ask a question, wait for the full answer, then immediately ask the next one
+    (worst case, no reading time). Same engine model as simulate(). Returns (answers per hour, mean answer time,
+    mean time to first token) measured after a warm-up of `warmup` completions (default: users)."""
+    F, B, tau, W, pool, budget = hw["F"], hw["B"], hw["tau"], hw["W"], hw["kv_pool"], hw["budget"]
+    fe, fe0, mkv, tseq = hw.get("fe", 0.0), hw.get("fe0", 0.0), hw.get("mkv", 1.0), hw.get("tseq", 0.0)
+    max_seqs = hw.get("max_seqs", 10 ** 9)
+    warmup = users if warmup is None else warmup
+    reqs, send, arrive, done_prefill, gen, first, finish = [], [], [], [], [], [], []
+    state = {"fe_free": 0.0}
+
+    def new(t):
+        p, o, s = make_req()
+        a = max(t, state["fe_free"]) + fe0 + fe * p           # single front end: requests tokenised one at a time
+        state["fe_free"] = a
+        reqs.append((p, o, s)); send.append(t); arrive.append(a)
+        done_prefill.append(min(s, p - 1) if prefix_cache else 0)
+        gen.append(0); first.append(None); finish.append(None)
+        return len(reqs) - 1
+
+    pending = [new(0.0) for _ in range(users)]
+    pending.sort(key=lambda i: arrive[i])
+    t, waiting, running, used, shared, done = 0.0, [], [], 0.0, False, []
+    while len(done) < completions + warmup:
+        while pending and arrive[pending[0]] <= t:
+            waiting.append(pending.pop(0))
+        if not waiting and not running:
+            t = arrive[pending[0]]
+            continue
+        while waiting:
+            i = waiting[0]
+            p, o, s = reqs[i]
+            own = kv_size(p + o - s) if prefix_cache and shared else kv_size(p + o)
+            if len(running) >= max_seqs or (used + own > pool and running):
+                break
+            shared = shared or prefix_cache
+            used += own
+            running.append(waiting.pop(0))
+        tok_budget = budget
+        lin_flops, att, mem = 0.0, 0.0, W
+        decoding = [i for i in running if done_prefill[i] >= reqs[i][0]]
+        for i in decoding:
+            ctx = reqs[i][0] + gen[i]
+            lin_flops += LIN + HEAD
+            att += L_FULL * ATT_FULL * ctx + L_SLIDE * ATT_SLIDE * min(ctx, WINDOW)
+            mem += mkv * kv_read(ctx)
+            tok_budget -= 1
+        prefilling = []
+        for i in running:
+            if done_prefill[i] < reqs[i][0] and tok_budget > 0:
+                k = min(tok_budget, reqs[i][0] - done_prefill[i])
+                prefilling.append((i, k))
+                lin_flops += k * LIN
+                att += att_flops(done_prefill[i], k)
+                mem += kv_read(done_prefill[i])
+                tok_budget -= k
+        t += max((lin_flops + att) / F, mem / B) + tau + tseq * len(decoding)
+        for i in decoding:
+            gen[i] += 1
+            if gen[i] >= reqs[i][1]:
+                finish[i] = t
+        for i, k in prefilling:
+            done_prefill[i] += k
+            if done_prefill[i] >= reqs[i][0]:
+                first[i] = t
+                gen[i] = 1
+                if gen[i] >= reqs[i][1]:
+                    finish[i] = t
+        for i in [i for i in running if finish[i] is not None]:
+            p, o, s = reqs[i]
+            used -= kv_size(p + o - s) if prefix_cache else kv_size(p + o)
+            running.remove(i)
+            done.append(i)
+            j = new(t)                                        # the same person asks the next question
+            pending.append(j)
+        pending.sort(key=lambda i: arrive[i])
+    meas = done[warmup:]
+    span = finish[meas[-1]] - finish[done[warmup - 1]] if warmup else finish[meas[-1]]
+    return (len(meas) - 1) / span * 3600, sum(finish[i] - send[i] for i in meas) / len(meas), \
+        sum(first[i] - send[i] for i in meas) / len(meas)
 
 
 def scenario_reqs(scen, n, len_ft, len_faq, rnd):
@@ -176,6 +263,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--validate")
     p.add_argument("--spark", action="store_true")
+    p.add_argument("--closed", action="store_true", help="steady-state capacity: users who ask again as soon as answered")
     p.add_argument("--out", default="results/exp01_sim.json")
     args = p.parse_args()
     e1 = Path.home() / "exp" / "e1" / "results"
@@ -189,25 +277,25 @@ def main():
         hw, meas = fit_h100(rows)
         # front end and KV-read efficiency: grid search on every first-repetition measurement (log error on the
         # median TTFT and the median answer time)
-        base = [r for r in rows if not r["rep"]]
+        base = [r for r in rows if not r["rep"] and r["n"] <= 128]    # n = 256, 512: held out, pure validation
         best = None
-        for fe in (0, 1e-6, 2e-6, 3e-6, 4e-6, 5e-6, 6e-6):
-            for fe0 in (0, 0.002, 0.005, 0.01):
-                for mkv in (1, 1.5, 2, 2.5, 3, 3.5, 4, 5):
-                    h = dict(hw, fe=fe, fe0=fe0, mkv=mkv)
-                    err = 0.0
-                    for r in base:
-                        reqs = list(zip(r["prompt_tokens"], r["completion_tokens"],
-                                        [FAQ_SHARED if r["scenario"] == "faq_pc" else 0] * r["n"]))
-                        tt, to = simulate(h, reqs, prefix_cache=r["scenario"] == "faq_pc")
-                        err += math.log(max(1e-3, stats(tt)["med"]) / max(1e-3, stats(r["ttft"])["med"])) ** 2
-                        err += math.log(stats(to)["med"] / stats(r["total"])["med"]) ** 2
-                    if best is None or err < best[0]:
-                        best = (err, fe, fe0, mkv)
-        hw.update(fe=best[1], fe0=best[2], mkv=best[3])
+        for mkv in (0.75, 1.0, 1.25, 1.5, 2.0):
+            for tseq in (0.0, 0.05e-3, 0.1e-3, 0.15e-3, 0.2e-3, 0.3e-3):
+                h = dict(hw, fe=3e-6, fe0=0.01, mkv=mkv, tseq=tseq)
+                err = 0.0
+                for r in base:
+                    reqs = list(zip(r["prompt_tokens"], r["completion_tokens"],
+                                    [FAQ_SHARED if r["scenario"] == "faq_pc" else 0] * r["n"]))
+                    tt, to = simulate(h, reqs, prefix_cache=r["scenario"] == "faq_pc")
+                    err += math.log(max(1e-3, stats(tt)["med"]) / max(1e-3, stats(r["ttft"])["med"])) ** 2
+                    err += math.log(stats(to)["med"] / stats(r["total"])["med"]) ** 2
+                if best is None or err < best[0]:
+                    best = (err, 3e-6, 0.01, mkv, tseq)
+        hw.update(fe=best[1], fe0=best[2], mkv=best[3], tseq=best[4])
         meas.update(fit_error=best[0])
         out["h100_fit"] = {"F_TFLOPS": hw["F"] / 1e12, "B_GBs": hw["B"] / 1e9, "tau_ms": hw["tau"] * 1e3,
-                           "fe_us_per_token": hw["fe"] * 1e6, "fe0_ms": hw["fe0"] * 1e3, "mkv": hw["mkv"], **meas}
+                           "fe_us_per_token": hw["fe"] * 1e6, "fe0_ms": hw["fe0"] * 1e3, "mkv": hw["mkv"],
+                           "tseq_ms": hw["tseq"] * 1e3, **meas}
         print("H100 fit:", out["h100_fit"])
         val = []
         for r in rows:
@@ -225,10 +313,10 @@ def main():
         out["h100_validation"] = val
     if args.spark:
         res = {}
-        for name in ("spark", "spark_opt", "spark_pess"):
+        for name in ("spark", "spark_opt", "spark_pess", "spark_tuned"):
             hw = HW[name]
             res[name] = []
-            for n in (1, 2, 4, 8, 16, 32, 64, 128):
+            for n in (1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024):
                 for scen in ("ft", "faq", "faq_pc"):
                     acc = {"ttft": [], "total": [], "wall": []}
                     for seed in range(max(5, math.ceil(400 / n))):
@@ -241,11 +329,27 @@ def main():
                            "prompt_tokens": PROMPT_FT if scen == "ft" else PROMPT_FAQ,
                            "computed_prompt_tokens": PROMPT_FT if scen == "ft" else (PROMPT_FAQ - FAQ_SHARED if scen == "faq_pc" else PROMPT_FAQ)}
                     res[name].append(rec)
-                    if name == "spark":
-                        print(f"spark {scen:7s} n={n:3d} ttft mean {rec['ttft']['mean']:7.2f} p90 {rec['ttft']['p90']:7.2f} | "
+                    if name in ("spark", "spark_tuned"):
+                        print(f"{name:11s} {scen:7s} n={n:3d} ttft mean {rec['ttft']['mean']:7.2f} p90 {rec['ttft']['p90']:7.2f} | "
                               f"answer mean {rec['total']['mean']:7.2f} p90 {rec['total']['p90']:7.2f} | all done {rec['wall']:7.2f}")
         out["spark"] = res
-        out["spark_params"] = {k: {kk: vv for kk, vv in HW[k].items()} for k in ("spark", "spark_opt", "spark_pess")}
+        out["spark_params"] = {k: {kk: vv for kk, vv in HW[k].items()} for k in ("spark", "spark_opt", "spark_pess", "spark_tuned")}
+    if args.closed:
+        res = {}
+        for name in ("spark", "spark_tuned", "spark_opt", "spark_pess"):
+            res[name] = []
+            for n in (1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024):
+                for scen in ("ft", "faq", "faq_pc"):
+                    rnd = random.Random(1)
+                    mk = (lambda: (PROMPT_FT, rnd.choice(len_ft), 0)) if scen == "ft" else \
+                        (lambda: (PROMPT_FAQ, rnd.choice(len_faq), FAQ_SHARED if scen == "faq_pc" else 0))
+                    thr, lat, ttf = simulate_closed(HW[name], n, mk, prefix_cache=scen == "faq_pc",
+                                                    completions=max(600, 2 * n))
+                    res[name].append({"n": n, "scenario": scen, "answers_per_hour": thr, "mean_answer_s": lat,
+                                      "mean_ttft_s": ttf})
+                    print(f"{name:11s} {scen:7s} users={n:5d}  {thr:9.0f} answers/h  answer {lat:8.1f} s  first word {ttf:8.2f} s",
+                          flush=True)
+        out["closed"] = res
     json.dump(out, open(args.out, "w"), indent=1)
 
 

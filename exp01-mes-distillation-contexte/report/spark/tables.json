@@ -1,20 +1,27 @@
 {
- "spark_table": "| 1 | 0.2 s | 23 s | 0.2 s | 24 s | 10 s | 34 s | 1.0 | 1.4 |\n| 2 | 0.2 s | 24 s | 0.3 s | 24 s | 16 s | 44 s | 1.0 | 1.9 |\n| 4 | 0.3 s | 22 s | 0.4 s | 26 s | 26 s | 65 s | 1.2 | 3.0 |\n| 8 | 0.3 s | 22 s | 0.6 s | 30 s | 48 s | 110 s | 1.3 | 4.9 |\n| 16 | 0.5 s | 23 s | 0.9 s | 40 s | 89 s | 197 s | 1.8 | 8.6 |\n| 32 | 0.8 s | 25 s | 1.5 s | 64 s | 171 s | 365 s | 2.5 | 14.4 |\n| 64 | 1.4 s | 28 s | 2.8 s | 104 s | 335 s | 650 s | 3.7 | 23.3 |\n| 128 | 2.7 s | 36 s | 5.4 s | 193 s | 668 s | 1105 s | 5.4 | 30.8 |",
- "cap": "| 1 | 154 | 152 | 107 |\n| 16 | 2 517 | 1 437 | 293 |\n| 64 | 8 252 | 2 222 | 354 |\n| 128 | 12 852 | 2 388 | 417 |",
- "sens": "| optimiste | 1 | 17 s | 17 s | 23 s |\n| optimiste | 16 | 16 s | 28 s | 126 s |\n| optimiste | 64 | 20 s | 73 s | 410 s |\n| central | 1 | 23 s | 24 s | 34 s |\n| central | 16 | 23 s | 40 s | 197 s |\n| central | 64 | 28 s | 104 s | 650 s |\n| pessimiste | 1 | 26 s | 27 s | 43 s |\n| pessimiste | 16 | 26 s | 45 s | 310 s |\n| pessimiste | 64 | 32 s | 116 s | 1060 s |",
- "meas": "| Modèle entraîné (question seule) | 1 | 0.04 | 0.03 | 2.74 | 2.72 | 2.7 | 2.7 |\n| Modèle de départ + FAQ, sans cache | 1 | 2.05 | 2.13 | 3.53 | 3.64 | 3.5 | 3.6 |\n| Modèle de départ + FAQ, cache de préfixe | 1 | 0.10 | 0.08 | 11.10 | 11.20 | 11.1 | 11.2 |\n| Modèle entraîné (question seule) | 2 | 0.10 | 0.05 | 5.99 | 5.98 | 6.0 | 6.0 |\n| Modèle de départ + FAQ, sans cache | 2 | 4.07 | 4.21 | 5.96 | 6.14 | 6.0 | 6.1 |\n| Modèle de départ + FAQ, cache de préfixe | 2 | 0.19 | 0.15 | 2.41 | 2.49 | 2.4 | 2.5 |\n| Modèle entraîné (question seule) | 4 | 0.11 | 0.05 | 4.43 | 4.40 | 5.6 | 5.6 |\n| Modèle de départ + FAQ, sans cache | 4 | 6.33 | 6.66 | 11.54 | 11.88 | 12.0 | 12.4 |\n| Modèle de départ + FAQ, cache de préfixe | 4 | 0.23 | 0.21 | 5.59 | 5.76 | 8.3 | 8.6 |\n| Modèle entraîné (question seule) | 8 | 0.14 | 0.07 | 3.40 | 3.35 | 4.3 | 4.3 |\n| Modèle de départ + FAQ, sans cache | 8 | 10.68 | 11.08 | 17.97 | 18.44 | 21.4 | 22.0 |\n| Modèle de départ + FAQ, cache de préfixe | 8 | 0.32 | 0.31 | 2.57 | 2.63 | 8.7 | 8.9 |\n| Modèle entraîné (question seule) | 16 | 0.21 | 0.12 | 3.19 | 3.03 | 12.2 | 11.9 |\n| Modèle de départ + FAQ, sans cache | 16 | 19.22 | 18.85 | 35.34 | 36.40 | 42.6 | 43.7 |\n| Modèle de départ + FAQ, cache de préfixe | 16 | 0.46 | 0.55 | 4.24 | 4.59 | 9.5 | 9.7 |\n| Modèle entraîné (question seule) | 32 | 0.29 | 0.20 | 3.14 | 2.70 | 15.9 | 15.2 |\n| Modèle de départ + FAQ, sans cache | 32 | 35.11 | 35.44 | 66.76 | 69.04 | 72.4 | 74.6 |\n| Modèle de départ + FAQ, cache de préfixe | 32 | 0.75 | 1.01 | 4.41 | 4.44 | 17.5 | 18.4 |\n| Modèle entraîné (question seule) | 64 | 0.42 | 0.36 | 3.68 | 2.91 | 13.7 | 12.8 |\n| Modèle de départ + FAQ, sans cache | 64 | 66.53 | 68.63 | 131.54 | 135.03 | 146.2 | 150.1 |\n| Modèle de départ + FAQ, cache de préfixe | 64 | 3.33 | 1.89 | 7.49 | 6.99 | 18.9 | 19.5 |",
- "err_med": 2.979141986124656,
- "err_max": 21.037798105517012,
+ "steady": "| 1 | 166 | 168 | 114 | 0,2 s | 0,2 s | 10 s | 22 s | 21 s | 31 s |\n| 2 | 327 | 318 | 173 | 0,3 s | 0,3 s | 11 s | 22 s | 23 s | 42 s |\n| 4 | 648 | 578 | 234 | 0,3 s | 0,4 s | 12 s | 22 s | 25 s | 61 s |\n| 8 | 1 266 | 980 | 288 | 0,3 s | 0,4 s | 14 s | 23 s | 29 s | 100 s |\n| 16 | 2 385 | 1 498 | 332 | 0,3 s | 0,6 s | 25 s | 24 s | 38 s | 174 s |\n| 32 | 4 325 | 2 029 | 347 | 0,4 s | 0,8 s | 150 s | 26 s | 56 s | 332 s |\n| 64 | 7 311 | 2 474 | 347 | 0,4 s | 1,4 s | 480 s | 30 s | 90 s | 663 s |\n| 128 | 11 251 | 2 796 | 346 | 0,7 s | 2,6 s | 1 143 s | 37 s | 157 s | 1 324 s |\n| 256 | 15 621 | 3 007 | 349 | 1,2 s | 5,2 s | 2 465 s | 49 s | 282 s | 2 646 s |\n| 512 | 15 720 | 2 977 | 348 | 55 s | 298 s | 5 112 s | 112 s | 600 s | 5 294 s |\n| 1024 | 15 417 | 2 990 | 348 | 176 s | 924 s | 10 403 s | 235 s | 1 230 s | 10 583 s |",
+ "plateau": "| optimiste | 21 146 | 4 238 | 557 | 5,0 | 38 |\n| central | 15 720 | 3 007 | 349 | 5,2 | 45 |\n| pessimiste | 13 951 | 2 702 | 209 | 5,2 | 67 |\n| central, vLLM réglé pour le débit | 16 798 | 3 071 | 339 | 5,5 | 49 |",
+ "validation": "| Modèle entraîné (question seule) | 1 | 0,04 | 0,03 | 2,74 | 2,74 |\n| Modèle de départ + FAQ, sans cache | 1 | 2,05 | 2,13 | 3,53 | 3,63 |\n| Modèle de départ + FAQ, cache de préfixe | 1 | 0,10 | 0,08 | 11,10 | 11,12 |\n| Modèle entraîné (question seule) | 2 | 0,10 | 0,05 | 5,99 | 6,03 |\n| Modèle de départ + FAQ, sans cache | 2 | 4,07 | 4,21 | 5,96 | 6,11 |\n| Modèle de départ + FAQ, cache de préfixe | 2 | 0,19 | 0,14 | 2,41 | 2,46 |\n| Modèle entraîné (question seule) | 4 | 0,11 | 0,05 | 4,43 | 4,47 |\n| Modèle de départ + FAQ, sans cache | 4 | 6,33 | 6,67 | 11,54 | 11,81 |\n| Modèle de départ + FAQ, cache de préfixe | 4 | 0,23 | 0,21 | 5,59 | 5,66 |\n| Modèle entraîné (question seule) | 8 | 0,14 | 0,08 | 3,40 | 3,50 |\n| Modèle de départ + FAQ, sans cache | 8 | 10,68 | 11,08 | 17,97 | 18,39 |\n| Modèle de départ + FAQ, cache de préfixe | 8 | 0,32 | 0,31 | 2,57 | 2,55 |\n| Modèle entraîné (question seule) | 16 | 0,21 | 0,12 | 3,19 | 3,30 |\n| Modèle de départ + FAQ, sans cache | 16 | 19,22 | 18,86 | 35,34 | 36,24 |\n| Modèle de départ + FAQ, cache de préfixe | 16 | 0,46 | 0,53 | 4,24 | 4,31 |\n| Modèle entraîné (question seule) | 32 | 0,29 | 0,22 | 3,14 | 3,21 |\n| Modèle de départ + FAQ, sans cache | 32 | 35,11 | 35,49 | 66,76 | 68,99 |\n| Modèle de départ + FAQ, cache de préfixe | 32 | 0,75 | 0,99 | 4,41 | 4,07 |\n| Modèle entraîné (question seule) | 64 | 0,42 | 0,38 | 3,68 | 3,87 |\n| Modèle de départ + FAQ, sans cache | 64 | 66,53 | 68,82 | 131,54 | 135,45 |\n| Modèle de départ + FAQ, cache de préfixe | 64 | 3,33 | 1,89 | 7,49 | 6,43 |\n| Modèle entraîné (question seule) | 128 | 0,98 | 0,73 | 4,45 | 5,04 |\n| Modèle de départ + FAQ, cache de préfixe | 128 | 2,36 | 3,70 | 9,59 | 10,62 |\n| Modèle entraîné (question seule) | 256 (contrôle) | 1,69 | 1,41 | 7,48 | 8,58 |\n| Modèle de départ + FAQ, cache de préfixe | 256 (contrôle) | 4,33 | 7,35 | 17,98 | 18,73 |\n| Modèle entraîné (question seule) | 512 (contrôle) | 8,00 | 9,07 | 14,62 | 16,16 |\n| Modèle de départ + FAQ, cache de préfixe | 512 (contrôle) | 16,81 | 16,16 | 29,02 | 29,71 |\n| Modèle de départ + FAQ, sans cache | 128 | 134,39 | 136,71 | 203,70 | 260,86 |",
+ "err_fit_med": 2.651936811390243,
+ "err_fit_max": 28.059629458718717,
+ "err_held": [
+  2.3949523548399743,
+  4.162436928597124,
+  10.504508952789049,
+  14.728442736098813
+ ],
  "fit": {
   "F_TFLOPS": 492.10572735783467,
   "B_GBs": 3040.2226580594406,
   "tau_ms": 0.9145821876369309,
   "fe_us_per_token": 3.0,
   "fe0_ms": 10.0,
-  "mkv": 1.5,
+  "mkv": 0.75,
+  "tseq_ms": 0.2,
   "ttft_faq_n1": 2.069,
   "decode_short_s": 0.02150510650139135,
   "decode_long_s": 0.021955835594001518,
-  "fit_error": 2.550484259383035
- }
+  "fit_error": 2.7507970087590214
+ },
+ "n_val": 28
 }

@@ -1,7 +1,9 @@
-"""Experiment 01, serving cost report: figures + Markdown from the H100 measurements and the DGX Spark simulation.
+"""Experiment 01, serving cost report: figures + tables from the H100 measurements and the DGX Spark simulation.
 
-    python exp01_spark_report.py      (in ~/exp/e1; reads results/exp01_bench_h100.jsonl, exp01_sim_h100.json,
-                                       exp01_sim_spark.json; writes report/spark/)
+    python exp01_spark_report.py      (in ~/exp/e1; reads results/exp01_sim_h100.json, exp01_sim_spark_closed.json;
+                                       writes report/spark/ figures and tables.json)
+Main regime: steady state, N people who each ask a new question as soon as they get their answer (N requests always
+in progress), which shows the ceiling of the machine.
 """
 
 import json
@@ -21,16 +23,13 @@ LAB = {"ft": "Modèle entraîné (question seule)", "faq_pc": "Modèle de dépar
 SC = ("ft", "faq_pc", "faq")
 TXT, TXT2, GRID, SURF = "#0b0b0b", "#52514e", "#e2e0d9", "#fcfcfb"
 
-sim = json.load(open(E1 / "results" / "exp01_sim_spark.json"))
+closed = json.load(open(E1 / "results" / "exp01_sim_spark_closed.json"))["closed"]
 h100 = json.load(open(E1 / "results" / "exp01_sim_h100.json"))
-spark = sim["spark"]
+NS = sorted({r["n"] for r in closed["spark"]})
 
 
 def get(name, scen, n):
-    return next(r for r in sim["spark"][name] if r["scenario"] == scen and r["n"] == n)
-
-
-NS = sorted({r["n"] for r in spark["spark"]})
+    return next(r for r in closed[name] if r["scenario"] == scen and r["n"] == n)
 
 
 def style(ax, title, ylabel, logy=False):
@@ -40,7 +39,7 @@ def style(ax, title, ylabel, logy=False):
         ax.set_yscale("log")
     ax.set_xticks(NS)
     ax.set_xticklabels([str(n) for n in NS])
-    ax.set_xlabel("Requêtes simultanées (une question par usager)", color=TXT2, fontsize=9)
+    ax.set_xlabel("Requêtes en cours en permanence (usagers actifs)", color=TXT2, fontsize=9)
     ax.set_ylabel(ylabel, color=TXT2, fontsize=9)
     ax.set_title(title, color=TXT, fontsize=10.5, loc="left")
     ax.grid(True, color=GRID, linewidth=0.6)
@@ -51,104 +50,94 @@ def style(ax, title, ylabel, logy=False):
     ax.tick_params(colors=TXT2, labelsize=8.5)
 
 
-def line_fig(metric, key, fname, title, ylabel, logy):
-    fig, ax = plt.subplots(figsize=(7.2, 3.9), dpi=170)
-    fig.patch.set_facecolor(SURF)
+def fmt(v, unit=""):
+    if v >= 1000:
+        return f"{v:,.0f}".replace(",", " ") + unit
+    return (f"{v:.1f}" if v < 10 else f"{v:.0f}").replace(".", ",") + unit
+
+
+def fig(key, fname, title, ylabel, logy, unit):
+    f, ax = plt.subplots(figsize=(7.4, 4.0), dpi=170)
+    f.patch.set_facecolor(SURF)
     for s in SC:
-        y = [get("spark", s, n)[metric][key] for n in NS]
-        lo = [get("spark_opt", s, n)[metric][key] for n in NS]
-        hi = [get("spark_pess", s, n)[metric][key] for n in NS]
-        ax.fill_between(NS, lo, hi, color=COL[s], alpha=0.10, linewidth=0)
-        ax.plot(NS, y, color=COL[s], linewidth=2, marker=MARK[s], markersize=5, label=LAB[s])
-        ax.annotate(f"{y[-1]:.0f} s" if y[-1] >= 10 else f"{y[-1]:.1f} s", (NS[-1], y[-1]), xytext=(6, 0),
-                    textcoords="offset points", fontsize=8, color=TXT2, va="center")
+        y = [get("spark", s, n)[key] for n in NS]
+        lo = [get("spark_opt", s, n)[key] for n in NS]
+        hi = [get("spark_pess", s, n)[key] for n in NS]
+        ax.fill_between(NS, [min(a, b) for a, b in zip(lo, hi)], [max(a, b) for a, b in zip(lo, hi)],
+                        color=COL[s], alpha=0.10, linewidth=0)
+        ax.plot(NS, y, color=COL[s], linewidth=2, marker=MARK[s], markersize=4.5, label=LAB[s])
+        ax.annotate(fmt(y[-1], unit), (NS[-1], y[-1]), xytext=(6, 0), textcoords="offset points", fontsize=8,
+                    color=TXT2, va="center")
     style(ax, title, ylabel, logy)
     ax.legend(frameon=False, fontsize=8, labelcolor=TXT, loc="upper left")
-    fig.tight_layout()
-    fig.savefig(OUT / fname, facecolor=SURF)
-    plt.close(fig)
+    f.tight_layout()
+    f.savefig(OUT / fname, facecolor=SURF)
+    plt.close(f)
 
 
-line_fig("total", "mean", "fig_reponse.png", "Temps moyen pour obtenir la réponse complète (DGX Spark, estimation)",
-         "secondes (échelle logarithmique)", True)
-line_fig("ttft", "mean", "fig_premier_mot.png", "Temps moyen avant le premier mot de la réponse (DGX Spark, estimation)",
-         "secondes (échelle logarithmique)", True)
+fig("answers_per_hour", "fig_capacite.png", "Réponses servies par heure par un DGX Spark : le plafond (estimation)",
+    "réponses par heure (échelle logarithmique)", True, "")
+fig("mean_answer_s", "fig_reponse.png", "Temps moyen pour obtenir la réponse complète (DGX Spark, estimation)",
+    "secondes (échelle logarithmique)", True, " s")
+fig("mean_ttft_s", "fig_premier_mot.png", "Temps moyen avant le premier mot de la réponse (DGX Spark, estimation)",
+    "secondes (échelle logarithmique)", True, " s")
 
-# capacity (Little's law on the simulated burst: N users / mean answer time)
-fig, ax = plt.subplots(figsize=(7.2, 3.6), dpi=170)
-fig.patch.set_facecolor(SURF)
-for s in SC:
-    y = [n * 3600 / get("spark", s, n)["total"]["mean"] for n in NS]
-    ax.plot(NS, y, color=COL[s], linewidth=2, marker=MARK[s], markersize=5, label=LAB[s])
-    ax.annotate(f"{y[-1]:,.0f}".replace(",", " "), (NS[-1], y[-1]), xytext=(6, 0), textcoords="offset points",
-                fontsize=8, color=TXT2, va="center")
-style(ax, "Réponses par heure qu'un DGX Spark peut servir (estimation)", "réponses par heure")
-ax.legend(frameon=False, fontsize=8, labelcolor=TXT, loc="upper left")
-fig.tight_layout()
-fig.savefig(OUT / "fig_capacite.png", facecolor=SURF)
-plt.close(fig)
-
-# H100 validation scatter
+# H100 validation scatter: fitted points (n <= 128) and held-out points (256, 512)
 val = h100["h100_validation"]
-fig, ax = plt.subplots(figsize=(5.2, 4.4), dpi=170)
-fig.patch.set_facecolor(SURF)
+f, ax = plt.subplots(figsize=(5.4, 4.6), dpi=170)
+f.patch.set_facecolor(SURF)
 for s in SC:
     vs = [v for v in val if v["scenario"] == s]
-    ax.scatter([v["meas_total_med"] for v in vs], [v["sim_total_med"] for v in vs], color=COL[s], marker=MARK[s], s=26,
-               label=LAB[s] + " (réponse)", zorder=3, edgecolors=SURF, linewidths=1)
-    ax.scatter([v["meas_ttft_med"] for v in vs], [v["sim_ttft_med"] for v in vs], facecolors="none", edgecolors=COL[s],
-               marker=MARK[s], s=26, label=LAB[s] + " (premier mot)", zorder=3)
-lim = [0.02, 300]
+    fit_pts = [v for v in vs if v["n"] <= 128]
+    held = [v for v in vs if v["n"] > 128]
+    ax.scatter([v["meas_total_med"] for v in fit_pts], [v["sim_total_med"] for v in fit_pts], color=COL[s],
+               marker=MARK[s], s=26, label=LAB[s], zorder=3, edgecolors=SURF, linewidths=1)
+    if held:
+        ax.scatter([v["meas_total_med"] for v in held], [v["sim_total_med"] for v in held], facecolors="none",
+                   edgecolors=COL[s], marker=MARK[s], s=60, linewidths=1.6, zorder=3,
+                   label=LAB[s].split(" (")[0] + " : contrôle, 256 et 512 requêtes")
+lim = [1, 400]
 ax.plot(lim, lim, color=TXT2, linewidth=0.8, linestyle="--")
 ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlim(lim); ax.set_ylim(lim)
 ax.set_facecolor(SURF); ax.grid(True, color=GRID, linewidth=0.6)
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
-ax.set_xlabel("mesuré sur 2 H100 (s, médiane)", color=TXT2, fontsize=9)
-ax.set_ylabel("simulé (s, médiane)", color=TXT2, fontsize=9)
-ax.set_title("Validation du simulateur sur 21 mesures H100", color=TXT, fontsize=10.5, loc="left")
+ax.set_xlabel("mesuré sur 2 H100 (s, médiane de la réponse complète)", color=TXT2, fontsize=8.5)
+ax.set_ylabel("simulé (s)", color=TXT2, fontsize=8.5)
+ax.set_title("Validation du simulateur sur les mesures H100", color=TXT, fontsize=10.5, loc="left")
 ax.tick_params(colors=TXT2, labelsize=8)
 ax.legend(frameon=False, fontsize=6.5, labelcolor=TXT, loc="upper left")
-fig.tight_layout()
-fig.savefig(OUT / "fig_validation.png", facecolor=SURF)
-plt.close(fig)
-
-
-def f(x):
-    return f"{x:.1f}" if x < 10 else f"{x:.0f}"
-
+f.tight_layout()
+f.savefig(OUT / "fig_validation.png", facecolor=SURF)
+plt.close(f)
 
 rows = []
 for n in NS:
     a, b, c = (get("spark", s, n) for s in SC)
-    rows.append(f"| {n} | {f(a['ttft']['mean'])} s | {f(a['total']['mean'])} s | {f(b['ttft']['mean'])} s | "
-                f"{f(b['total']['mean'])} s | {f(c['ttft']['mean'])} s | {f(c['total']['mean'])} s | "
-                f"{b['total']['mean'] / a['total']['mean']:.1f} | {c['total']['mean'] / a['total']['mean']:.1f} |")
-SPARK_TABLE = "\n".join(rows)
+    rows.append(f"| {n} | {fmt(a['answers_per_hour'])} | {fmt(b['answers_per_hour'])} | {fmt(c['answers_per_hour'])} | "
+                f"{fmt(a['mean_ttft_s'], ' s')} | {fmt(b['mean_ttft_s'], ' s')} | {fmt(c['mean_ttft_s'], ' s')} | "
+                f"{fmt(a['mean_answer_s'], ' s')} | {fmt(b['mean_answer_s'], ' s')} | {fmt(c['mean_answer_s'], ' s')} |")
 
-cap = []
-for n in (1, 16, 64, 128):
-    v = [n * 3600 / get("spark", s, n)["total"]["mean"] for s in SC]
-    cap.append(f"| {n} | {v[0]:,.0f} | {v[1]:,.0f} | {v[2]:,.0f} |".replace(",", " "))
-CAP_TABLE = "\n".join(cap)
 
-sens = []
-for name, lab in (("spark_opt", "optimiste"), ("spark", "central"), ("spark_pess", "pessimiste")):
-    for n in (1, 16, 64):
-        a, b, c = (get(name, s, n)["total"]["mean"] for s in SC)
-        sens.append(f"| {lab} | {n} | {f(a)} s | {f(b)} s | {f(c)} s |")
-SENS_TABLE = "\n".join(sens)
+def plateau(name, s):
+    return max(get(name, s, n)["answers_per_hour"] for n in NS)
 
-meas_rows = []
+
+plat = []
+for name, lab in (("spark_opt", "optimiste"), ("spark", "central"), ("spark_pess", "pessimiste"),
+                  ("spark_tuned", "central, vLLM réglé pour le débit")):
+    p = [plateau(name, s) for s in SC]
+    plat.append(f"| {lab} | {fmt(p[0])} | {fmt(p[1])} | {fmt(p[2])} | {p[0] / p[1]:.1f} | {p[0] / p[2]:.0f} |".replace(".", ","))
+
+vrows = []
 for v in val:
-    meas_rows.append(f"| {LAB[v['scenario']]} | {v['n']} | {v['meas_ttft_med']:.2f} | {v['sim_ttft_med']:.2f} | "
-                     f"{v['meas_total_med']:.2f} | {v['sim_total_med']:.2f} | {v['meas_wall']:.1f} | {v['sim_wall']:.1f} |")
-MEAS_TABLE = "\n".join(meas_rows)
-errs = [abs(v["sim_total_med"] / v["meas_total_med"] - 1) for v in val]
-ERR_MED = sorted(errs)[len(errs) // 2] * 100
-ERR_MAX = max(errs) * 100
-fit = h100["h100_fit"]
-
-json.dump({"spark_table": SPARK_TABLE, "cap": CAP_TABLE, "sens": SENS_TABLE, "meas": MEAS_TABLE, "err_med": ERR_MED,
-           "err_max": ERR_MAX, "fit": fit}, open(OUT / "tables.json", "w"), indent=1, ensure_ascii=False)
-print(SPARK_TABLE); print(CAP_TABLE); print(SENS_TABLE); print(f"validation error on answer time: median {ERR_MED:.1f} %, max {ERR_MAX:.1f} %")
+    vrows.append(f"| {LAB[v['scenario']]} | {v['n']}{' (contrôle)' if v['n'] > 128 else ''} | {v['meas_ttft_med']:.2f} | "
+                 f"{v['sim_ttft_med']:.2f} | {v['meas_total_med']:.2f} | {v['sim_total_med']:.2f} |".replace(".", ","))
+err = lambda vs: sorted(abs(v["sim_total_med"] / v["meas_total_med"] - 1) * 100 for v in vs)
+e_fit, e_held = err([v for v in val if v["n"] <= 128]), err([v for v in val if v["n"] > 128])
+tables = {"steady": "\n".join(rows), "plateau": "\n".join(plat), "validation": "\n".join(vrows),
+          "err_fit_med": e_fit[len(e_fit) // 2], "err_fit_max": e_fit[-1], "err_held": e_held, "fit": h100["h100_fit"],
+          "n_val": len(val)}
+json.dump(tables, open(OUT / "tables.json", "w"), indent=1, ensure_ascii=False)
+print(tables["steady"]); print(tables["plateau"])
+print("fit error med/max", tables["err_fit_med"], tables["err_fit_max"], "held-out", e_held, "points", len(val))
