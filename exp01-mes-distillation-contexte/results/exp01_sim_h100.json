@@ -1,0 +1,226 @@
+{
+ "h100_fit": {
+  "F_TFLOPS": 492.10572735783467,
+  "B_GBs": 3040.2226580594406,
+  "tau_ms": 0.9145821876369309,
+  "fe_us_per_token": 3.0,
+  "fe0_ms": 10.0,
+  "mkv": 1.5,
+  "ttft_faq_n1": 2.069,
+  "decode_short_s": 0.02150510650139135,
+  "decode_long_s": 0.021955835594001518,
+  "fit_error": 2.550484259383035
+ },
+ "h100_validation": [
+  {
+   "scenario": "ft",
+   "n": 1,
+   "meas_ttft_med": 0.044,
+   "sim_ttft_med": 0.03159528701044535,
+   "meas_total_med": 2.736,
+   "sim_total_med": 2.7211482329147954,
+   "meas_wall": 2.736,
+   "sim_wall": 2.7211482329147954
+  },
+  {
+   "scenario": "faq",
+   "n": 1,
+   "meas_ttft_med": 2.054,
+   "sim_ttft_med": 2.1293716937819975,
+   "meas_total_med": 3.529,
+   "sim_total_med": 3.638783743034955,
+   "meas_wall": 3.529,
+   "sim_wall": 3.638783743034955
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 1,
+   "meas_ttft_med": 0.099,
+   "sim_ttft_med": 0.07796540748807365,
+   "meas_total_med": 11.096,
+   "sim_total_med": 11.200760037849017,
+   "meas_wall": 11.097,
+   "sim_wall": 11.200760037849017
+  },
+  {
+   "scenario": "ft",
+   "n": 2,
+   "meas_ttft_med": 0.095,
+   "sim_ttft_med": 0.05310936912937804,
+   "meas_total_med": 5.99,
+   "sim_total_med": 5.979316439290412,
+   "meas_wall": 5.993,
+   "sim_wall": 5.979316439290412
+  },
+  {
+   "scenario": "faq",
+   "n": 2,
+   "meas_ttft_med": 4.069,
+   "sim_ttft_med": 4.2050406510707425,
+   "meas_total_med": 5.957,
+   "sim_total_med": 6.138966704750431,
+   "meas_wall": 5.957,
+   "sim_wall": 6.138966704750431
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 2,
+   "meas_ttft_med": 0.188,
+   "sim_ttft_med": 0.145039053096211,
+   "meas_total_med": 2.406,
+   "sim_total_med": 2.4893439480965442,
+   "meas_wall": 2.409,
+   "sim_wall": 2.4893439480965442
+  },
+  {
+   "scenario": "ft",
+   "n": 4,
+   "meas_ttft_med": 0.113,
+   "sim_ttft_med": 0.053095671569501526,
+   "meas_total_med": 4.43,
+   "sim_total_med": 4.395755138484657,
+   "meas_wall": 5.631,
+   "sim_wall": 5.583196505238836
+  },
+  {
+   "scenario": "faq",
+   "n": 4,
+   "meas_ttft_med": 6.334,
+   "sim_ttft_med": 6.66462685136221,
+   "meas_total_med": 11.544,
+   "sim_total_med": 11.882772760477966,
+   "meas_wall": 12.033,
+   "sim_wall": 12.371167083161229
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 4,
+   "meas_ttft_med": 0.234,
+   "sim_ttft_med": 0.21430033283773656,
+   "meas_total_med": 5.586,
+   "sim_total_med": 5.759644641617825,
+   "meas_wall": 8.307,
+   "sim_wall": 8.601537541453103
+  },
+  {
+   "scenario": "ft",
+   "n": 8,
+   "meas_ttft_med": 0.138,
+   "sim_ttft_med": 0.07463122195556324,
+   "meas_total_med": 3.4,
+   "sim_total_med": 3.3544456582050755,
+   "meas_wall": 4.34,
+   "sim_wall": 4.2622465136598935
+  },
+  {
+   "scenario": "faq",
+   "n": 8,
+   "meas_ttft_med": 10.678,
+   "sim_ttft_med": 11.07896406952266,
+   "meas_total_med": 17.97,
+   "sim_total_med": 18.44207235832227,
+   "meas_wall": 21.406,
+   "sim_wall": 21.95346337329132
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 8,
+   "meas_ttft_med": 0.322,
+   "sim_ttft_med": 0.31129384210071964,
+   "meas_total_med": 2.572,
+   "sim_total_med": 2.6348922615055064,
+   "meas_wall": 8.672,
+   "sim_wall": 8.901262463642093
+  },
+  {
+   "scenario": "ft",
+   "n": 16,
+   "meas_ttft_med": 0.209,
+   "sim_ttft_med": 0.11785906897737584,
+   "meas_total_med": 3.186,
+   "sim_total_med": 3.0252062144056593,
+   "meas_wall": 12.177,
+   "sim_wall": 11.907813988179644
+  },
+  {
+   "scenario": "faq",
+   "n": 16,
+   "meas_ttft_med": 19.224,
+   "sim_ttft_med": 18.845203853719106,
+   "meas_total_med": 35.344,
+   "sim_total_med": 36.3969479435759,
+   "meas_wall": 42.578,
+   "sim_wall": 43.65651423812894
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 16,
+   "meas_ttft_med": 0.462,
+   "sim_ttft_med": 0.5484554060481219,
+   "meas_total_med": 4.241,
+   "sim_total_med": 4.594012696866965,
+   "meas_wall": 9.524,
+   "sim_wall": 9.739056672286278
+  },
+  {
+   "scenario": "ft",
+   "n": 32,
+   "meas_ttft_med": 0.29,
+   "sim_ttft_med": 0.20479261146296834,
+   "meas_total_med": 3.142,
+   "sim_total_med": 2.702140843219029,
+   "meas_wall": 15.872,
+   "sim_wall": 15.185092117029967
+  },
+  {
+   "scenario": "faq",
+   "n": 32,
+   "meas_ttft_med": 35.11,
+   "sim_ttft_med": 35.43740431979863,
+   "meas_total_med": 66.756,
+   "sim_total_med": 69.0397641033665,
+   "meas_wall": 72.372,
+   "sim_wall": 74.57724390832514
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 32,
+   "meas_ttft_med": 0.748,
+   "sim_ttft_med": 1.0090989989659267,
+   "meas_total_med": 4.409,
+   "sim_total_med": 4.4355009706903115,
+   "meas_wall": 17.466,
+   "sim_wall": 18.411469179916566
+  },
+  {
+   "scenario": "ft",
+   "n": 64,
+   "meas_ttft_med": 0.418,
+   "sim_ttft_med": 0.3591171602776946,
+   "meas_total_med": 3.682,
+   "sim_total_med": 2.9073882737548633,
+   "meas_wall": 13.714,
+   "sim_wall": 12.774094766707067
+  },
+  {
+   "scenario": "faq",
+   "n": 64,
+   "meas_ttft_med": 66.535,
+   "sim_ttft_med": 68.63163294823967,
+   "meas_total_med": 131.539,
+   "sim_total_med": 135.0298307601244,
+   "meas_wall": 146.179,
+   "sim_wall": 150.12644609355962
+  },
+  {
+   "scenario": "faq_pc",
+   "n": 64,
+   "meas_ttft_med": 3.334,
+   "sim_ttft_med": 1.8928760642323474,
+   "meas_total_med": 7.49,
+   "sim_total_med": 6.986469277252168,
+   "meas_wall": 18.914,
+   "sim_wall": 19.46536605909344
+  }
+ ]
+}

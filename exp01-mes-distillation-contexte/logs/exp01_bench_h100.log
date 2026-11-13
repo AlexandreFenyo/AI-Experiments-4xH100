@@ -1,0 +1,31 @@
+Fri Nov 13 01:20:33 UTC 2026
+== generation paused
+ft      n=  1 wall    2.74s  ttft med   0.04 max   0.04  total med   2.74 max   2.74  prompt 41 cached None
+ft      n=  1 wall    5.80s  ttft med   0.04 max   0.04  total med   5.80 max   5.80  prompt 54 cached None
+ft      n=  1 wall    2.57s  ttft med   0.04 max   0.04  total med   2.58 max   2.58  prompt 46 cached None
+faq     n=  1 wall    3.53s  ttft med   2.05 max   2.05  total med   3.53 max   3.53  prompt 15358 cached None
+faq     n=  1 wall    2.83s  ttft med   2.08 max   2.08  total med   2.83 max   2.83  prompt 15358 cached None
+faq     n=  1 wall    3.43s  ttft med   2.07 max   2.07  total med   3.43 max   3.43  prompt 15366 cached None
+faq_pc  n=  1 wall   11.10s  ttft med   0.10 max   0.10  total med  11.10 max  11.10  prompt 15337 cached None
+faq_pc  n=  1 wall    2.94s  ttft med   0.13 max   0.13  total med   2.94 max   2.94  prompt 15341 cached None
+faq_pc  n=  1 wall    6.71s  ttft med   0.13 max   0.13  total med   6.71 max   6.71  prompt 15343 cached None
+ft      n=  2 wall    5.99s  ttft med   0.10 max   0.10  total med   5.99 max   5.99  prompt 48 cached None
+faq     n=  2 wall    5.96s  ttft med   4.07 max   4.07  total med   5.96 max   5.96  prompt 15370 cached None
+faq_pc  n=  2 wall    2.41s  ttft med   0.19 max   0.19  total med   2.41 max   2.41  prompt 15338 cached None
+ft      n=  4 wall    5.63s  ttft med   0.11 max   0.12  total med   4.43 max   5.63  prompt 44 cached None
+faq     n=  4 wall   12.03s  ttft med   6.33 max   8.09  total med  11.54 max  12.03  prompt 15358 cached None
+faq_pc  n=  4 wall    8.31s  ttft med   0.23 max   0.24  total med   5.59 max   8.30  prompt 15344 cached None
+ft      n=  8 wall    4.34s  ttft med   0.14 max   0.14  total med   3.40 max   4.33  prompt 45 cached None
+faq     n=  8 wall   21.41s  ttft med  10.68 max  16.21  total med  17.97 max  21.41  prompt 15361 cached None
+faq_pc  n=  8 wall    8.67s  ttft med   0.32 max   0.42  total med   2.57 max   8.66  prompt 15345 cached None
+ft      n= 16 wall   12.18s  ttft med   0.21 max   0.22  total med   3.19 max  12.16  prompt 52 cached None
+faq     n= 16 wall   42.58s  ttft med  19.22 max  32.27  total med  35.34 max  42.55  prompt 15358 cached None
+faq_pc  n= 16 wall    9.52s  ttft med   0.46 max   0.64  total med   4.24 max   9.51  prompt 15341 cached None
+ft      n= 32 wall   15.87s  ttft med   0.29 max   0.31  total med   3.14 max  15.87  prompt 51 cached None
+faq     n= 32 wall   72.37s  ttft med  35.11 max  64.33  total med  66.76 max  72.36  prompt 15355 cached None
+faq_pc  n= 32 wall   17.47s  ttft med   0.75 max   1.16  total med   4.41 max  17.41  prompt 15343 cached None
+ft      n= 64 wall   13.71s  ttft med   0.42 max   0.58  total med   3.68 max  13.64  prompt 55 cached None
+faq     n= 64 wall  146.18s  ttft med  66.53 max 130.69  total med 131.54 max 146.15  prompt 15358 cached None
+faq_pc  n= 64 wall   18.91s  ttft med   3.33 max   3.52  total med   7.49 max  18.84  prompt 15344 cached None
+Fri Nov 13 01:28:34 UTC 2026
+== generation resumed
